@@ -46,6 +46,7 @@ import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.RelatedTo;
 import net.fortuna.ical4j.model.property.Status;
+import static net.fortuna.ical4j.model.property.Status.VEVENT_TENTATIVE;
 import net.fortuna.ical4j.model.property.Summary;
 import net.fortuna.ical4j.model.property.Uid;
 import net.fortuna.ical4j.util.UidGenerator;
@@ -130,7 +131,8 @@ public class Main {
                 Summary summary = new Summary(courseName);
                 Uid kurssiUid = ug.generateUid();
                 Categories cat1 = new Categories(firstLecture.getSummary().getValue());
-                Categories cat2 = new Categories("COURSE");
+                Categories cat2 = new Categories("COURSE");                
+                Status tentative = VEVENT_TENTATIVE;
 //                ParameterList pl = new ParameterList();
 //                ParameterFactoryImpl pf = ParameterFactoryImpl.getInstance();
 //                pl.add(pf.createParameter(Parameter.VALUE, "value"));
@@ -140,6 +142,7 @@ public class Main {
                 props.add(end);
                 props.add(summary);
                 props.add(kurssiUid);
+                props.add(tentative);
                 props.add(cat1);
                 props.add(cat2);
 
@@ -152,6 +155,7 @@ public class Main {
                     conversion.childToAnotherEvent(uusiKurssi);
                     conversion.getSummary().setValue(courseName + " LUENTO");
                     conversion.getProperties().add(new Categories("LECTURE"));
+                    conversion.getProperties().add(VEVENT_TENTATIVE);
                     listIt.set(conversion);
 //                    listIt.set(new Lecture(current));
                 }
@@ -167,6 +171,12 @@ public class Main {
 //                Categories cat2 = new Categories(aList, courseName)
             }
         }
+        
+        
+        
+        
+// Debuggaustulosteita
+//
         System.out.println("hyUniikit koko aluksi: " + hyUniikitKokoEnsin);
         System.out.println("hyUniikit koko nyt: " + hyUniikit.size());
         System.out.println("eventsPerSummary entryset koko aluksi: " + eventsPerSummaryKokoEnsin);
