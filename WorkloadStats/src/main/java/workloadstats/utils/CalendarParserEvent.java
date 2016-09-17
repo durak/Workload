@@ -12,35 +12,38 @@ import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Summary;
 import workloadstats.domain.Event;
+import workloadstats.domain.Uncategorized;
 
 /**
  *
  * @author Ilkka
  */
-public class CalendarParser {
+public class CalendarParserEvent {
 
     private Calendar calendar;
 
-    public CalendarParser(Calendar calendar) {
+    public CalendarParserEvent(Calendar calendar) {
         this.calendar = calendar;
 
     }
-
-    public List<VEvent> allVEvents() {
-        List<VEvent> allVEvents = new ArrayList<>();
+    
+        public List<Event> allEvents() {
+        List<Event> allEvents = new ArrayList<>();
         for (Iterator i = calendar.getComponents(Component.VEVENT).iterator(); i.hasNext();) {
             Component component = (Component) i.next();
             VEvent ve = (VEvent) component;
+            Uncategorized un = new Uncategorized(ve);
+
             
-            allVEvents.add(ve);
+            allEvents.add(un);
         }
 
-        return allVEvents;
+        return allEvents;
     }
 
-    public Set<Summary> uniqueVEventSummaries() {
+    public Set<Summary> uniqueEventSummaries() {
         Set<Summary> uniqueCourseSummaries = new HashSet<>();
-        for (VEvent ve : allVEvents()) {
+        for (Event ve : allEvents()) {
             Summary s = ve.getSummary();
             uniqueCourseSummaries.add(s);
         }
@@ -48,13 +51,13 @@ public class CalendarParser {
         return uniqueCourseSummaries;
     }
 
-    public Map<Summary, List<VEvent>> vEventsPerSummary() {
-        Map<Summary, List<VEvent>> vps = new HashMap<>();
-        for (Summary uniqueVEventSummary : uniqueVEventSummaries()) {
-            vps.put(uniqueVEventSummary, new ArrayList<>());
-            for (VEvent ve : allVEvents()) {
-                if (ve.getSummary().equals(uniqueVEventSummary)) {
-                    vps.get(uniqueVEventSummary).add(ve);
+    public Map<Summary, List<Event>> eventsPerSummary() {
+        Map<Summary, List<Event>> vps = new HashMap<>();
+        for (Summary uniqueEventSummary : uniqueEventSummaries()) {
+            vps.put(uniqueEventSummary, new ArrayList<>());
+            for (Event ve : allEvents()) {
+                if (ve.getSummary().equals(uniqueEventSummary)) {
+                    vps.get(uniqueEventSummary).add(ve);
                 }
             }
         }
@@ -75,4 +78,5 @@ public class CalendarParser {
 
         return clean;
     }
+
 }

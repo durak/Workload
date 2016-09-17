@@ -12,6 +12,7 @@ public class EventManager {
 
     public EventManager() {
         cp = ComponentFactory.getInstance();
+        
     }
     
     

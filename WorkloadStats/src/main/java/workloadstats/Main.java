@@ -12,10 +12,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
 
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.data.CalendarBuilder;
@@ -26,12 +30,19 @@ import net.fortuna.ical4j.filter.PeriodRule;
 import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.Dur;
+import net.fortuna.ical4j.model.Parameter;
+import net.fortuna.ical4j.model.ParameterFactory;
+import net.fortuna.ical4j.model.ParameterFactoryImpl;
+import net.fortuna.ical4j.model.ParameterList;
 import net.fortuna.ical4j.model.Period;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.ValidationException;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Categories;
+import net.fortuna.ical4j.model.property.DtEnd;
+import net.fortuna.ical4j.model.property.DtStamp;
+import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.RelatedTo;
 import net.fortuna.ical4j.model.property.Status;
@@ -40,9 +51,13 @@ import net.fortuna.ical4j.model.property.Uid;
 import net.fortuna.ical4j.util.UidGenerator;
 import workloadstats.domain.Course;
 import workloadstats.domain.Event;
+
 import workloadstats.domain.Lecture;
+import workloadstats.domain.Uncategorized;
 import workloadstats.persistance.EventManager;
+import workloadstats.utils.CalendarBuilderImpl;
 import workloadstats.utils.CalendarParser;
+import workloadstats.utils.CalendarParserEvent;
 import workloadstats.utils.HyCalendarFormatter;
 import workloadstats.utils.VEventManager;
 
@@ -54,145 +69,144 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, IOException, ParserException, URISyntaxException, ParseException, ValidationException {
 
-        System.out.println("alku");
+        Scanner lukija = new Scanner(System.in);
         File calendarFile = new File("fi.ics");
-
         FileInputStream fin = new FileInputStream(calendarFile);
 
-        CalendarBuilder builder = new CalendarBuilder();
-
-        Calendar calendar = builder.build(fin);
-
-        /*
-        Filtering events
-         */
-        java.util.Calendar today = java.util.Calendar.getInstance();
-        today.set(java.util.Calendar.HOUR_OF_DAY, 0);
-        today.clear(java.util.Calendar.MINUTE);
-        today.clear(java.util.Calendar.SECOND);
-
-        java.util.Calendar eka = java.util.Calendar.getInstance();
-        eka.set(java.util.Calendar.HOUR_OF_DAY, 0);
-        eka.clear(java.util.Calendar.MINUTE);
-        eka.clear(java.util.Calendar.SECOND);
-
-        java.util.Calendar toka = java.util.Calendar.getInstance();
-        toka.set(java.util.Calendar.HOUR_OF_DAY, 1);
-        toka.clear(java.util.Calendar.MINUTE);
-        toka.clear(java.util.Calendar.SECOND);
-
-        // create a period starting now with a duration of one (1) day..
-        Period period = new Period(new DateTime(today.getTime()), new Dur(10, 0, 0, 0));
-        Filter filter = new Filter(new PeriodRule(period));
-
-        for (Iterator i = filter.filter(calendar.getComponents(Component.VEVENT)).iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            VEvent ve = (VEvent) component;
-//            System.out.println("  test  " + ve.getLocation());
-            for (Iterator j = component.getProperties().iterator(); j.hasNext();) {
-                Property property = (Property) j.next();
-//                System.out.println("Property [" + property.getName() + ", " + property.getValue() + "]");
-            }
-        }
-
-        /*
-        New VEvent
-         */
-        DateTime start = new DateTime(eka.getTime());
-        DateTime end = new DateTime(toka.getTime());
-        VEvent uusi = new VEvent(start, end, "testinimi");
-
-        
-        
-        Property status = new Status("TENTATIVE");
-        status.setValue("ss");
-        
-
-//        System.out.println(testEventti.getClass());
-        
-//        System.out.println(kurssi.getExams());
-//        System.out.println(kurssi.getLectures());
-//        System.out.println("sss");
-        
-//        System.out.println(kurssi.getLectures());
-
+        CalendarBuilderImpl builder = new CalendarBuilderImpl();
         UidGenerator ug = new UidGenerator("uidGen");
-        Uid uid = ug.generateUid();
-        uusi.getProperties().add(uid);
-        Categories cat = new Categories("Kurssi");
-        uusi.getProperties().add(cat);
 
-        uid = ug.generateUid();
-        uid = uusi.getUid();
-//        testEventti.getProperties().add(uid);
-//        testEventti.getProperties().add(cat);
-//        System.out.println(testEventti.getName());
-//        System.out.println(testEventti.getClass());
-//        System.out.println(testEventti.getDateStamp());
-//        System.out.println(testEventti.getProperties());
+        Calendar hyCal = builder.build(fin);
+        Calendar omaCal = builder.newCalendar();
 
-        calendar.getComponents().add(uusi);
+        CalendarParserEvent hyParser = new CalendarParserEvent(hyCal);
+        Set<Summary> hyUniikit = hyParser.uniqueEventSummaries();
+        Map<Summary, List<Event>> eventsPerSummary = hyParser.eventsPerSummary();
 
-//        calendar.getComponents().add(testEventti);
-        for (Iterator i = calendar.getComponents().iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
+//        
+//        
+//        
+//        for (Iterator i = hyUniikit.iterator(); i.hasNext();) {
+//            Summary sm = (Summary) i.next();
+//            System.out.println(sm.getValue());
+//            System.out.print("Onko tämä kurssi vai jokin muu tapahtuma? (vastaa kurssi tai muu): ");
+//            if (lukija.nextLine().equals("kurssi")) {
+//
+//            }
+//        }
+//
+//
+//
+        //testataan categories toimintaa
+//        VEvent testi = hyParser.allEvents().get(0);
+//        testi.getProperties().add(new DtStamp());
+//        testi.getProperties().add(new Categories("a"));
+//        testi.getProperties().add(new Categories("b"));
+//        PropertyList propTest = testi.getProperties().getProperties(Property.CATEGORIES);
+//        System.out.println(propTest);
+//        testi.validate();
+//        System.out.println(testi);
+//
+        int hyUniikitKokoEnsin = hyUniikit.size();
+        int eventsPerSummaryKokoEnsin = eventsPerSummary.entrySet().size();
 
-//            System.out.println("Component [" + component.getName() + "]");
-            StringBuilder sb = new StringBuilder();
-//            sb.append(component.getName());
-            for (Iterator j = component.getProperties().iterator(); j.hasNext();) {
-//                System.out.println(sb.toString());
-                Property property = (Property) j.next();
-//                System.out.println("Property [" + property.getName() + ", " + property.getValue() + "]");
-//                if (property.getName().equals("LOCATION")) {
-//                    property.setValue("LIPASTO");
-//                }
+        List<Course> courses = new ArrayList<>();
+        for (Iterator i = hyUniikit.iterator(); i.hasNext();) {
+            Summary sm = (Summary) i.next();
+            System.out.println(sm.getValue());
+            System.out.print("Onko tämä kurssi vai jokin muu tapahtuma? (vastaa kurssi tai muu): ");
 
-                sb.append(property.getName());
-                sb.append(",");
+            if (lukija.nextLine().equals("kurssi")) {
+                System.out.print("Anna kurssille nimi: ");
+                String courseName = lukija.nextLine();
 
+                List<Event> lectures = eventsPerSummary.get(sm);
+
+                VEvent firstLecture = lectures.get(0);
+
+                PropertyList props = new PropertyList();
+                DtStart start = firstLecture.getStartDate();
+                DtEnd end = firstLecture.getEndDate();
+                Summary summary = new Summary(courseName);
+                Uid kurssiUid = ug.generateUid();
+                Categories cat1 = new Categories(firstLecture.getSummary().getValue());
+                Categories cat2 = new Categories("COURSE");
+//                ParameterList pl = new ParameterList();
+//                ParameterFactoryImpl pf = ParameterFactoryImpl.getInstance();
+//                pl.add(pf.createParameter(Parameter.VALUE, "value"));
+//                Categories cat2 = new Categories(pl, "cat");
+
+                props.add(start);
+                props.add(end);
+                props.add(summary);
+                props.add(kurssiUid);
+                props.add(cat1);
+                props.add(cat2);
+
+                Course uusiKurssi = new Course(props);
+
+                //ListIterator luokkamuutosta varten
+                ListIterator<Event> listIt = lectures.listIterator();
+                while (listIt.hasNext()) {
+                    Event conversion = new Lecture(listIt.next());
+                    conversion.childToAnotherEvent(uusiKurssi);
+                    conversion.getSummary().setValue(courseName + " LUENTO");
+                    conversion.getProperties().add(new Categories("LECTURE"));
+                    listIt.set(conversion);
+//                    listIt.set(new Lecture(current));
+                }
+
+                uusiKurssi.addEventList((List<Event>) lectures);
+                courses.add(uusiKurssi);
+//                System.out.println(uusiKurssi);
+//                System.out.println(lectures);
+
+                eventsPerSummary.remove(sm);
+                i.remove();
+
+//                Categories cat2 = new Categories(aList, courseName)
             }
-//            System.out.println(sb.toString());
+        }
+        System.out.println("hyUniikit koko aluksi: " + hyUniikitKokoEnsin);
+        System.out.println("hyUniikit koko nyt: " + hyUniikit.size());
+        System.out.println("eventsPerSummary entryset koko aluksi: " + eventsPerSummaryKokoEnsin);
+        System.out.println("eventsPerSummary entryset koko nyt: " + eventsPerSummary.entrySet().size());
+        System.out.println("kurssilistan koko lopuksi: " + courses.size());
+
+        for (Course course : courses) {
+            if (course.getLectures() != null) {
+                System.out.println("Kurssi: " + course);
+                for (Event lecture : course.getLectures()) {
+                    System.out.println("   " + lecture);
+                }
+            }
         }
 
-        calendar.getProperties().add(new ProdId("-//Events Calendar//iCal4j 1.0//EN"));
-        FileOutputStream fout = new FileOutputStream("mycalendar.ics");
-
-        CalendarOutputter outputter = new CalendarOutputter();
-        outputter.setValidating(false);
-        outputter.output(calendar, fout);
-
-        System.out.println("iterointi");
-        HyCalendarFormatter hyF = new HyCalendarFormatter(calendar);
-        hyF.UniqueVevents();
-
-        CalendarParser hyParser = new CalendarParser(calendar);
-        VEventManager veventManager = new VEventManager();
-
-        Map<Summary, List<VEvent>> eventitPerSummary = hyParser.vEventsPerSummary();
-        for (Summary summary : eventitPerSummary.keySet()) {
-            System.out.println(summary);
-            List<VEvent> eventit = eventitPerSummary.get(summary);
-            veventManager.relateVEventsToParent(eventit, uusi);
-
-            for (VEvent vEvent : eventit) {
-//                System.out.println("   " + vEvent.getStartDate());
-//                System.out.println("   " + vEvent.getProperties().get(5));
-                System.out.println("   " + vEvent.getProperty("RELATED-TO"));
-//                System.out.println(vEvent);
-            }
-
-            veventManager.deletePropertyFromVEvents(eventit, "RELATED-TO");
-            for (VEvent vEvent : eventit) {
-
-                System.out.println("   " + vEvent.getProperty("RELATED-TO"));
-
-            }
-
-        }
-
-        VEvent v = new Lecture(start, end, "s");
-        System.out.println(v.getClass());
-
+//        for (Iterator i = eventsPerSummary.entrySet().iterator(); i.hasNext();) {
+//            Summary sm =  (Summary) i.next();
+//            System.out.println(sm.getValue());
+//            System.out.print("Onko tämä kurssi vai jokin muu tapahtuma? (vastaa kurssi tai muu): ");
+//            if (lukija.nextLine().equals("kurssi")) {
+//                System.out.print("Anna kurssille nimi: ");
+//                String courseName = lukija.nextLine();
+//
+//                List<Event> lectures = eventsPerSummary.get(sm);
+//                VEvent firstLecture = lectures.get(0);
+//
+//                PropertyList props = new PropertyList();
+//                Uid kurssiUid = ug.generateUid();
+//                DtStart s = firstLecture.getStartDate();
+//                DtEnd e = firstLecture.getEndDate();
+//                Categories cat = new Categories(firstLecture.getSummary().getValue());
+//                ParameterList pl = new ParameterList();
+//                ParameterFactoryImpl pf = ParameterFactoryImpl.getInstance();
+//                pl.add(pf.createParameter("name", "value"));
+//                Categories cat2 = new Categories(pl, "cat");
+//
+////                Categories cat2 = new Categories(aList, courseName)
+//                
+//                
+//            }
+//        }
     }
 }

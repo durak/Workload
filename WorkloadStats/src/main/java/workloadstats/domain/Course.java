@@ -8,10 +8,11 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import net.fortuna.ical4j.model.Property;
+import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Status;
 
-public class Course {
+public class Course extends Event {
 
     private String courseId;
     private String name;
@@ -21,50 +22,74 @@ public class Course {
 
     private boolean finished;
 
-    private List<VEvent> lectures;
-    private List<VEvent> exercises;
-    private List<VEvent> personal;
-    private List<VEvent> teamwork;
-    private List<VEvent> exams;
+    private List<Event> lectures;
+    private List<Event> exercises;
+    private List<Event> personal;
+    private List<Event> teamwork;
+    private List<Event> exams;
     private List<List> allEvents;
 
-    public Course(String courseId) {
-        this.courseId = courseId;
+    public Course(VEvent ve) {
+        super(ve);
         this.lectures = new ArrayList<>();
         this.exercises = new ArrayList<>();
         this.personal = new ArrayList<>();
         this.teamwork = new ArrayList<>();
         this.exams = new ArrayList<>();
         this.allEvents = new ArrayList<>();
-
-        allEvents.add(lectures);
-        allEvents.add(exercises);
-        allEvents.add(personal);
-        allEvents.add(teamwork);
-        allEvents.add(exams);
-
     }
 
-    public String getName() {
-        return "";
+    public Course(PropertyList pl) {
+        super(pl);
+        this.lectures = new ArrayList<>();
+        this.exercises = new ArrayList<>();
+        this.personal = new ArrayList<>();
+        this.teamwork = new ArrayList<>();
+        this.exams = new ArrayList<>();
+        this.allEvents = new ArrayList<>();
     }
 
-    public void addEvent(VEvent vevent) {
-        if (vevent.getClass() == Lecture.class) {
-            lectures.add(vevent);
+//    public Course(String courseId) {
+//        this.courseId = courseId;
+//        this.lectures = new ArrayList<>();
+//        this.exercises = new ArrayList<>();
+//        this.personal = new ArrayList<>();
+//        this.teamwork = new ArrayList<>();
+//        this.exams = new ArrayList<>();
+//        this.allEvents = new ArrayList<>();
+//
+//        allEvents.add(lectures);
+//        allEvents.add(exercises);
+//        allEvents.add(personal);
+//        allEvents.add(teamwork);
+//        allEvents.add(exams);
+//
+//    }
+//    public String getName() {
+//        return "";
+//    }
+    public void addEvent(Event event) {
+        if (event.getClass() == Lecture.class) {
+            lectures.add(event);
         }
-        if (vevent.getClass() == Exercise.class) {
-            exercises.add(vevent);
+        if (event.getClass() == Exercise.class) {
+            exercises.add(event);
         }
-        if (vevent.getClass() == Personal.class) {
-            personal.add(vevent);
+        if (event.getClass() == Personal.class) {
+            personal.add(event);
         }
-        if (vevent.getClass() == Teamwork.class) {
-            teamwork.add(vevent);
+        if (event.getClass() == Teamwork.class) {
+            teamwork.add(event);
         }
 
-        if (vevent.getClass() == Exam.class) {
-            exams.add(vevent);
+        if (event.getClass() == Exam.class) {
+            exams.add(event);
+        }
+    }
+
+    public void addEventList(List<Event> list) {
+        for (Event event : list) {
+            addEvent(event);
         }
     }
 

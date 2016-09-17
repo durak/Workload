@@ -1,11 +1,17 @@
 workloadstats\ICalendarParser.class
 workloadstats\persistance\CalendarManager.class
 workloadstats\domain\Exam.class
+workloadstats\domain\Lecture.class
+workloadstats\domain\Course.class
+workloadstats\domain\Uncategorized.class
+workloadstats\Dump.class
 workloadstats\domain\Exercise.class
 workloadstats\domain\Personal.class
 workloadstats\utils\CalendarBuilderImpl.class
 workloadstats\domain\Teamwork.class
+workloadstats\utils\CalendarParserEvent.class
 workloadstats\utils\VEventManager.class
+workloadstats\Testiluokka.class
 workloadstats\domain\kalenterikompo.class
 workloadstats\persistance\EventManager.class
 workloadstats\utils\HyCalendarFormatter.class

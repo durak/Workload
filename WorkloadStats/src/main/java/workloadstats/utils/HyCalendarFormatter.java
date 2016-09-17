@@ -33,7 +33,7 @@ public class HyCalendarFormatter {
         this.summaries = new HashMap<>();
     }
 
-    public void UniqueVevents() {
+    public void UniqueVevents(Calendar calendar) {
 
         Set<Summary> uniqueCourseSummaries = new HashSet<>();        
 
