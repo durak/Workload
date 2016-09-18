@@ -19,12 +19,12 @@ import static net.fortuna.ical4j.model.property.Status.VEVENT_TENTATIVE;
 import net.fortuna.ical4j.model.property.Summary;
 import net.fortuna.ical4j.model.property.Uid;
 import net.fortuna.ical4j.util.UidGenerator;
-import workloadstats.domain.Course;
-import workloadstats.domain.Event;
-import workloadstats.domain.Exercise;
-import workloadstats.domain.Lecture;
+import workloadstats.domain.model.Course;
+import workloadstats.domain.model.Event;
+import workloadstats.domain.model.Exercise;
+import workloadstats.domain.model.Lecture;
 import workloadstats.ui.TextUi;
-import workloadstats.utils.CalendarParserEvent;
+import workloadstats.domain.trash.CalendarParserEvent;
 
 /**
  *
