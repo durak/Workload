@@ -13,4 +13,8 @@ public class Exercise extends Event {
         super(start, end, summary);
     }
     
+    public Exercise(VEvent ve) {
+        super(ve);
+    }
+    
 }

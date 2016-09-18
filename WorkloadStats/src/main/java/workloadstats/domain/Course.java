@@ -27,27 +27,46 @@ public class Course extends Event {
     private List<Event> personal;
     private List<Event> teamwork;
     private List<Event> exams;
-    private List<List> allEvents;
+    
 
     public Course(VEvent ve) {
         super(ve);
+        this.name = ve.getSummary().getValue();
         this.lectures = new ArrayList<>();
         this.exercises = new ArrayList<>();
         this.personal = new ArrayList<>();
         this.teamwork = new ArrayList<>();
         this.exams = new ArrayList<>();
-        this.allEvents = new ArrayList<>();
+    
     }
 
     public Course(PropertyList pl) {
         super(pl);
+        this.name = pl.getProperty(Property.SUMMARY).getValue();
         this.lectures = new ArrayList<>();
         this.exercises = new ArrayList<>();
         this.personal = new ArrayList<>();
         this.teamwork = new ArrayList<>();
         this.exams = new ArrayList<>();
-        this.allEvents = new ArrayList<>();
+    
     }
+    
+    public String getCourseName() {
+        return this.name;
+    }
+    
+    public List<Event> getAllEvents() {
+        List<Event> allEvents = new ArrayList<>();
+        allEvents.addAll(lectures);
+        allEvents.addAll(exercises);
+        allEvents.addAll(personal);
+        allEvents.addAll(teamwork);
+        allEvents.addAll(exams);
+        
+        return allEvents;
+    }
+    
+    
 
 //    public Course(String courseId) {
 //        this.courseId = courseId;
@@ -69,7 +88,9 @@ public class Course extends Event {
 //        return "";
 //    }
     public void addEvent(Event event) {
-        if (event.getClass() == Lecture.class) {
+        super.parentAnotherEvent(event);
+        
+        if (event.getClass() == Lecture.class) {            
             lectures.add(event);
         }
         if (event.getClass() == Exercise.class) {
@@ -81,7 +102,6 @@ public class Course extends Event {
         if (event.getClass() == Teamwork.class) {
             teamwork.add(event);
         }
-
         if (event.getClass() == Exam.class) {
             exams.add(event);
         }
@@ -113,16 +133,16 @@ public class Course extends Event {
         return this.exams;
     }
 
-    public void finishCourse() throws IOException, URISyntaxException, ParseException {
-
-        for (List eventList : this.allEvents) {
-            for (Iterator it = eventList.iterator(); it.hasNext();) {
-                Event e = (Event) it.next();
-                Property status = e.getProperties().getProperty("STATUS");
-                status.setValue("CONFIRMED");
-
-            }
-        }
-    }
+//    public void finishCourse() throws IOException, URISyntaxException, ParseException {
+//
+//        for (List eventList : this.allEvents) {
+//            for (Iterator it = eventList.iterator(); it.hasNext();) {
+//                Event e = (Event) it.next();
+//                Property status = e.getProperties().getProperty("STATUS");
+//                status.setValue("CONFIRMED");
+//
+//            }
+//        }
+//    }
 
 }
