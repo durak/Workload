@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package workloadstats.calendar.hycalendar;
+package workloadstats.domain.model;
 
 import java.util.EnumSet;
 
@@ -21,9 +21,5 @@ public enum EventType {
     TEAMWORK,
     TRASH
 
-/**
- * 
- */    
-//public static final EnumSet<EventType> all = EnumSet.of(COURSE,LECTURE,EXERCISE,PERSONAL,TEAMWORK,TRASH);    
 
 }

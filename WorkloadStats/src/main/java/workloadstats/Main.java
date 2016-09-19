@@ -17,12 +17,14 @@ import java.util.Scanner;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.data.ParserException;
+import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.ValidationException;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.calendar.hycalendar.HyCalendarControl;
 import workloadstats.calendar.mycalendar.MyCalendarParser;
 import workloadstats.utils.CalendarBuilderImpl;
+import workloadstats.utils.EventUtilities;
 
 /**
  *
@@ -65,19 +67,24 @@ public class Main {
             outputter.output(myCal, fout);
         }
         if (test2) {
+            EventUtilities eu = new EventUtilities();
             File calendarFile = new File("mycalendar2.ics");
             FileInputStream my = new FileInputStream(calendarFile);
             CalendarBuilderImpl builder = new CalendarBuilderImpl();
             Calendar myCal = builder.build(my);
             MyCalendarParser myParser = new MyCalendarParser(myCal);
             List<Course> courses = myParser.getCourses();
+            
             System.out.println(courses.size());
             for (Course course : courses) {
                 System.out.println(course);
+                System.out.println("sum of dur: " + eu.getSumOfDurations(course.getAllEvents()));                
+                
+                System.out.println();
                 List<Event> events = course.getAllEvents();
-                for (Event event : events) {
-                    System.out.println(event);
-
+                for (Event event : events) {        
+                    System.out.println(event.getEventName());
+                    System.out.println("kesto: " + eu.getDuration(event));
                 }
             }
 

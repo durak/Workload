@@ -1,4 +1,4 @@
-package workloadstats.domain.control;
+package workloadstats.domain.trash;
 
 import java.net.SocketException;
 import java.util.ArrayList;

@@ -12,7 +12,7 @@ import net.fortuna.ical4j.model.ParameterList;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Categories;
-import workloadstats.calendar.hycalendar.EventType;
+import workloadstats.domain.model.EventType;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.domain.model.Exercise;
