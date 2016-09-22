@@ -1,4 +1,4 @@
-package workloadstats.calendar.mycalendar;
+package workloadstats.calendardata.mycalendar;
 
 import java.util.List;
 import net.fortuna.ical4j.model.Calendar;

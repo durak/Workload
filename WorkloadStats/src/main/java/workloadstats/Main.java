@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workloadstats;
 
 import java.io.File;
@@ -21,9 +16,9 @@ import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.ValidationException;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
-import workloadstats.calendar.hycalendar.HyCalendarControl;
-import workloadstats.calendar.mycalendar.MyCalendarParser;
-import workloadstats.utils.CalendarBuilderImpl;
+import workloadstats.calendardata.hycalendar.HyCalendarControl;
+import workloadstats.calendardata.mycalendar.MyCalendarParser;
+import workloadstats.calendardata.CalendarBuilderImpl;
 import workloadstats.utils.EventUtilities;
 
 /**
@@ -35,8 +30,8 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException, ParserException, URISyntaxException, ParseException, ValidationException {
 
         Scanner lukija = new Scanner(System.in);
-        Boolean test = false;
-        Boolean test2 = true;
+        Boolean test = true;
+        Boolean test2 = false;
 
         if (test) {
             File calendarFile = new File("fi.ics");

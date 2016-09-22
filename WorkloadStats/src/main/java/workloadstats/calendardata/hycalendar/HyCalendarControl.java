@@ -1,4 +1,4 @@
-package workloadstats.calendar.hycalendar;
+package workloadstats.calendardata.hycalendar;
 
 import workloadstats.domain.model.EventType;
 import java.net.SocketException;

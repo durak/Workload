@@ -1,4 +1,4 @@
-package workloadstats.calendar.hycalendar;
+package workloadstats.calendardata.hycalendar;
 
 import java.net.SocketException;
 import java.util.ArrayList;

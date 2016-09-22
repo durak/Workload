@@ -1,4 +1,4 @@
-package workloadstats.calendar.mycalendar;
+package workloadstats.calendardata.mycalendar;
 
 import java.util.ArrayList;
 import java.util.EnumSet;

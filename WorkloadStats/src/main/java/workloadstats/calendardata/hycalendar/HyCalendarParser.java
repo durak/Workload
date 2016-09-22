@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package workloadstats.calendar.hycalendar;
+package workloadstats.calendardata.hycalendar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ import workloadstats.domain.model.Event;
 import workloadstats.domain.model.Uncategorized;
 
 /**
- * TODO: Wrappaa koko kalenteri tähän yksinkertaisuuden vuoksi
+ * TODO: 
  * eli vielä tarvitaan muiden komponenttien (timezonet yms) ronkkimista
  * @author Ilkka
  */
