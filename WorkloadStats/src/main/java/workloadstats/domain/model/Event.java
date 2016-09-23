@@ -71,10 +71,11 @@ public abstract class Event extends VEvent {
         }
     }
 
-    public void setStatusConfirmed() throws IOException, URISyntaxException, ParseException {
+    public void setStatusConfirmed() {
         this.status = "CONFIRMED";
-        Property status = this.getProperties().getProperty("STATUS");
-        status.setValue("CONFIRMED");
+//        Property status = this.getProperties().getProperty("STATUS");
+//        status.setValue("CONFIRMED");
+        addPropertyToVEvent(Property.STATUS, "CONFIRMED");
     }
 
     public String getEventName() {

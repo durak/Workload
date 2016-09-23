@@ -1,2 +1,3 @@
 workloadstats\domain\model\CourseTest.class
-workloadstats\TestiluokkaTest.class
+workloadstats\calendardata\MyCalendarParserTest.class
+workloadstats\domain\model\EventTest.class

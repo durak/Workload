@@ -12,7 +12,7 @@ import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.Version;
 
 /**
- *
+ * Luokka ei ole vielä käytössä
  * @author Ilkka
  */
 public class CalendarBuilderImpl extends CalendarBuilder {

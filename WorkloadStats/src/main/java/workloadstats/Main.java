@@ -30,7 +30,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException, ParserException, URISyntaxException, ParseException, ValidationException {
 
         Scanner lukija = new Scanner(System.in);
-        Boolean test = true;
+        Boolean test = false;
         Boolean test2 = false;
 
         /*

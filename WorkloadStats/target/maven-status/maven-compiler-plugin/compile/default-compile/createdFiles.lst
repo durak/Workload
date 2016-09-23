@@ -12,7 +12,6 @@ workloadstats\domain\model\Uncategorized.class
 workloadstats\domain\model\Course.class
 workloadstats\domain\model\Teamwork.class
 workloadstats\calendardata\hycalendar\HyCalendarControl.class
-workloadstats\Testiluokka.class
 workloadstats\domain\model\Lecture.class
 workloadstats\calendardata\hycalendar\HyCalendarParser.class
 workloadstats\domain\model\Exam.class
