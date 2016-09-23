@@ -4,6 +4,7 @@ iCalendar-standardin mukaista kalenteridataa hyödyntävä seurantatyökalu opis
 
 ## Dokumentaatio
 [Aiheen kuvaus ja rakenne](Dokumentaatio/aihemaarittely.md)
+
 [Tuntikirjanpito](Dokumentaatio/tuntikirjanpito.md)
 
 ## Muuta kivaa

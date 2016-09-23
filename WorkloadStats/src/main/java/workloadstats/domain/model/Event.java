@@ -12,14 +12,13 @@ import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Categories;
 import net.fortuna.ical4j.model.property.Summary;
-import workloadstats.domain.trash.VEventManager;
 
 /**
  *
  * @author Ilkka
  */
 public abstract class Event extends VEvent {
-    
+
     private String courseId;
     private String status;
     private String relatedTo;
@@ -64,11 +63,11 @@ public abstract class Event extends VEvent {
             }
             this.getProperty(property).setValue(value);
         } catch (IOException ex) {
-            Logger.getLogger(VEventManager.class.getName()).log(Level.SEVERE, null, ex);
+
         } catch (URISyntaxException ex) {
-            Logger.getLogger(VEventManager.class.getName()).log(Level.SEVERE, null, ex);
+
         } catch (ParseException ex) {
-            Logger.getLogger(VEventManager.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
 
@@ -77,7 +76,7 @@ public abstract class Event extends VEvent {
         Property status = this.getProperties().getProperty("STATUS");
         status.setValue("CONFIRMED");
     }
-    
+
     public String getEventName() {
         return this.getSummary().getValue();
     }

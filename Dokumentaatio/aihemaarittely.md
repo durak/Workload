@@ -7,13 +7,17 @@ Varastoiduista seurantatiedoista opiskelija voi verrata kurssiin käyttämääns
 
 Kurssien työtaakasta voidaan luoda myös aggregaattimuuttujia ja katsoa opiskelijan kokonaistaakkaa jollain aikavälillä.
 
-Ohjelma tallentaa kerätyt tiedot samassa iCalendar-formaatissa millä siihen voi tuoda tietoa ulkopuolelta
+Koska ohjelma tallentaa kerätyt tiedot samassa iCalendar-formaatissa millä siihen voi tuoda tietoa ulkopuolelta, on kaikki ohjelmalla kerätyt tiedot ladattavissa uudestaan mihin tahansa kalenteriohjelmaan. Näin opiskelija voi seurata historiallista työtaakkaansa myös haluamallaan tutulla kalenterilla, mutta myös aikatauluttaa itselleen valmiiksi tulevia työtaakkoja; esim. "Perjantai 23.9. klo 17-19, kirjoita testejä".
+
+Ohessa kaksi linkkiä kuviin, jotka havainnoillistavat (pelkällä yliopiston kalenteridatalla, ei omia merkintöjä vielä) muutosta kalenteridatassa ennen ja jälkeen ohjelman käsittelyn.
+[Before](before.png)
+[After](after.png)
 
 ##Mahdollisia laajennuksia:
  - visuaalisia kuvaajia seurantatiedoista
  - ei kalenteritiedostoja, vaan suora lukeminen yliopiston kalenterista ja tallentaminen esim. google calendariin.
  
-#Suunnitteluvaiheen luokkamalli ja muutamia selvennyksiä kohdealueen mallintamisesta ohjelmassa
+##Malli ja muutamia selvennyksiä kohdealueen mallintamisesta ohjelmassa
 Ohjelman käyttämä datasäilö on yksinkertainen iCalendar-standardin mukainen kalenteritiedosto. Ohjelma ei siis käytä tietokantatauluja, vaan datan purkaminen ohjelman sovelluslogiikan olioiksi, sekä tallentaminen takaisin tallennuskerrokseen tapahtuu iCal4J-kirjaston toimintoja hyödyntäen. Kirjaston tarjoamat luokat toimivat pohjana ohjelmassa toteutetulle sovelluslogiikalle.
 
 Ohjelman kohdealueesta muodostettu luokkamalli muodostuu rakenteesta, jossa abstrakti luokka Event kuvaa mitä tahansa kalenterimerkinnän pohjalta luotua oliota. Abstraktin luokan toteuttaa kohdealueelta määritellyt luokat, ja mallin yhteenkokoajana toimii luokka Course, johon muut kalenterimerkinnät liittyvät. Huomioitavaa on, että myös Course on Event-luokan toteutus.
