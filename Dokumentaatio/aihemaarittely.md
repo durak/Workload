@@ -10,6 +10,7 @@ Kurssien työtaakasta voidaan luoda myös aggregaattimuuttujia ja katsoa opiskel
 Koska ohjelma tallentaa kerätyt tiedot samassa iCalendar-formaatissa millä siihen voi tuoda tietoa ulkopuolelta, on kaikki ohjelmalla kerätyt tiedot ladattavissa uudestaan mihin tahansa kalenteriohjelmaan. Näin opiskelija voi seurata historiallista työtaakkaansa myös haluamallaan tutulla kalenterilla, mutta myös aikatauluttaa itselleen valmiiksi tulevia työtaakkoja; esim. "Perjantai 23.9. klo 17-19, kirjoita testejä".
 
 Linkin takana havainnoillistus (vielä pelkällä yliopiston kalenteridatalla, ei omia merkintöjä) muutosta kalenteridatassa ennen ja jälkeen ohjelman käsittelyn.
+
 [Kalenteridatan muutokset](kalenteriesimerkki.md)
 
 
