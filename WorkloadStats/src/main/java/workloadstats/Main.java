@@ -15,6 +15,7 @@ import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Date;
+import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.ValidationException;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
@@ -44,10 +45,9 @@ public class Main {
         EventUtilities eu = new EventUtilities();
         File calendarFile = new File("mycalendar2.ics");
         FileInputStream my = new FileInputStream(calendarFile);
-        CalendarBuilderImpl builder = new CalendarBuilderImpl();        
+        CalendarBuilderImpl builder = new CalendarBuilderImpl();
         Calendar myCal = builder.build(my);
         MyCalendarControl myCalendarControl = new MyCalendarControl(myCal);
-        
 
         Gui gui = new Gui(myCalendarControl);
         SwingUtilities.invokeLater(gui);
@@ -114,6 +114,14 @@ public class Main {
 //        frame.setContentPane(new EventListPanel(kurssitForGui.get(1).getAllEvents()));
 //        frame.setSize(260, 200);
 //        frame.setVisible(true);
+        //date-testing
+        java.util.Calendar today = java.util.Calendar.getInstance();
+        today.set(java.util.Calendar.HOUR_OF_DAY, 0);
+        today.clear(java.util.Calendar.MINUTE);
+        today.clear(java.util.Calendar.SECOND);
+        DateTime dt = new DateTime("19980118T230000");
+        System.out.println(dt);
+
     }
 
 }

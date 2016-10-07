@@ -42,7 +42,7 @@ public class EventListPanel extends JPanel {
         initPanelComponents();
     }
 
-    public EventListPanel(Course course) {
+    public EventListPanel(Course course, EventStatsPanel eventStatsPanel) {
         this.course = course;
         events = course.getAllEvents();
         initPanelComponents();
@@ -74,31 +74,14 @@ public class EventListPanel extends JPanel {
         list.setSelectionModel(selectionModel);
 
         ////////////////////////
-//        for (Event event : events) {
-//            model.addElement(event);
-//        }
 
-//        list.addListSelectionListener(new ListSelectionListener() {
-//            @Override
-//            public void valueChanged(ListSelectionEvent e) {
-//                boolean isAdjusting = e.getValueIsAdjusting();
-//
-//                if (!isAdjusting) {
-//                    selectedEvent = (Event) list.getSelectedValue();
-//                    System.out.println(selectedEvent.getEventName());
-//                }
-//            }
-//        });
         add(pane, BorderLayout.NORTH);
     }
 
     public void reset(Course course) {
         this.course = course;
         events = course.getAllEvents();
-
         Event[] ev = events.toArray(new Event[events.size()]);
-
-//        list.setSelectedIndex(0);
         list.setListData(ev);
 //        list.setSelectedIndex(0);
     }
