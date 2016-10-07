@@ -30,11 +30,13 @@ import workloadstats.domain.model.Event;
  */
 public class EventListPanel extends JPanel {
     private EventStatsPanel eventStatsPanel;
-    private Course course;
+    private Course selectedCourse;
+    private Event selectedEvent;
+    
     private List<Event> events;
     private JList list;
     DefaultListModel model;
-    Event selectedEvent;
+    
 
     public EventListPanel(List<Event> events, EventStatsPanel eventStatsPanel) {
         this.eventStatsPanel = eventStatsPanel;
@@ -43,7 +45,7 @@ public class EventListPanel extends JPanel {
     }
 
     public EventListPanel(Course course, EventStatsPanel eventStatsPanel) {
-        this.course = course;
+        this.selectedCourse = course;
         events = course.getAllEvents();
         initPanelComponents();
     }
@@ -67,7 +69,7 @@ public class EventListPanel extends JPanel {
                 ListModel m = list.getModel();
                 selectedEvent = (Event) m.getElementAt(newIndex);
                 System.out.println(selectedEvent.getEventName());
-                eventStatsPanel.setEvent(selectedEvent);
+                eventStatsPanel.setEvent(selectedCourse, selectedEvent);
 //                                    System.out.println(selectedEvent.getEventName());
             }
         };
@@ -79,7 +81,7 @@ public class EventListPanel extends JPanel {
     }
 
     public void reset(Course course) {
-        this.course = course;
+        this.selectedCourse = course;
         events = course.getAllEvents();
         Event[] ev = events.toArray(new Event[events.size()]);
         list.setListData(ev);

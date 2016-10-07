@@ -1,9 +1,13 @@
 package workloadstats.calendardata.mycalendar;
 
+import java.io.IOException;
 import java.net.SocketException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.List;
 import net.fortuna.ical4j.model.Calendar;
+import net.fortuna.ical4j.model.Property;
+import net.fortuna.ical4j.model.PropertyFactoryImpl;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.property.Categories;
 import net.fortuna.ical4j.model.property.DtEnd;
@@ -14,10 +18,12 @@ import net.fortuna.ical4j.model.property.Summary;
 import net.fortuna.ical4j.util.UidGenerator;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
+import workloadstats.domain.model.Personal;
 import workloadstats.utils.EventUtilities;
 
 /**
  * Control class for program's own calendar data & domain model object handling
+ *
  * @author Ilkka
  */
 public class MyCalendarControl {
@@ -40,31 +46,56 @@ public class MyCalendarControl {
     public List<Course> getCourses() {
         return courses;
     }
-    
+
     /**
      * Build a new Course event with input from the user
+     *
      * @param summary
      * @param startDate
      * @param endDate
      * @return
-     * @throws ParseException 
+     * @throws ParseException
      */
-    public Course buildNewCourse(String summary, String startDate, String endDate) throws ParseException {                                        
+    public Course buildNewCourse(String summary, String startDate, String endDate) throws ParseException, IOException, URISyntaxException {
+        PropertyFactoryImpl pf = PropertyFactoryImpl.getInstance();
         PropertyList props = new PropertyList();
         props.add(new DtStart(startDate));
         props.add(new DtEnd(endDate));
         props.add(new DtStamp());
         props.add(new Summary(summary));
-        props.add(ug.generateUid());        
+        props.add(ug.generateUid());
         props.add(new Categories("COURSE"));
-        props.add(VEVENT_TENTATIVE);
+        Property status = pf.createProperty(Property.STATUS);
+        status.setValue("TENTATIVE");
+        props.add(status);
         Course newCourse = new Course(props);
-        
+
         return newCourse;
     }
-    
+
+    public Personal buildNewPersonal(String summary, String startDate, String endDate, Course parent) throws ParseException, IOException, URISyntaxException {
+        PropertyFactoryImpl pf = PropertyFactoryImpl.getInstance();
+        PropertyList props = new PropertyList();
+        props.add(new DtStart(startDate));
+        props.add(new DtEnd(endDate));
+        props.add(new DtStamp());
+        props.add(new Summary(summary));
+        props.add(ug.generateUid());
+        props.add(new Categories("PERSONAL"));
+        Property status = pf.createProperty(Property.STATUS);
+        status.setValue("CONFIRMED");
+        props.add(status);
+        
+        Personal newPersonal = new Personal(props);
+        parent.parentAnotherEvent(parent);
+        parent.addEvent(newPersonal);
+        
+        return newPersonal;
+    }
+
     /**
      * Calculate parameter event's duration in minutes
+     *
      * @param event
      * @return Duration in minutes
      */

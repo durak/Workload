@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import workloadstats.calendardata.hycalendar.HyCalendarControl;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
+import workloadstats.domain.model.Course;
 
 /**
  *
@@ -82,6 +84,11 @@ public class Gui implements Runnable {
 
     public JFrame getFrame() {
         return frame;
+    }
+    
+    //testing
+    public List<Course> testaustaVartenKurssitUlosGuista() {
+        return this.myCalendarControl.getCourses();
     }
 
 }

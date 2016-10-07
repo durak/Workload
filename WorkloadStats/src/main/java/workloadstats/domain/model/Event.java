@@ -20,11 +20,12 @@ import net.fortuna.ical4j.model.property.Summary;
 
 /**
  * Abstract calendar event type
+ *
  * @author Ilkka
  */
 public abstract class Event extends VEvent {
 
-    private String courseId;
+    private String eventSummary;
     private String status;
     private String relatedTo;
 
@@ -33,10 +34,10 @@ public abstract class Event extends VEvent {
         this.status = "TENTATIVE";
     }
 
-    public Event(DateTime start, DateTime end, String courseId) {
-        super(start, end, "testinimi");
-        this.courseId = courseId;
-        super.getProperties().add(new Categories(courseId));
+    public Event(DateTime start, DateTime end, String summary) {
+        super(start, end, summary);
+        this.eventSummary = summary;
+//        super.getProperties().add(new Categories(courseId));
 
     }
 
@@ -47,10 +48,11 @@ public abstract class Event extends VEvent {
     public Event(PropertyList pl) {
         super(pl);
     }
-    
+
     /**
      * Set this event's UID as the value of child event's RELATED_TO property
-     * @param child 
+     *
+     * @param child
      */
     public void parentAnotherEvent(Event child) {
         if (!child.equals(this)) {
@@ -60,7 +62,8 @@ public abstract class Event extends VEvent {
 
     /**
      * Set parent event's UID as this event's RELATED_TO value
-     * @param parent 
+     *
+     * @param parent
      */
     public void childToAnotherEvent(Event parent) {
         if (!parent.equals(this)) {
@@ -74,6 +77,7 @@ public abstract class Event extends VEvent {
             if (this.getProperty(property) == null) {
                 this.getProperties().add(pf.createProperty(property));
             }
+            
             this.getProperty(property).setValue(value);
         } catch (IOException ex) {
 
@@ -83,59 +87,77 @@ public abstract class Event extends VEvent {
 
         }
     }
-    
+
     /**
      * Set Status property to TENTATIVE
      */
     public void setStatusTentative() {
         this.status = "TENTATIVE";
-        
+        addPropertyToVEvent(Property.STATUS, "TENTATIVE");
     }
-    
+
     /**
      * Set status property to CONFIRMED
      */
     public void setStatusConfirmed() {
         this.status = "CONFIRMED";
-//        Property status = this.getProperties().getProperty("STATUS");
-//        status.setValue("CONFIRMED");
         addPropertyToVEvent(Property.STATUS, "CONFIRMED");
     }
     
-    
+    public void setStatusCancelled() {
+        this.status = "CANCELLED";
+        addPropertyToVEvent(Property.STATUS, "CANCELLED");
+    }
+
     /**
      * Get summary as String
-     * @return 
+     *
+     * @return
      */
     public String getEventName() {
         return this.getSummary().getValue();
     }
     
     /**
+     * Get event's status as a string
+     * @return String of status, possible values CONFIRMED or TENTATIVE
+     */
+    public String getEventStatus() {
+        if (this.getProperty(Property.STATUS) == null) {
+            setStatusTentative();
+        }
+        
+        return this.getProperty(Property.STATUS).getValue();
+    }
+
+    /**
      * Get Start date as string, Helsinki timezone
+     *
      * @return date in format yyyyMMdd
      */
     public String getStartDateString() {
         String date = toHelsinkiTime(this.getStartDate().getDate());
         return date.substring(0, 8);
     }
-    
+
     /**
      * Get End date as string, Helsinki timezone
+     *
      * @return date in format yyyyMMdd
      */
     public String getEndDateString() {
         String date = toHelsinkiTime(this.getEndDate().getDate());
         return date.substring(0, 8);
     }
-    
+
     /**
      * Get Start time as string, Helsinki timezone
+     *
      * @return time in format HHmmss
      */
-    public String getStartTime() {        
+    public String getStartTime() {
         Date date = this.getStartDate().getDate();
-        String time = toHelsinkiTime(date);        
+        String time = toHelsinkiTime(date);
 
         return time.substring(9, 15);
     }

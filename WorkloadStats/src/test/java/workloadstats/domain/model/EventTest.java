@@ -30,7 +30,7 @@ public class EventTest {
 
     Event ev1;
     Event ev2;
-    
+
     UidGenerator ug;
 
     public EventTest() {
@@ -54,7 +54,7 @@ public class EventTest {
         VEvent ve2 = new VEvent(start, "testi2");
         ve1.getProperties().add(ug.generateUid());
         ve2.getProperties().add(ug.generateUid());
-        
+
         ev1 = new Exam(ve1);
         ev2 = new Personal(ve2);
     }
@@ -72,37 +72,76 @@ public class EventTest {
     public void eventinSummarykenttaPalautuuOikein() {
         assertEquals("testi1", ev1.getEventName());
         assertEquals("testi2", ev2.getEventName());
-        
+
     }
-    
+
     @Test
     public void eventinVoiAsettaaToisenParentiksi() {
         ev1.parentAnotherEvent(ev2);
         String ev2RelatedTo = ev2.getProperty(Property.RELATED_TO).getValue();
-        
+
         String parentUid = ev1.getProperty(Property.UID).getValue();
-        
+
         assertEquals(parentUid, ev2RelatedTo);
-        
+
     }
-    
+
     @Test
-    public void eventinVoiAsettaaChildiksi() {       
+    public void eventinVoiAsettaaChildiksi() {
         ev1.childToAnotherEvent(ev2);
         String ev1RelatedTo = ev1.getProperty(Property.RELATED_TO).getValue();
-        
+
         String parentUid = ev2.getProperty(Property.UID).getValue();
-        
+
         assertEquals(parentUid, ev1RelatedTo);
+    }
+
+    @Test
+    public void eventinStatuksenMuutosConfirmedOnnistuuEkanKerran() {
+        ev1.setStatusConfirmed();
+        assertEquals("CONFIRMED", ev1.getProperty(Property.STATUS).getValue());
+    }
+
+    @Test
+    public void eventinStatuksenMuutosConfirmedOnnistuuUseammanKerran() {
+        ev1.setStatusTentative();
+        ev1.setStatusConfirmed();
+        ev1.setStatusConfirmed();
+        assertEquals("CONFIRMED", ev1.getProperty(Property.STATUS).getValue());
+    }
+
+    @Test
+    public void eventinStatuksenMuutosTentativeOnnistuuEkanKerran() {
+        ev1.setStatusTentative();
+        assertEquals("TENTATIVE", ev1.getProperty(Property.STATUS).getValue());
     }
     
     @Test
-    public void eventinStatuksenMuutosConfirmedOnnistuu() {
+    public void eventinStatuksenMuutosTentativeOnnistuuUseammanKerran() {
         ev1.setStatusConfirmed();
-        assertEquals("CONFIRMED", ev1.getProperty(Property.STATUS).getValue());
-        
+        ev1.setStatusTentative();
+        ev1.setStatusTentative();
+        assertEquals("TENTATIVE", ev1.getProperty(Property.STATUS).getValue());
+    }
+    @Test
+    public void eventinStatuksenMuutosCancelledOnnistuuEkanKerran() {
+        ev1.setStatusCancelled();
+        assertEquals("CANCELLED", ev1.getProperty(Property.STATUS).getValue());
     }
     
-
+    @Test
+    public void eventinStatuksenMuutosCancelledOnnistuuUseammanKerran() {
+        ev1.setStatusConfirmed();
+        ev1.setStatusCancelled();
+        ev1.setStatusCancelled();
+        assertEquals("CANCELLED", ev1.getProperty(Property.STATUS).getValue());
+    }
+    
+    @Test
+    public void eventinStatusPalautuuOikein() {
+        assertEquals("TENTATIVE", ev1.getEventStatus());
+        ev1.setStatusConfirmed();
+        assertEquals("CONFIRMED", ev1.getEventStatus());        
+    }
 
 }

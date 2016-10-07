@@ -16,13 +16,18 @@ import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.DateTime;
+import net.fortuna.ical4j.model.Property;
+import net.fortuna.ical4j.model.PropertyFactoryImpl;
 import net.fortuna.ical4j.model.ValidationException;
+import net.fortuna.ical4j.model.component.VEvent;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.calendardata.hycalendar.HyCalendarControl;
 import workloadstats.calendardata.mycalendar.MyCalendarParser;
 import workloadstats.calendardata.CalendarBuilderImpl;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
+import workloadstats.domain.model.Exam;
+import workloadstats.domain.model.Lecture;
 import workloadstats.ui.CourseListPanel;
 import workloadstats.ui.EventListPanel;
 import workloadstats.ui.Gui;
@@ -121,6 +126,37 @@ public class Main {
         today.clear(java.util.Calendar.SECOND);
         DateTime dt = new DateTime("19980118T230000");
         System.out.println(dt);
+
+//        List<Course> kurssit = gui.testaustaVartenKurssitUlosGuista();
+//        Event satunnainen = kurssit.get(0).getAllEvents().get(0);
+//        System.out.println(satunnainen);
+//        satunnainen.getProperties().remove(Property.STATUS);
+//        satunnainen.getProperties().remove(Property.RELATED_TO);
+//        satunnainen.getProperty(Property.STATUS).setValue("s");
+//        System.out.println(satunnainen);
+
+//        java.util.Calendar calendar = java.util.Calendar.getInstance();
+//        calendar.set(java.util.Calendar.MONTH, java.util.Calendar.DECEMBER);
+//        calendar.set(java.util.Calendar.DAY_OF_MONTH, 25);
+//        DateTime day = new DateTime(calendar.getTime());
+//        Exam testi = new Exam(day, day, "summary");
+//        testi.setStatusCancelled();
+//        testi.setStatusConfirmed();
+//        System.out.println(testi);
+//        
+//        Event joku = kurssitForGui.get(0).getAllEvents().get(0);
+//        Lecture joku2 = (Lecture) joku;
+//        joku2.setStatusCancelled();
+//        VEvent uuspa = new VEvent(day, "summary");
+//        PropertyFactoryImpl pf = PropertyFactoryImpl.getInstance();
+//        uuspa.getProperties().add(pf.createProperty(Property.STATUS));
+//        uuspa.getProperties().getProperty(Property.STATUS).setValue("VE");
+//        
+////        uuspa.getProperties().add();
+//        System.out.println(uuspa);
+////        joku.setStatusCancelled();
+//        System.out.println(joku);
+//        satunnainen.getProperty(Property.STATUS).setValue("VEVENT_CANCELLED");
 
     }
 
