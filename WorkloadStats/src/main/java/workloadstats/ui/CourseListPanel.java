@@ -100,10 +100,10 @@ public class CourseListPanel extends JPanel {
 //
 //            }
 //        });
-        JButton addButton = new JButton("Add Element");
-        JButton removeButton = new JButton("Remove Element");
+        JButton newCourseButton = new JButton("Uusi kurssi");
+        JButton deleteCourseButton = new JButton("Poista kurssi");
 
-        addButton.addActionListener(new ActionListener() {
+        newCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                VEvent newVev = new VEvent();
 //                Course newCou = new Course(newVev);
@@ -126,7 +126,7 @@ public class CourseListPanel extends JPanel {
             }
         });
 
-        removeButton.addActionListener(new ActionListener() {
+        deleteCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (model.getSize() > 0) {
                     courses.remove(model.getElementAt(list.getSelectedIndex()));
@@ -139,8 +139,8 @@ public class CourseListPanel extends JPanel {
         });
 
         add(scrollPane, BorderLayout.NORTH);
-        add(addButton, BorderLayout.SOUTH);
-        add(removeButton, BorderLayout.SOUTH);
+        add(newCourseButton, BorderLayout.SOUTH);
+        add(deleteCourseButton, BorderLayout.SOUTH);
 
     }
 

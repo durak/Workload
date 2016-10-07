@@ -56,7 +56,7 @@ public class Gui implements Runnable {
         MenuButtonPanel menuButtonPanel = new MenuButtonPanel();
         CourseStatsPanel courseStatsPanel = new CourseStatsPanel();
         EventStatsPanel eventStatsPanel = new EventStatsPanel(myCalendarControl);
-        EventListPanel eventListPanel = new EventListPanel(myCalendarControl.getCourses().get(1).getAllEvents(), eventStatsPanel);
+        EventListPanel eventListPanel = new EventListPanel(myCalendarControl, myCalendarControl.getCourses().get(0), eventStatsPanel);
         CourseListPanel courseListPanel = new CourseListPanel(myCalendarControl, eventListPanel);
         
         
