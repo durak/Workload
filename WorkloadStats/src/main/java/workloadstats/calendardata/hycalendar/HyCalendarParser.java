@@ -20,8 +20,7 @@ import workloadstats.domain.model.Event;
 import workloadstats.domain.model.Uncategorized;
 
 /**
- * TODO: 
- * eli vielä tarvitaan muiden komponenttien (timezonet yms) ronkkimista
+ * Parser functions for imported University calendar data
  * @author Ilkka
  */
 public class HyCalendarParser {

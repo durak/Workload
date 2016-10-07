@@ -12,6 +12,10 @@ import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Status;
 
+/**
+ * Course type calendar event
+ * @author Ilkka
+ */
 public class Course extends Event {
 
     private String courseId;
@@ -55,6 +59,11 @@ public class Course extends Event {
         return this.name;
     }
     
+    
+    /**
+     * Return a list of all events in this course
+     * @return 
+     */
     public List<Event> getAllEvents() {
         List<Event> allEvents = new ArrayList<>();
         allEvents.addAll(lectures);
@@ -87,6 +96,11 @@ public class Course extends Event {
 //    public String getName() {
 //        return "";
 //    }
+    
+    /**
+     * Add calendar event to this course
+     * @param event 
+     */
     public void addEvent(Event event) {
         super.parentAnotherEvent(event);
         
@@ -106,7 +120,11 @@ public class Course extends Event {
             exams.add(event);
         }
     }
-
+    
+    /**
+     * Add list of events to this course
+     * @param list 
+     */
     public void addEventList(List<Event> list) {
         for (Event event : list) {
             addEvent(event);

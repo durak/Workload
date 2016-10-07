@@ -118,7 +118,7 @@ public class CourseListPanel extends JPanel {
                     model.addElement(newCourse);
                     courses.add(newCourse);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "alert", "alert", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "alert", "Virhe syötteessä", JOptionPane.ERROR_MESSAGE);
 
                     Logger.getLogger(CourseListPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }

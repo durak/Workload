@@ -5,7 +5,7 @@ import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.component.VEvent;
 
 /**
- *
+ * Personal type calendar event
  * @author Ilkka
  */
 public class Personal extends Event {

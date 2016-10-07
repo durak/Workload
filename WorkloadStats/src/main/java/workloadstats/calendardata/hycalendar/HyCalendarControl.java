@@ -14,7 +14,7 @@ import workloadstats.domain.model.Event;
 import workloadstats.domain.model.Lecture;
 
 /**
- *
+ * Control class for handling University calendar data importing
  * @author Ilkka
  */
 public class HyCalendarControl {

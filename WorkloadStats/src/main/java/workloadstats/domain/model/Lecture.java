@@ -5,6 +5,11 @@ import java.util.Date;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.component.VEvent;
 
+
+/**
+ * Lecture type calendar event
+ * @author Ilkka
+ */
 public class Lecture extends Event {
     
 //    private String name;

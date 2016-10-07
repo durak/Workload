@@ -18,7 +18,7 @@ import workloadstats.domain.model.Exercise;
 import workloadstats.domain.model.Lecture;
 
 /**
- *
+ * Helper class for turning parsed University calendar data into domain model objects
  * @author Ilkka
  */
 public class HyEventSorter {

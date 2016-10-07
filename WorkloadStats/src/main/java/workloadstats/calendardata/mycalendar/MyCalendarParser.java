@@ -22,7 +22,7 @@ import workloadstats.domain.model.Teamwork;
 import workloadstats.domain.model.Uncategorized;
 
 /**
- *
+ * Parser for programs own calendar data & domain model object builder
  * @author Ilkka
  */
 public class MyCalendarParser {
@@ -44,11 +44,20 @@ public class MyCalendarParser {
         allEvents();
         addEventstoCourses();
     }
-
+    
+    /**
+     * Get list of Course events parsed from data
+     * @return List of Course events
+     */
     public List<Course> getCourses() {
         return this.courses;
     }
-
+    
+    /**
+     * Find a Course event that is a parent for the parameter event
+     * @param ve
+     * @return 
+     */
     public Course getCourseForEvent(Event ve) {        
         String uid = ve.getProperty(Property.RELATED_TO).getValue();
         return courseWithUid.get(uid);
