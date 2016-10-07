@@ -29,14 +29,15 @@ import workloadstats.domain.model.Event;
  * @author Ilkka
  */
 public class EventListPanel extends JPanel {
-
+    private EventStatsPanel eventStatsPanel;
     private Course course;
     private List<Event> events;
     private JList list;
     DefaultListModel model;
     Event selectedEvent;
 
-    public EventListPanel(List<Event> events) {
+    public EventListPanel(List<Event> events, EventStatsPanel eventStatsPanel) {
+        this.eventStatsPanel = eventStatsPanel;
         this.events = events;
         initPanelComponents();
     }
@@ -61,20 +62,21 @@ public class EventListPanel extends JPanel {
 
 //        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         ////////////////////////
-        ListSelectionModel selectionModel = new SingleSelectionModel() {
+        ListSelectionModel selectionModel = new SingleSelectionListModel() {
             public void updateSingleSelection(int oldIndex, int newIndex) {
                 ListModel m = list.getModel();
                 selectedEvent = (Event) m.getElementAt(newIndex);
                 System.out.println(selectedEvent.getEventName());
+                eventStatsPanel.setEvent(selectedEvent);
 //                                    System.out.println(selectedEvent.getEventName());
             }
         };
         list.setSelectionModel(selectionModel);
 
         ////////////////////////
-        for (Event event : events) {
-            model.addElement(event);
-        }
+//        for (Event event : events) {
+//            model.addElement(event);
+//        }
 
 //        list.addListSelectionListener(new ListSelectionListener() {
 //            @Override
@@ -104,21 +106,4 @@ public class EventListPanel extends JPanel {
     
 }
 
-class SingleSelectionModel extends DefaultListSelectionModel {
 
-    public SingleSelectionModel() {
-        setSelectionMode(SINGLE_SELECTION);
-    }
-    public void setSelectionInterval(int index0, int index1) {
-        int oldIndex = getMinSelectionIndex();
-        super.setSelectionInterval(index0, index1);
-        int newIndex = getMinSelectionIndex();
-        if (oldIndex != newIndex) {
-            updateSingleSelection(oldIndex, newIndex);
-        }
-    }
-
-    public void updateSingleSelection(int oldIndex, int newIndex) {
-    }
-
-}

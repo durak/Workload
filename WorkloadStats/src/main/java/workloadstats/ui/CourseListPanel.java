@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import net.fortuna.ical4j.model.component.VEvent;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 
@@ -47,7 +48,7 @@ public class CourseListPanel extends JPanel {
         selectedCourse = null;
         model = new DefaultListModel();
         list = new JList(model);
-        JScrollPane pane = new JScrollPane(list);
+        JScrollPane scrollPane = new JScrollPane(list);
         list.setCellRenderer(new CourseListRenderer());
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -81,7 +82,10 @@ public class CourseListPanel extends JPanel {
 
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                model.addElement("Uusi");
+//                VEvent newVev = new VEvent();
+//                Course newCou = new Course(newVev);
+//                model.addElement(newCou);
+                System.out.println("test");
             }
         });
 
@@ -93,8 +97,8 @@ public class CourseListPanel extends JPanel {
             }
         });
 
-        add(pane, BorderLayout.NORTH);
-//        add(addButton, BorderLayout.WEST);
+        add(scrollPane, BorderLayout.NORTH);
+        add(addButton, BorderLayout.SOUTH);
 //        add(removeButton, BorderLayout.EAST);
 
     }

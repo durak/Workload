@@ -5,10 +5,13 @@
  */
 package workloadstats.ui;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import workloadstats.domain.model.Event;
 
 /**
  *
@@ -16,36 +19,58 @@ import javax.swing.JPanel;
  */
 public class EventStatsPanel extends JPanel {
 
+    private Event selectedEvent;
+        
+    private JTextField otsikkoSisalto2;
+    private JLabel otsikkoSisalto;
+    private JLabel pvmSisalto;
+    private JLabel kellonaikaSisalto;
+    private JLabel paikkaSisalto;
+    private JLabel lasnaSisalto;
+
     public EventStatsPanel() {
+        selectedEvent = null;
         initPanelComponents();
     }
 
     private void initPanelComponents() {
         this.setBorder(javax.swing.BorderFactory.createTitledBorder("Kalenterimerkinnän tiedot"));
-        GridLayout layout = new GridLayout(5, 2);
-        this.setLayout(layout);
-        JLabel jl1 = new JLabel("Otsikko");
-        JLabel jl2 = new JLabel("otsikko sisalto");
-        JLabel jl3 = new JLabel("Pvm");
-        JLabel jl4 = new JLabel("Pvm sisalto");
-        JLabel jl5 = new JLabel("Kellonaika");
-        JLabel jl6 = new JLabel("Kellonaika sisalto");
-        JLabel jl7 = new JLabel("Paikka");
-        JLabel jl8 = new JLabel("Paikka sisalto");
-        JLabel jl9 = new JLabel("Läsnä");
-        JLabel jl10 = new JLabel("Läsnä sisalto");
         
+        // Upper panel for eventStats
+        JPanel upper = new JPanel();
+        GridLayout layout = new GridLayout(5, 2);
+        upper.setLayout(layout);
+        this.add(upper, BorderLayout.CENTER);
 
-        this.add(jl1);
-        this.add(jl2);
-        this.add(jl3);
-        this.add(jl4);
-        this.add(jl5);
-        this.add(jl6);
-        this.add(jl7);
-        this.add(jl8);
-        this.add(jl9);
-        this.add(jl10);
+        JLabel otsikko = new JLabel("Otsikko");
+        JLabel pvm = new JLabel("Pvm");
+        JLabel kellonaika = new JLabel("Kellonaika");
+        JLabel paikka = new JLabel("Paikka");
+        JLabel lasna = new JLabel("Läsnä");
+        
+        otsikkoSisalto2 = new JTextField("sisalto");
+        otsikkoSisalto = new JLabel("otsikko sisalto");
+        pvmSisalto = new JLabel("Pvm sisalto");
+        kellonaikaSisalto = new JLabel("Kellonaika sisalto");
+        paikkaSisalto = new JLabel("Paikka sisalto");
+        lasnaSisalto = new JLabel("Läsnä sisalto");
 
+        upper.add(otsikko);
+//        upper.add(otsikkoSisalto);
+        upper.add(otsikkoSisalto2);
+        upper.add(pvm);
+        upper.add(pvmSisalto);
+        upper.add(kellonaika);
+        upper.add(kellonaikaSisalto);
+        upper.add(paikka);
+        upper.add(paikkaSisalto);
+        upper.add(lasna);
+        upper.add(lasnaSisalto);
+
+    }
+
+    public void setEvent(Event event) {
+        otsikkoSisalto.setText(event.getEventName());
+        otsikkoSisalto2.setText(event.getEventName());
     }
 }
