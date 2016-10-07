@@ -82,4 +82,9 @@ public abstract class Event extends VEvent {
         return this.getSummary().getValue();
     }
 
+
+  
+    
+
+
 }

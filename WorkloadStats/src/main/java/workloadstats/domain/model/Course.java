@@ -132,6 +132,10 @@ public class Course extends Event {
     public List<Event> getExams() {
         return this.exams;
     }
+    
+    
+    
+
 
 //    public void finishCourse() throws IOException, URISyntaxException, ParseException {
 //
