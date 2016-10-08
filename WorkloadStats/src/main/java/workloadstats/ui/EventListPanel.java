@@ -26,6 +26,7 @@ import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import workloadstats.calendardata.FieldTitle;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
@@ -97,28 +98,42 @@ public class EventListPanel extends JPanel {
 //                Course newCou = new Course(newVev);
 //                model.addElement(newCou);
 
-                String summary = JOptionPane.showInputDialog("Anna tapahtumalle nimi");
-                String date = JOptionPane.showInputDialog("Anna tapahtumalle päivämäärä (muoto VVVVKKPP");
-                String startTime = JOptionPane.showInputDialog("Anna tapahtumalle aloitusaika (muoto HHMMSS");
-                String endTime = JOptionPane.showInputDialog("Anna tapahtumalle lopetusaika (muoto HHMMSS");
-                String startDateTime = date + "T" + startTime;
-                String endDateTime = date + "T" + endTime;
+//                String summary = JOptionPane.showInputDialog("Anna tapahtumalle nimi");
+//                String date = JOptionPane.showInputDialog("Anna tapahtumalle päivämäärä (muoto VVVVKKPP");
+//                String startTime = JOptionPane.showInputDialog("Anna tapahtumalle aloitusaika (muoto HHMMSS");
+//                String endTime = JOptionPane.showInputDialog("Anna tapahtumalle lopetusaika (muoto HHMMSS");
+//                String startDateTime = date + "T" + startTime;
+//                String endDateTime = date + "T" + endTime;
+                NewEventPanel newEventPanel = new NewEventPanel();
+                int choice = JOptionPane.showConfirmDialog(scrollPane, newEventPanel,
+                        "Syötä uusi tapahtuma", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-                try {
+                if (choice == JOptionPane.OK_OPTION) {
 
-                    Personal newPersonal = myCalendarControl.buildNewPersonal(summary, startDateTime, endDateTime, selectedCourse);
+                    String summary = newEventPanel.getValue(FieldTitle.EVENTNAME);
+                    String date = newEventPanel.getValue(FieldTitle.DATE);
+                    String startTime = newEventPanel.getValue(FieldTitle.STARTTIME);
+                    String startDateTime = date + "T" + startTime;
+                    String endTime = newEventPanel.getValue(FieldTitle.ENDTIME);
+                    String endDateTime = date + "T" + endTime;
+
+                    try {
+
+                        Personal newPersonal = myCalendarControl.buildNewPersonal(summary, startDateTime, endDateTime, selectedCourse);
 
 //                    model.addElement(newPersonal);
-                    reset(selectedCourse);
+                        reset(selectedCourse);
 //                    courses.add(newCourse);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
 
-                    Logger.getLogger(CourseListPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CourseListPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
 
             }
-        });
+        }
+        );
         add(newEventButton);
     }
 

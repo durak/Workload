@@ -25,6 +25,7 @@ import workloadstats.domain.model.Event;
 import workloadstats.calendardata.hycalendar.HyCalendarControl;
 import workloadstats.calendardata.mycalendar.MyCalendarParser;
 import workloadstats.calendardata.CalendarBuilderImpl;
+import workloadstats.calendardata.FieldTitle;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Exam;
 import workloadstats.domain.model.Lecture;
@@ -158,6 +159,8 @@ public class Main {
 //        System.out.println(joku);
 //        satunnainen.getProperty(Property.STATUS).setValue("VEVENT_CANCELLED");
 
+
+        
     }
 
 }

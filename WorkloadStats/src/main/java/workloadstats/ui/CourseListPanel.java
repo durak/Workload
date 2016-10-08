@@ -105,13 +105,6 @@ public class CourseListPanel extends JPanel {
 
         newCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                VEvent newVev = new VEvent();
-//                Course newCou = new Course(newVev);
-//                model.addElement(newCou);
-//                System.out.println("test");
-//                String summary = JOptionPane.showInputDialog("Anna kurssille nimi");
-//                String date = JOptionPane.showInputDialog("Anna kurssille aloituspäivämäärä (muoto VVVVKKPP");
-//                date = date + "T000000";
 
                 NewCoursePanel newCoursePanel = new NewCoursePanel();
                 int choice = JOptionPane.showConfirmDialog(scrollPane, newCoursePanel,
@@ -142,19 +135,11 @@ public class CourseListPanel extends JPanel {
                     JOptionPane.showMessageDialog(scrollPane, "Valitse ensin kurssi", "Alert", JOptionPane.ERROR_MESSAGE);
                 } else {
                     int choice = JOptionPane.showConfirmDialog(scrollPane, "Haluatko varmasti poistaa kurssin?",
-                            "Alert", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+                            "Achtung!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
                     if (choice == JOptionPane.OK_OPTION) {
                         model.removeElementAt(list.getSelectedIndex());
                     }
                 }
-
-//                if (model.getSize() > 0) {
-//                    courses.remove(model.getElementAt(list.getSelectedIndex()));
-////                    courses.remove(model.getElementAt(0));
-//                    model.removeElementAt(list.getSelectedIndex());
-//                    System.out.println("courses size" + courses.size());
-//                    System.out.println("model sieze " + model.size());
-//                }
             }
         });
 
