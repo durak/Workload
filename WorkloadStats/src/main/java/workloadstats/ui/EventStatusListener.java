@@ -1,0 +1,37 @@
+package workloadstats.ui;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JRadioButton;
+import workloadstats.domain.model.Event;
+
+/**
+ *
+ * @author Ilkka
+ */
+public class EventStatusListener implements ActionListener {
+
+    private Event event;
+    
+    public EventStatusListener() {
+        
+    }
+    public void setEvent(Event ev) {
+        this.event = ev;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getActionCommand().equals(StatusAc.TENTATIVE.name())) {
+            event.setStatusTentative();
+        }
+        if (ae.getActionCommand().equals(StatusAc.CANCELLED.name())) {
+            event.setStatusCancelled();
+        }
+        if (ae.getActionCommand().equals(StatusAc.CONFIRMED.name())) {
+            event.setStatusConfirmed();
+        }
+
+    }
+
+}

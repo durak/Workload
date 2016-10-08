@@ -12,10 +12,12 @@ import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Course;
@@ -38,7 +40,12 @@ public class EventStatsPanel extends JPanel {
     private JLabel alkuSisalto;
     private JLabel kestoSisalto;
     private JLabel paikkaSisalto;
-    private JTextField lasnaSisalto;
+
+    JRadioButton yes;
+    JRadioButton no;
+    JRadioButton maybe;
+
+    private EventStatusListener eventStatusListener;
 
     public EventStatsPanel(MyCalendarControl myCalendarControl) {
         this.myCalendarControl = myCalendarControl;
@@ -48,16 +55,11 @@ public class EventStatsPanel extends JPanel {
 
     private void initPanelComponents() {
         this.setBorder(javax.swing.BorderFactory.createTitledBorder("Kalenterimerkinnän tiedot"));
-//        GridLayout layout = new GridLayout(1, 1);
         BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
         this.setLayout(layout);
-        // Upper panel for eventStats
-//        JPanel upper = new JPanel();
-//        GridLayout layout = new GridLayout(6, 2);
-//        upper.setLayout(layout);
+
         this.add(upperInit());
         this.add(lowerInit());
-
     }
 
     /**
@@ -70,17 +72,25 @@ public class EventStatsPanel extends JPanel {
         selectedCourse = course;
         selectedEvent = event;
         otsikkoSisalto.setText(event.getEventName());
-//        otsikkoSisalto2.setText(event.getEventName());
         pvmSisalto.setText(event.getStartDateString());
         alkuSisalto.setText(event.getStartTime());
         String kestoLongToString = Long.toString(myCalendarControl.getEventDuration(event));
         kestoSisalto.setText(kestoLongToString);
-        lasnaSisalto.setText(event.getEventStatus());
+        eventStatusListener.setEvent(selectedEvent);
+        resetRadioButtons();
+    }
 
+    private void resetRadioButtons() {
+        JRadioButton[] rbuttons = {yes, no, maybe};
+        for (int i = 0; i < rbuttons.length; i++) {
+            JRadioButton reset = rbuttons[i];
+            String command = reset.getActionCommand();
+            reset.setSelected(selectedEvent.getEventStatus().equals(command));
+        }
     }
 
     /*
-      Initialize upper JPanel
+      Initialize upper part of panel
      */
     private JPanel upperInit() {
         JPanel upper = new JPanel();
@@ -92,18 +102,14 @@ public class EventStatsPanel extends JPanel {
         JLabel alku = new JLabel("Alku");
         JLabel kesto = new JLabel("Kesto");
         JLabel paikka = new JLabel("Paikka");
-        JLabel lasna = new JLabel("Läsnä");
 
-//        otsikkoSisalto2 = new JTextField("sisalto");
-        otsikkoSisalto = new JLabel("otsikko sisalto");
-        pvmSisalto = new JLabel("Pvm sisalto");
-        alkuSisalto = new JLabel("alku sisalto");
-        kestoSisalto = new JLabel("kesto sisalto");
-        paikkaSisalto = new JLabel("Paikka sisalto");
-        lasnaSisalto = new JTextField("Läsnä sisalto");
+        otsikkoSisalto = new JLabel("---");
+        pvmSisalto = new JLabel("---");
+        alkuSisalto = new JLabel("---");
+        kestoSisalto = new JLabel("---");
+        paikkaSisalto = new JLabel("---");
 
         upper.add(otsikko);
-//        upper.add(otsikkoSisalto2);
         upper.add(otsikkoSisalto);
         upper.add(pvm);
         upper.add(pvmSisalto);
@@ -113,74 +119,65 @@ public class EventStatsPanel extends JPanel {
         upper.add(kestoSisalto);
 //        upper.add(paikka);
 //        upper.add(paikkaSisalto);
-        upper.add(lasna);
-        upper.add(lasnaSisalto);
 
         return upper;
     }
 
+    /*
+     Initialize lower part of panel
+     */
+//    private JPanel lowerInit() {
+//        JPanel lower = new JPanel();
+//        JButton paivita = new JButton("Päivitä");
+//
+//        lower.add(paivita);
+//
+//        paivita.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                String lasnaOloStatus = lasnaSisalto.getText();
+//                if (lasnaOloStatus.equals("TENTATIVE")) {
+//                    selectedEvent.setStatusTentative();
+//                } else if (lasnaOloStatus.equals("CONFIRMED")) {
+//                    selectedEvent.setStatusConfirmed();
+//                } else if (lasnaOloStatus.equals("CANCELLED")) {
+//                    selectedEvent.setStatusCancelled();
+//                } else {
+//                    JOptionPane.showMessageDialog(lower, "Virhe syötteessä", "Alert", JOptionPane.ERROR_MESSAGE);
+//                }
+//
+//            }
+//        });
+//        
+//        
+//
+//        return lower;
+//    }
     private JPanel lowerInit() {
         JPanel lower = new JPanel();
-        JButton paivita = new JButton("Päivitä");
-        JButton uusiEvent = new JButton("Uusi tapahtuma");
-        lower.add(paivita);
-        lower.add(uusiEvent);
+//        lower.setLayout(new BoxLayout(lower, 2));
+        lower.setBorder(javax.swing.BorderFactory.createTitledBorder("Osallistutko / osallistuitko tapahtumaan"));
 
-        ////////////////////////////////////////////////////////////////////////
-        paivita.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String lasnaOloStatus = lasnaSisalto.getText();
-                if (lasnaOloStatus.equals("TENTATIVE")) {
-                    selectedEvent.setStatusTentative();
-                } else if (lasnaOloStatus.equals("CONFIRMED")) {
-                    selectedEvent.setStatusConfirmed();
-                } else if (lasnaOloStatus.equals("CANCELLED")) {
-                    selectedEvent.setStatusCancelled();
-                } else {
-                    JOptionPane.showMessageDialog(null, "alert", "Virhe syötteessä", JOptionPane.ERROR_MESSAGE);
-                }
-//                if (model.getSize() > 0) {
-//                    courses.remove(model.getElementAt(list.getSelectedIndex()));
-//                    courses.remove(model.getElementAt(0));
-//                    model.removeElementAt(list.getSelectedIndex());
-//                    System.out.println("courses size" + courses.size());
-//                    System.out.println("model sieze " + model.size());
-//                }
-            }
-        });
+        yes = new JRadioButton("Kyllä");
+        yes.setActionCommand(StatusAc.CONFIRMED.name());
+        no = new JRadioButton("Ei");
+        no.setActionCommand(StatusAc.CANCELLED.name());
+        maybe = new JRadioButton("Harkitsen");
+        maybe.setActionCommand(StatusAc.TENTATIVE.name());
 
-        ////////////////////////////////////////////////////////////////////////
-        uusiEvent.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-//                VEvent newVev = new VEvent();
-//                Course newCou = new Course(newVev);
-//                model.addElement(newCou);
-                
-                String summary = JOptionPane.showInputDialog("Anna tapahtumalle nimi");
-                String date = JOptionPane.showInputDialog("Anna tapahtumalle päivämäärä (muoto VVVVKKPP");                
-                String startTime = JOptionPane.showInputDialog("Anna tapahtumalle aloitusaika (muoto HHMMSS");
-                String endTime = JOptionPane.showInputDialog("Anna tapahtumalle lopetusaika (muoto HHMMSS");
-                String startDateTime = date + "T" + startTime;
-                String endDateTime = date + "T" + endTime;
-                
+        eventStatusListener = new EventStatusListener();
+        yes.addActionListener(eventStatusListener);
+        no.addActionListener(eventStatusListener);
+        maybe.addActionListener(eventStatusListener);
 
-                try {
-                    System.out.println(selectedCourse.getAllEvents());
-                    Personal newPersonal = myCalendarControl.buildNewPersonal(summary, startDateTime, endDateTime, selectedCourse);
-                    System.out.println("entäs nyt");
-                    System.out.println(selectedCourse.getAllEvents());
-//                            model.addElement(newCourse);
-//                    courses.add(newCourse);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "alert", "Virhe syötteessä", JOptionPane.ERROR_MESSAGE);
+        lower.add(maybe);
+        lower.add(yes);
+        lower.add(no);
 
-                    Logger.getLogger(CourseListPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        ButtonGroup eventStatusGroup = new ButtonGroup();
+        eventStatusGroup.add(maybe);
+        eventStatusGroup.add(yes);
+        eventStatusGroup.add(no);
 
-            }
-        });
-
-        ////////////////////////////////////////////////////////////////////////
         return lower;
     }
 
