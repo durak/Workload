@@ -124,13 +124,13 @@ public class EventStatsPanel extends JPanel {
         lower.setBorder(javax.swing.BorderFactory.createTitledBorder("Osallistutko / osallistuitko tapahtumaan"));
 
         yes = new JRadioButton("Kyllä");
-        yes.setActionCommand(StatusAc.CONFIRMED.name());
+        yes.setActionCommand(Ac.CONFIRMED.name());
         yes.setEnabled(selectedEvent != null);
         no = new JRadioButton("Ei");
-        no.setActionCommand(StatusAc.CANCELLED.name());
+        no.setActionCommand(Ac.CANCELLED.name());
         no.setEnabled(selectedEvent != null);
         maybe = new JRadioButton("Harkitsen");
-        maybe.setActionCommand(StatusAc.TENTATIVE.name());
+        maybe.setActionCommand(Ac.TENTATIVE.name());
         maybe.setEnabled(selectedEvent != null);
 
         eventStatusListener = new EventStatusListener();

@@ -127,9 +127,11 @@ public abstract class Event extends VEvent {
         if (this.getProperty(Property.STATUS) == null) {
             setStatusTentative();
         }
-
+        
         return this.getProperty(Property.STATUS).getValue();
     }
+    
+
 
     /**
      * Get Start date as string, Helsinki timezone

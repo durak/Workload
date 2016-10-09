@@ -22,13 +22,13 @@ public class EventStatusListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getActionCommand().equals(StatusAc.TENTATIVE.name())) {
+        if (ae.getActionCommand().equals(Ac.TENTATIVE.name())) {
             event.setStatusTentative();
         }
-        if (ae.getActionCommand().equals(StatusAc.CANCELLED.name())) {
+        if (ae.getActionCommand().equals(Ac.CANCELLED.name())) {
             event.setStatusCancelled();
         }
-        if (ae.getActionCommand().equals(StatusAc.CONFIRMED.name())) {
+        if (ae.getActionCommand().equals(Ac.CONFIRMED.name())) {
             event.setStatusConfirmed();
         }
 

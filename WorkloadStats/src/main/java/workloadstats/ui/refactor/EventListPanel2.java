@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -32,29 +31,23 @@ import workloadstats.ui.SingleSelectionListModel;
  * @author Ilkka
  */
 public class EventListPanel2 extends JPanel implements ListDataListener {
-    
+
     private MyCalendarControl myCalendarControl;
-    private EventStatsPanel eventStatsPanel;
+//    private EventStatsPanel eventStatsPanel;
     private Course selectedCourse;
     private Event selectedEvent;
 
     private List<Event> events;
     private JList list;
-    
+
     private EventListModel elm;
+    private EventStatsPanel2 eventStatsPanel2;
 
-    public EventListPanel2(List<Event> events, EventStatsPanel eventStatsPanel) {
-        this.eventStatsPanel = eventStatsPanel;
-        this.events = events;
-        initPanelComponents();
-    }
-
-    public EventListPanel2(MyCalendarControl myCalendarControl, Course course, EventStatsPanel eventStatsPanel, EventListModel elm) {
+    public EventListPanel2(MyCalendarControl myCalendarControl, EventListModel elm, EventStatsPanel2 eventStatsPanel2) {
+        this.eventStatsPanel2 = eventStatsPanel2;
         this.elm = elm;
         this.myCalendarControl = myCalendarControl;
-        this.selectedCourse = course;
-        events = course.getAllEvents();
-        this.eventStatsPanel = eventStatsPanel;
+
         initPanelComponents();
     }
 
@@ -67,23 +60,25 @@ public class EventListPanel2 extends JPanel implements ListDataListener {
         selectedEvent = null;
         elm.addListDataListener(this);
         list = new JList(elm);
-//        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.addListSelectionListener(eventStatsPanel2);
+        
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPane = new JScrollPane(list);
         list.setCellRenderer(new EventRenderer());
 
         //////////////////////
-        ListSelectionModel selectionModel = new SingleSelectionListModel() {
-            public void updateSingleSelection(int oldIndex, int newIndex) {
-                ListModel m = list.getModel();
-                selectedEvent = (Event) m.getElementAt(newIndex);
-                eventStatsPanel.setEvent(selectedEvent);
-
-//                System.out.println(selectedEvent.getEventName());
-            }
-        };
-        list.setSelectionModel(selectionModel);
-
-        ////////////////////////
+//        ListSelectionModel selectionModel = new SingleSelectionListModel() {
+//            public void updateSingleSelection(int oldIndex, int newIndex) {
+//                ListModel m = list.getModel();
+//                selectedEvent = (Event) m.getElementAt(newIndex);
+////                eventStatsPanel.setEvent(selectedEvent);
+//
+////                System.out.println(selectedEvent.getEventName());
+//            }
+//        };
+//        list.setSelectionModel(selectionModel);
+//
+//        ////////////////////////
         add(scrollPane);
 
         ////////////////////////////////////////////////////////////////////////
@@ -131,20 +126,36 @@ public class EventListPanel2 extends JPanel implements ListDataListener {
 //        list.setSelectedIndex(0);
     }
 
+    /**
+     * Listen to changes in the underlying data model
+     *
+     * @param lde
+     */
+
     @Override
     public void intervalAdded(ListDataEvent lde) {
         System.out.println("Interval added \n" + lde.toString());
     }
 
+    /**
+     * Listen to changes in the underlying data model
+     *
+     * @param lde
+     */
     @Override
     public void intervalRemoved(ListDataEvent lde) {
         System.out.println("Interval removed \n" + lde.toString());
     }
 
+    /**
+     * Listen to changes in the underlying data model
+     *
+     * @param lde
+     */
     @Override
     public void contentsChanged(ListDataEvent lde) {
         list.clearSelection();
-        
+
         System.out.println("contents changed \n" + lde.toString());
         System.out.println(lde.getSource());
     }

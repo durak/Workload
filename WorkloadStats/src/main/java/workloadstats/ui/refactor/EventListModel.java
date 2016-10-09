@@ -1,5 +1,6 @@
 package workloadstats.ui.refactor;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractListModel;
@@ -14,9 +15,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
+import workloadstats.utils.EventComparator;
+import workloadstats.utils.Utility;
 
 /**
- * Model for eventlist
+ * ListModel for event JList, uses CourseListModel as a point of entry for domain objects
  *
  * @author Ilkka
  */
@@ -55,14 +58,20 @@ public class EventListModel extends AbstractListModel implements ListSelectionLi
         fireContentsChanged(this, 0, getSize());
     }
 
+    /**
+     * A bit complicated process: 
+     * Listens to ListSelectionEvents from CourseListModel, and updates this model
+     * with events. User can select any number of courses to add.
+     * @param lse 
+     */
     @Override
     public void valueChanged(ListSelectionEvent lse) {
-        System.out.println("listselection value changed");
+//        System.out.println("listselection value changed");
         JList courseJList =(JList) lse.getSource();                        
         ListSelectionModel courseLsm = courseJList.getSelectionModel();
         int minIndex = courseJList.getMinSelectionIndex();
         int maxIndex = courseJList.getMaxSelectionIndex();
-        System.out.println(courseJList.getSelectedIndex());
+//        System.out.println(courseJList.getSelectedIndex());
         List<Event> newEvents = new ArrayList<>();
         if (!lse.getValueIsAdjusting()) {
             for (int i = minIndex; i <= maxIndex; i++) {
@@ -73,8 +82,8 @@ public class EventListModel extends AbstractListModel implements ListSelectionLi
                 }                
             }                                                                                             
         }
+        Collections.sort(newEvents, new EventComparator());
         events = newEvents;
-        
         fireContentsChanged(this, 0, getSize());
     }
 

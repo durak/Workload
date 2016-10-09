@@ -23,6 +23,7 @@ import workloadstats.ui.refactor.CourseListModel;
 import workloadstats.ui.refactor.CourseListPanel2;
 import workloadstats.ui.refactor.EventListModel;
 import workloadstats.ui.refactor.EventListPanel2;
+import workloadstats.ui.refactor.EventStatsPanel2;
 
 /**
  *
@@ -59,15 +60,16 @@ public class Gui implements Runnable {
         
         MenuButtonPanel menuButtonPanel = new MenuButtonPanel();
         CourseStatsPanel courseStatsPanel = new CourseStatsPanel();
-        EventStatsPanel eventStatsPanel = new EventStatsPanel(myCalendarControl);
+//        EventStatsPanel eventStatsPanel = new EventStatsPanel(myCalendarControl);
 //        EventListPanel eventListPanel = new EventListPanel(myCalendarControl, myCalendarControl.getCourses().get(0), eventStatsPanel);
 //        CourseListPanel courseListPanel = new CourseListPanel(myCalendarControl, eventListPanel);
         
-        
+        EventStatsPanel2 eventStatsPanel = new EventStatsPanel2();
         CourseListModel clm = new CourseListModel(myCalendarControl.getCourses());
         EventListModel elm = new EventListModel(clm);
         clm.addListDataListener(elm);
-        EventListPanel2 eventListPanel = new EventListPanel2(myCalendarControl, myCalendarControl.getCourses().get(0), eventStatsPanel, elm);
+        
+        EventListPanel2 eventListPanel = new EventListPanel2(myCalendarControl, elm, eventStatsPanel);
         
         CourseListPanel2 courseListPanel = new CourseListPanel2(myCalendarControl, eventListPanel, clm, elm);
         
