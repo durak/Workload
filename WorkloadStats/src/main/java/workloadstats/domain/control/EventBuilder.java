@@ -91,4 +91,24 @@ public class EventBuilder {
         
         return buildNewEvent(summary, startDateTime, endDateTime, type, status);
     }
+    
+    public static Course buildNewCourse(Map<EvPropId, String> userAnswers) throws ParseException, IOException, URISyntaxException {
+        String summary = userAnswers.get(EvPropId.COURSENAME);
+        String sDate = userAnswers.get(EvPropId.DATE);
+        String startDateTime = sDate + "T000000";        
+                
+        return (Course) buildNewEvent(summary, startDateTime, startDateTime, EventType.COURSE.name(), "TENTATIVE");
+//        PropertyFactoryImpl pf = PropertyFactoryImpl.getInstance();
+//        PropertyList props = new PropertyList();
+//        props.add(new DtStart(startDate));
+//        props.add(new DtEnd(endDate));
+//        props.add(new DtStamp());
+//        props.add(new Summary(summary));
+//        props.add(ug.generateUid());
+//        props.add(new Categories("COURSE"));
+//        Property status = pf.createProperty(Property.STATUS);
+//        status.setValue("TENTATIVE");
+//        props.add(status);
+//        Course newCourse = new Course(props);
+    }
 }

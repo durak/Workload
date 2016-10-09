@@ -46,15 +46,15 @@ public class EventListModel extends AbstractListModel implements ListSelectionLi
         return events.get(i);
     }
 
-    public void addNewEvent(Event newEvent) {
-        this.course.addEvent(newEvent);
+    public void addNewEvent(Event ev) {
+        this.course.addEvent(ev);
         //this, alku, loppu
         fireContentsChanged(this, 0, getSize());
     }
 
-    public void removeEvent(Event event) {
-        System.out.println(event);
-        this.course.removeEvent(event);
+    public void removeEvent(Event ev) {
+        System.out.println(ev);
+        this.course.removeEvent(ev);
         fireContentsChanged(this, 0, getSize());
     }
 
@@ -67,30 +67,16 @@ public class EventListModel extends AbstractListModel implements ListSelectionLi
      */
     @Override
     public void valueChanged(ListSelectionEvent lse) {
-        JList listThatFiredASelectionEvent = (JList) lse.getSource();
-        int[] selectedIndices = listThatFiredASelectionEvent.getSelectedIndices();
+        JList courseList = (JList) lse.getSource();
+        int[] selectedIndices = courseList.getSelectedIndices();
         List<Event> newCollectionOfEventsToShow = new ArrayList<>();
         
+        //Add all events from courses the user has selected
         for (int i = 0; i < selectedIndices.length; i++) {
             Course oneOfSelected = (Course) clm.getElementAt(selectedIndices[i]);
             newCollectionOfEventsToShow.addAll(oneOfSelected.getAllEvents());
         }
         
-//        ListSelectionModel listSelectionModelOfThatList = listThatFiredASelectionEvent.getSelectionModel();
-//        
-//        
-//        int minIndex = listThatFiredASelectionEvent.getMinSelectionIndex();
-//        int maxIndex = listThatFiredASelectionEvent.getMaxSelectionIndex();
-//
-//        //Check every index between min and max: if user has selected them -> add events
-//        if (!lse.getValueIsAdjusting()) {            
-//            for (int i = minIndex; i <= maxIndex; i++) {
-//                if (listSelectionModelOfThatList.isSelectedIndex(i)) {
-//                    Course oneOfSelectedCourses = (Course) clm.getElementAt(i);
-//                    newCollectionOfEventsToShow.addAll(oneOfSelectedCourses.getAllEvents());
-//                }
-//            }
-//        }
         //Sort events chronologically
         Collections.sort(newCollectionOfEventsToShow, new EventComparatorChronological());
         events = newCollectionOfEventsToShow;
@@ -110,6 +96,7 @@ public class EventListModel extends AbstractListModel implements ListSelectionLi
     @Override
     public void contentsChanged(ListDataEvent lde) {
         System.out.println("contents changed \n" + lde.toString());
+        fireContentsChanged(this, 0, getSize());
     }
 
     /**

@@ -1,9 +1,7 @@
 package workloadstats.ui;
 
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,20 +14,20 @@ import javax.swing.JTextField;
  */
 public class NewEventPanel extends JPanel {
 
-    private final EvPropId[] userInputNeededFor = {EvPropId.EVENTNAME, EvPropId.EVENTTYPE, EvPropId.DATE, EvPropId.STARTTIME,
-        EvPropId.ENDTIME, EvPropId.STATUS};
+    private EvPropId[] userInputNeeded;
 
     private Map<EvPropId, JTextField> panelFields;
 
-    public NewEventPanel() {
-        this.setBorder(javax.swing.BorderFactory.createTitledBorder("Uuden tapahtuman tiedot"));
+    public NewEventPanel(EvPropId[] userInputNeeded, String title) {
+        this.setBorder(javax.swing.BorderFactory.createTitledBorder(title));
         setLayout(new GridLayout(6, 2));
+        this.userInputNeeded = userInputNeeded;
         panelFields = new HashMap<>();
 
-        for (EvPropId fieldTitle : userInputNeededFor) {
-            panelFields.put(fieldTitle, new JTextField(10));
-            add(new JLabel(fieldTitle.getDescr()));
-            add(panelFields.get(fieldTitle));
+        for (EvPropId evPropId : userInputNeeded) {
+            panelFields.put(evPropId, new JTextField(10));
+            add(new JLabel(evPropId.getDescr()));
+            add(panelFields.get(evPropId));
         }
     }
 
@@ -37,9 +35,14 @@ public class NewEventPanel extends JPanel {
         return panelFields.get(field).getText();
     }
 
+    /**
+     * Return a map of user's answers
+     *
+     * @return
+     */
     public Map getValues() {
         Map<EvPropId, String> values = new HashMap<>();
-        for (EvPropId evPropId : userInputNeededFor) {
+        for (EvPropId evPropId : userInputNeeded) {
             values.put(evPropId, panelFields.get(evPropId).getText());
         }
         return values;

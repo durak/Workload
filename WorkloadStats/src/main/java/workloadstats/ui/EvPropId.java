@@ -28,4 +28,6 @@ public enum EvPropId {
     public String getDescr() {
         return descr;
     }
+    
+        
 }

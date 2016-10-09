@@ -1,6 +1,7 @@
 package workloadstats.ui.refactor;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -24,14 +25,15 @@ import workloadstats.ui.NewCoursePanel;
  * @author Ilkka
  */
 public class CourseListPanel2 extends JPanel {
+
     private MyCalendarControl myCalendarControl;
     private EventListPanel2 eventListPanel;
     private List<Course> courses;
     private JList list;
-    
+
     private CourseListModel clm;
     private EventListModel elm;
-    
+
     //            
     Course selectedCourse;
 
@@ -48,23 +50,37 @@ public class CourseListPanel2 extends JPanel {
         this.setBorder(javax.swing.BorderFactory.createTitledBorder("Kurssilista"));
         BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
         this.setLayout(layout);
-
-        CalendarEventButtonListener cebl = new CalendarEventButtonListener(this, clm);
         
-        list = new JList(clm);        
+        JPanel buttons = new JPanel(new GridLayout(2, 2, 10, 10));
+        CalendarEventButtonListener cebl = new CalendarEventButtonListener(buttons, clm);
+
+        list = new JList(clm);
         list.addListSelectionListener(elm);
         list.addListSelectionListener(cebl);
-
-
-        JScrollPane scrollPane = new JScrollPane(list);
         list.setCellRenderer(new CourseListRenderer());
+        JScrollPane scrollPane = new JScrollPane(list);
+        
 
+        
+        
+        
         JButton newCourseButton = new JButton("Uusi kurssi");
-        newCourseButton.setActionCommand(Ac.NEWEVENT.name());
+        newCourseButton.setActionCommand(Ac.NEWCOURSE.name());
         newCourseButton.addActionListener(cebl);
         JButton deleteCourseButton = new JButton("Poista kurssi");
+
+        JButton newEventButton = new JButton("Uusi tapahtuma");
+        newEventButton.setActionCommand(Ac.NEWEVENT.name());
+        newEventButton.addActionListener(cebl);
+        JButton deleteEventButton = new JButton("Poista tapahtuma");
+
         
-        
+        buttons.setBorder(javax.swing.BorderFactory.createTitledBorder("Toiminnot"));
+        buttons.add(newCourseButton);
+        buttons.add(deleteCourseButton);
+        buttons.add(newEventButton);
+        buttons.add(deleteEventButton);
+
 //        newCourseButton.addActionListener(new ActionListener() {
 //            public void actionPerformed(ActionEvent e) {
 //
@@ -89,11 +105,9 @@ public class CourseListPanel2 extends JPanel {
 //
 //            }
 //        });
-
         deleteCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
-                
+
                 if (list.getSelectedValue() == null) {
                     JOptionPane.showMessageDialog(scrollPane, "Valitse ensin kurssi", "Alert", JOptionPane.ERROR_MESSAGE);
                 } else {
@@ -106,11 +120,10 @@ public class CourseListPanel2 extends JPanel {
             }
         });
 
-        add(scrollPane, BorderLayout.NORTH);
-        add(newCourseButton, BorderLayout.SOUTH);
-        add(deleteCourseButton, BorderLayout.SOUTH);
+        add(scrollPane);
+
+        add(buttons);
 
     }
 
-}    
-
+}

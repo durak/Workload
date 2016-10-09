@@ -3,9 +3,6 @@ package workloadstats.ui;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.text.ParseException;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import workloadstats.domain.control.EventBuilder;
+import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.domain.model.EventType;
 import workloadstats.ui.refactor.CourseListModel;
@@ -43,12 +41,35 @@ public class CalendarEventButtonListener implements ActionListener, ListSelectio
     public void actionPerformed(ActionEvent ae) {
         if (ae.getActionCommand().equals(Ac.NEWCOURSE.name())) {
 
+            EvPropId[] userInputNeeded = {EvPropId.COURSENAME, EvPropId.DATE};
+            NewEventPanel newCoursePanel = new NewEventPanel(userInputNeeded, "Uuden kurssin tiedot");
+            int choice = JOptionPane.showConfirmDialog(pane, newCoursePanel,
+                    "Syötä uusi kurssi", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+            if (choice == JOptionPane.OK_OPTION) {
+                Map<EvPropId, String> answers = newCoursePanel.getValues();
+
+                try {
+                    Course newCourse = EventBuilder.buildNewCourse(answers);
+                    datamodel.addNewCourse(newCourse);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(pane, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
+                    Logger.getLogger(CalendarEventButtonListener.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
+
         if (ae.getActionCommand().equals(Ac.DELETECOURSE.name())) {
 
         }
         if (ae.getActionCommand().equals(Ac.NEWEVENT.name())) {
-            NewEventPanel newEventPanel = new NewEventPanel();
+
+            EvPropId[] neededAnswers = {EvPropId.EVENTNAME,
+                EvPropId.EVENTTYPE, EvPropId.DATE, EvPropId.STARTTIME,
+                EvPropId.ENDTIME, EvPropId.STATUS};
+
+            NewEventPanel newEventPanel = new NewEventPanel(neededAnswers, "Uuden tapahtuman tiedot");
             int choice = JOptionPane.showConfirmDialog(pane, newEventPanel,
                     "Syötä uusi tapahtuma", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
@@ -73,20 +94,15 @@ public class CalendarEventButtonListener implements ActionListener, ListSelectio
     @Override
     public void valueChanged(ListSelectionEvent lse) {
         JList courseList = (JList) lse.getSource();
-        int[] selectedIndices = courseList.getSelectedIndices();
-        if (selectedIndices.length > 1) {
-            resetButtons(false);
-        } else {
-            resetButtons(true);
-        }
-
-        System.out.println("calendarbuttonlistener " + lse.getSource());
         if (!lse.getValueIsAdjusting()) {
-            System.out.println("eventin eka " + lse.getFirstIndex());
-            System.out.println("eventin vika " + lse.getLastIndex());
-            System.out.println("listan selektiot" + courseList.getSelectedIndices().length);
+            int[] selectedIndices = courseList.getSelectedIndices();
+
+            if (selectedIndices.length > 1) {
+                resetButtons(false);
+            } else {
+                resetButtons(true);
+            }
         }
-        System.out.println("calendarbuttonlistener " + lse.getClass());
 
     }
 
