@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workloadstats.ui;
 
 import java.awt.BorderLayout;
@@ -10,10 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.List;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import workloadstats.calendardata.hycalendar.HyCalendarControl;
@@ -55,8 +47,6 @@ public class Gui implements Runnable {
     }
 
     private void initFramePaneComponents(Container container) {
-//        GridLayout layout = new GridLayout(2, 3);
-//        container.setLayout(layout);
         
         MenuButtonPanel menuButtonPanel = new MenuButtonPanel();
         CourseStatsPanel courseStatsPanel = new CourseStatsPanel();
@@ -73,8 +63,7 @@ public class Gui implements Runnable {
         
         CourseListPanel2 courseListPanel = new CourseListPanel2(myCalendarControl, eventListPanel, clm, elm);
         
-        
-        
+                
         JPanel west = new JPanel(new GridLayout(2, 1));
         west.add(menuButtonPanel);
         west.add(courseListPanel);
@@ -83,17 +72,10 @@ public class Gui implements Runnable {
         east.add(eventStatsPanel);
         east.add(courseStatsPanel);
         
-//        container.add(menuButtonPanel, BorderLayout.NORTH);
         container.add(west, BorderLayout.WEST);
         container.add(eventListPanel, BorderLayout.CENTER);
         container.add(east, BorderLayout.EAST);
         
-//        JLabel teksti = new JLabel("Tekstikenttä!");
-//        container.add(teksti);
-//        container.add(new JButton("Pohjoinen (North)"), BorderLayout.NORTH);
-//        container.add(new JButton("Itä (East)"), BorderLayout.EAST);
-//        container.add(new JButton("Etelä (South)"), BorderLayout.SOUTH);
-//        container.add(new JButton("Länsi (West)"), BorderLayout.WEST);
 
     }
 

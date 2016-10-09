@@ -13,9 +13,9 @@ public class EventStatusListener implements ActionListener {
 
     private Event event;
     
-    public EventStatusListener() {
-        
+    public EventStatusListener() {        
     }
+    
     public void setEvent(Event ev) {
         this.event = ev;
     }

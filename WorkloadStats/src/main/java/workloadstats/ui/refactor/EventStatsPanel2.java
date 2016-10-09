@@ -38,6 +38,7 @@ public class EventStatsPanel2 extends JPanel implements ListSelectionListener {
     public EventStatsPanel2() {
         eventStatusListener = new EventStatusListener();
         selectedEvent = null;
+        
         initPanelComponents();
     }
 
@@ -154,9 +155,10 @@ public class EventStatsPanel2 extends JPanel implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent lse) {
         JList eventList = (JList) lse.getSource();
-        Event selection = (Event) eventList.getSelectedValue();
-        System.out.println(selection);
+        Event selection = (Event) eventList.getSelectedValue();        
         resetEvent(selection);
+        System.out.println("EventStatsPanel2 " + eventList);
+        System.out.println(eventList.getModel());
     }
 
 }

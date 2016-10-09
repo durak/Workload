@@ -9,8 +9,12 @@ public enum Ac {
     CONFIRMED,
     CANCELLED,
     NEWCALENDAR,
-    IMPORT,
-    LOAD,
-    SAVE;
+    IMPORTCALENDAR,
+    LOADCALENDAR,
+    SAVECALENDAR,
+    NEWEVENT,
+    DELETE_EVENT,
+    NEWCOURSE,
+    DELETECOURSE;
     
 }

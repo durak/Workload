@@ -51,7 +51,7 @@ public class EventListPanel2 extends JPanel implements ListDataListener {
         initPanelComponents();
     }
 
-    public void initPanelComponents() {
+    private void initPanelComponents() {
         this.setBorder(javax.swing.BorderFactory.createTitledBorder("Kalenterimerkinnät"));
 
         BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -66,22 +66,10 @@ public class EventListPanel2 extends JPanel implements ListDataListener {
         JScrollPane scrollPane = new JScrollPane(list);
         list.setCellRenderer(new EventRenderer());
 
-        //////////////////////
-//        ListSelectionModel selectionModel = new SingleSelectionListModel() {
-//            public void updateSingleSelection(int oldIndex, int newIndex) {
-//                ListModel m = list.getModel();
-//                selectedEvent = (Event) m.getElementAt(newIndex);
-////                eventStatsPanel.setEvent(selectedEvent);
-//
-////                System.out.println(selectedEvent.getEventName());
-//            }
-//        };
-//        list.setSelectionModel(selectionModel);
-//
-//        ////////////////////////
+
         add(scrollPane);
 
-        ////////////////////////////////////////////////////////////////////////
+
         JButton newEventButton = new JButton("Uusi tapahtuma");
 
         newEventButton.addActionListener(new ActionListener() {
@@ -157,7 +145,7 @@ public class EventListPanel2 extends JPanel implements ListDataListener {
         list.clearSelection();
 
         System.out.println("contents changed \n" + lde.toString());
-        System.out.println(lde.getSource());
+        System.out.println("eventListPanel2 " + lde.getSource());
     }
 
 }
