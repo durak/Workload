@@ -2,9 +2,6 @@ package workloadstats.ui.refactor;
 
 import java.util.List;
 import javax.swing.AbstractListModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.EventListenerList;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 
@@ -49,17 +46,21 @@ public class CourseListModel extends AbstractListModel {
             fireIntervalRemoved(this, index, index);
         }
     }
-    
+
     public void removeCourseAt(int i) {
         removeCourse((Course) getElementAt(i));
+        fireContentsChanged(this, 0, getSize());
+        if (i >= 0) {
+            fireIntervalRemoved(this, i, i);
+        }
     }
-    
+
     public void addEvent(int i, Event event) {
-        courses.get(i).addEvent(event);        
+        courses.get(i).addEvent(event);
     }
-    
+
     public void removeEvent(int i, Event event) {
-        courses.get(i).removeEvent(event);        
+        courses.get(i).removeEvent(event);
     }
 
 }

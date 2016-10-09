@@ -13,7 +13,7 @@ import net.fortuna.ical4j.model.component.VEvent;
 import workloadstats.domain.model.Event;
 
 /**
- * Static utility methods
+ * Static helper utility methods
  * @author Ilkka
  */
 public class Utility {

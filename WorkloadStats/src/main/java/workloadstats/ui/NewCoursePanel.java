@@ -15,7 +15,7 @@ public class NewCoursePanel extends JPanel {
     private JTextField name;
     private JTextField startDate;
     
-    private Map<EvPropId, JTextField> panelFields;
+    private Map<PropId, JTextField> panelFields;
     
     public NewCoursePanel() {
         this.setBorder(javax.swing.BorderFactory.createTitledBorder("Uuden kurssin tiedot"));

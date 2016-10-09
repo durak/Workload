@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import workloadstats.calendardata.hycalendar.HyCalendarControl;
@@ -24,10 +25,10 @@ import workloadstats.ui.refactor.EventStatsPanel2;
 public class Gui implements Runnable {
 
     private HyCalendarControl hyCalendarControl;
-    private MyCalendarControl myCalendarControl;        
-    
+    private MyCalendarControl myCalendarControl;
+
     private JFrame frame;
-    
+
     public Gui(MyCalendarControl myCalendarControl) {
 //        this.hyCalendarControl = hyCalendarControl;
         this.myCalendarControl = myCalendarControl;
@@ -40,47 +41,50 @@ public class Gui implements Runnable {
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        initFramePaneComponents(frame.getContentPane());
+        initComponent(frame.getContentPane());
 
         frame.pack();
         frame.setVisible(true);
     }
 
-    private void initFramePaneComponents(Container container) {
-        
-        MenuButtonPanel menuButtonPanel = new MenuButtonPanel();
-        CourseStatsPanel courseStatsPanel = new CourseStatsPanel();
+    private void initComponent(Container container) {
 
-        
-        EventStatsPanel2 eventStatsPanel = new EventStatsPanel2();
         CourseListModel clm = new CourseListModel(myCalendarControl.getCourses());
         EventListModel elm = new EventListModel(clm);
         clm.addListDataListener(elm);
-        
-        EventListPanel2 eventListPanel = new EventListPanel2(myCalendarControl, elm, eventStatsPanel);
-        
+                        
+        JList courseList = new JList(clm);
+        JList eventList = new JList(elm);
+
+        MenuButtonPanel menuButtonPanel = new MenuButtonPanel();
+        CourseStatsPanel courseStatsPanel = new CourseStatsPanel();
+        EventStatsPanel2 eventStatsPanel = new EventStatsPanel2();
+        EventListPanel2 eventListPanel = new EventListPanel2(eventList);
         CourseListPanel2 courseListPanel = new CourseListPanel2(myCalendarControl, eventListPanel, clm, elm);
         
-                
+        eventList.addListSelectionListener(eventStatsPanel);
+        elm.addListDataListener(eventListPanel);
+
+
+
         JPanel west = new JPanel(new GridLayout(2, 1));
         west.add(menuButtonPanel);
         west.add(courseListPanel);
-        
-        JPanel east = new JPanel(new GridLayout(2,1));
+
+        JPanel east = new JPanel(new GridLayout(2, 1));
         east.add(eventStatsPanel);
         east.add(courseStatsPanel);
-        
+
         container.add(west, BorderLayout.WEST);
         container.add(eventListPanel, BorderLayout.CENTER);
         container.add(east, BorderLayout.EAST);
-        
 
     }
 
     public JFrame getFrame() {
         return frame;
     }
-    
+
     //testing
     public List<Course> testaustaVartenKurssitUlosGuista() {
         return this.myCalendarControl.getCourses();

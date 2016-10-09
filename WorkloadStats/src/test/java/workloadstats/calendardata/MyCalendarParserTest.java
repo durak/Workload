@@ -1,11 +1,5 @@
 package workloadstats.calendardata;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,7 +17,7 @@ import static org.junit.Assert.*;
 import workloadstats.calendardata.CalendarBuilderImpl;
 import workloadstats.calendardata.mycalendar.MyCalendarParser;
 import workloadstats.domain.model.Course;
-import workloadstats.utils.EventUtilities;
+
 
 /**
  *
@@ -48,7 +42,7 @@ public class MyCalendarParserTest {
     @Before
     public void setUp() throws FileNotFoundException, IOException, ParserException {
 
-        EventUtilities eu = new EventUtilities();
+//        EventUtilities eu = new EventUtilities();
         File calendarFile = new File("testCalendar.ics");
         FileInputStream my = new FileInputStream(calendarFile);
         CalendarBuilderImpl builder = new CalendarBuilderImpl();

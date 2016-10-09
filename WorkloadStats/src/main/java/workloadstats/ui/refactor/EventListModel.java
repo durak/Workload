@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.JList;
-import javax.swing.ListModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
@@ -16,7 +12,6 @@ import javax.swing.event.ListSelectionListener;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.utils.EventComparatorChronological;
-import workloadstats.utils.Utility;
 
 /**
  * ListModel for event JList, uses CourseListModel as a point of entry for
@@ -96,16 +91,8 @@ public class EventListModel extends AbstractListModel implements ListSelectionLi
     @Override
     public void contentsChanged(ListDataEvent lde) {
         System.out.println("contents changed \n" + lde.toString());
-        fireContentsChanged(this, 0, getSize());
+//        fireContentsChanged(this, 0, getSize());
     }
 
-    /**
-     * For convenience a getter for the underlying CourseListModel data model
-     *
-     * @return
-     */
-    public CourseListModel getClm() {
-        return clm;
-    }
 
 }

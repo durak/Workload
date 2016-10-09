@@ -22,7 +22,7 @@ import workloadstats.domain.model.Lecture;
 import workloadstats.domain.model.Personal;
 import workloadstats.domain.model.Teamwork;
 import workloadstats.ui.Ac;
-import workloadstats.ui.EvPropId;
+import workloadstats.ui.PropId;
 
 /**
  * Builder for event creation and verification
@@ -78,13 +78,13 @@ public class EventBuilder {
         return iNeedAHome;
     }
     
-    public static Event buildNewEvent(Map<EvPropId, String> userAnswers) throws ParseException, IOException, URISyntaxException {        
-        String summary = userAnswers.get(EvPropId.EVENTNAME);
-        String sDate = userAnswers.get(EvPropId.DATE);
-        String sTime = userAnswers.get(EvPropId.STARTTIME);
-        String eTime = userAnswers.get(EvPropId.ENDTIME);
-        String type = userAnswers.get(EvPropId.EVENTTYPE);
-        String status = userAnswers.get(EvPropId.STATUS);
+    public static Event buildNewEvent(Map<PropId, String> userAnswers) throws ParseException, IOException, URISyntaxException {        
+        String summary = userAnswers.get(PropId.EVENTNAME);
+        String sDate = userAnswers.get(PropId.DATE);
+        String sTime = userAnswers.get(PropId.STARTTIME);
+        String eTime = userAnswers.get(PropId.ENDTIME);
+        String type = userAnswers.get(PropId.EVENTTYPE);
+        String status = userAnswers.get(PropId.STATUS);
         
         String startDateTime = sDate + "T" + sTime + "00";
         String endDateTime = sDate + "T" + eTime + "00";
@@ -92,23 +92,11 @@ public class EventBuilder {
         return buildNewEvent(summary, startDateTime, endDateTime, type, status);
     }
     
-    public static Course buildNewCourse(Map<EvPropId, String> userAnswers) throws ParseException, IOException, URISyntaxException {
-        String summary = userAnswers.get(EvPropId.COURSENAME);
-        String sDate = userAnswers.get(EvPropId.DATE);
+    public static Course buildNewCourse(Map<PropId, String> userAnswers) throws ParseException, IOException, URISyntaxException {
+        String summary = userAnswers.get(PropId.COURSENAME);
+        String sDate = userAnswers.get(PropId.DATE);
         String startDateTime = sDate + "T000000";        
                 
         return (Course) buildNewEvent(summary, startDateTime, startDateTime, EventType.COURSE.name(), "TENTATIVE");
-//        PropertyFactoryImpl pf = PropertyFactoryImpl.getInstance();
-//        PropertyList props = new PropertyList();
-//        props.add(new DtStart(startDate));
-//        props.add(new DtEnd(endDate));
-//        props.add(new DtStamp());
-//        props.add(new Summary(summary));
-//        props.add(ug.generateUid());
-//        props.add(new Categories("COURSE"));
-//        Property status = pf.createProperty(Property.STATUS);
-//        status.setValue("TENTATIVE");
-//        props.add(status);
-//        Course newCourse = new Course(props);
     }
 }

@@ -1,4 +1,9 @@
-package workloadstats.ui;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package workloadstats.ui.refactor;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -15,25 +20,28 @@ import javax.swing.event.ListSelectionListener;
 import workloadstats.domain.control.EventBuilder;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
-import workloadstats.domain.model.EventType;
-import workloadstats.ui.refactor.CourseListModel;
+import workloadstats.ui.Ac;
+import workloadstats.ui.PropId;
+import workloadstats.ui.NewEventPanel;
 
 /**
  * Button listener for data model modification buttons
  *
  * @author Ilkka
  */
-public class CalendarEventButtonListener implements ActionListener, ListSelectionListener {
+public class CalendarEventButtonListener2 implements ActionListener, ListSelectionListener {
 
-    private JPanel parentPanel;
-    private Component cmpnt;
-    private CourseListModel datamodel;
+    private JPanel panel;
+    private JList courseList;
+    private JList eventList;
+    private CourseListModel datamodel;    
     private int[] selections;
 
-    public CalendarEventButtonListener(JPanel parentPanel, CourseListModel datamodel) {
-        this.cmpnt = cmpnt;
-        this.parentPanel = parentPanel;
-        this.datamodel = datamodel;
+    public CalendarEventButtonListener2 (JPanel panel, JList courseList, JList eventList) {        
+        this.panel = panel;
+        this.courseList = courseList;
+        this.eventList = eventList;
+        this.datamodel = (CourseListModel) courseList.getModel();           
     }
 
     @Override
@@ -42,7 +50,7 @@ public class CalendarEventButtonListener implements ActionListener, ListSelectio
 
             PropId[] userInputNeeded = {PropId.COURSENAME, PropId.DATE};
             NewEventPanel newCoursePanel = new NewEventPanel(userInputNeeded, "Uuden kurssin tiedot");
-            int choice = JOptionPane.showConfirmDialog(parentPanel, newCoursePanel,
+            int choice = JOptionPane.showConfirmDialog(panel, newCoursePanel,
                     "Syötä uusi kurssi", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
             if (choice == JOptionPane.OK_OPTION) {
@@ -53,8 +61,8 @@ public class CalendarEventButtonListener implements ActionListener, ListSelectio
                     datamodel.addNewCourse(newCourse);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(parentPanel, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
-                    Logger.getLogger(CalendarEventButtonListener.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(panel, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
+                    Logger.getLogger(CalendarEventButtonListener2.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -62,14 +70,13 @@ public class CalendarEventButtonListener implements ActionListener, ListSelectio
         if (ae.getActionCommand().equals(Ac.DELETECOURSE.name())) {
             int oldSelection = selections[0];
             if (selections.length == 1) {
-                int choice = JOptionPane.showConfirmDialog(parentPanel, "Haluatko varmasti poistaa kurssin?",
-                        "Achtung!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-                if (choice == JOptionPane.OK_OPTION) {
-                    datamodel.removeCourseAt(selections[0]);
-                }
+                datamodel.removeCourseAt(selections[0]);
+            }
+            if (datamodel.getSize() > oldSelection) {
+                
+                
             }
         }
-        
         if (ae.getActionCommand().equals(Ac.NEWEVENT.name())) {
 
             PropId[] neededAnswers = {PropId.EVENTNAME,
@@ -77,7 +84,7 @@ public class CalendarEventButtonListener implements ActionListener, ListSelectio
                 PropId.ENDTIME, PropId.STATUS};
 
             NewEventPanel newEventPanel = new NewEventPanel(neededAnswers, "Uuden tapahtuman tiedot");
-            int choice = JOptionPane.showConfirmDialog(parentPanel, newEventPanel,
+            int choice = JOptionPane.showConfirmDialog(panel, newEventPanel,
                     "Syötä uusi tapahtuma", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
             if (choice == JOptionPane.OK_OPTION) {
@@ -87,8 +94,8 @@ public class CalendarEventButtonListener implements ActionListener, ListSelectio
                     Event newEvent = EventBuilder.buildNewEvent(answers);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(parentPanel, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
-                    Logger.getLogger(CalendarEventButtonListener.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(panel, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
+                    Logger.getLogger(CalendarEventButtonListener2.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
@@ -99,23 +106,24 @@ public class CalendarEventButtonListener implements ActionListener, ListSelectio
     }
 
     @Override
-    public void valueChanged(ListSelectionEvent lse
-    ) {
-        JList courseList = (JList) lse.getSource();
-        if (!lse.getValueIsAdjusting()) {
-            int[] selectedIndices = courseList.getSelectedIndices();
-            this.selections = selectedIndices;
-            if (selectedIndices.length > 1) {
-                resetButtons(false);
-            } else {
-                resetButtons(true);
-            }
-        }
+    public void valueChanged(ListSelectionEvent lse) {
+//        JList courseList = (JList) lse.getSource();
+//        if (!lse.getValueIsAdjusting()) {
+//            int[] selectedIndices = courseList.getSelectedIndices();
+//            this.selections = selectedIndices;
+//            if (selectedIndices.length > 1) {
+//                resetButtons(false);
+//            } else {
+//                resetButtons(true);
+//            }
+//        }
+            JList kumpi = (JList) lse.getSource();
+            System.out.println("Kutsu tuli " + kumpi.getName());
 
     }
 
     public void resetButtons(Boolean b) {
-        Component[] all = parentPanel.getComponents();
+        Component[] all = panel.getComponents();
 
         for (int i = 0; i < all.length; i++) {
             if (all[i] instanceof JButton) {

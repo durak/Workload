@@ -19,7 +19,7 @@ import workloadstats.calendardata.mycalendar.MyCalendarParser;
 import workloadstats.calendardata.CalendarBuilderImpl;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.ui.Gui;
-import workloadstats.utils.EventUtilities;
+import workloadstats.utils.Utility;
 
 /**
  *
@@ -35,7 +35,7 @@ public class Main {
         Boolean test = false;
         Boolean test2 = false;
 
-        EventUtilities eu = new EventUtilities();
+        
         File calendarFile = new File("mycalendar2.ics");
         FileInputStream my = new FileInputStream(calendarFile);
         CalendarBuilderImpl builder = new CalendarBuilderImpl();
@@ -89,13 +89,13 @@ public class Main {
             System.out.println(courses.size());
             for (Course course : courses) {
                 System.out.println(course);
-                System.out.println("sum of dur: " + eu.getSumOfDurations(course.getAllEvents()));
+                System.out.println("sum of dur: " + Utility.getSumOfDurations(course.getAllEvents()));
 
                 System.out.println();
                 List<Event> events = course.getAllEvents();
                 for (Event event : events) {
                     System.out.println(event.getEventName());
-                    System.out.println("kesto: " + eu.getDuration(event));
+                    System.out.println("kesto: " + Utility.getDuration(event));
                 }
             }
 

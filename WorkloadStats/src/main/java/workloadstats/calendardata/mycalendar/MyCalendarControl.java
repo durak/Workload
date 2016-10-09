@@ -20,7 +20,8 @@ import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.domain.model.EventType;
 import workloadstats.domain.model.Personal;
-import workloadstats.utils.EventUtilities;
+import workloadstats.utils.Utility;
+
 
 /**
  * Control class for program's own calendar data & domain model object handling
@@ -33,14 +34,12 @@ public class MyCalendarControl {
     private List<Course> courses;
     private MyCalendarParser myCalendarParser;
     private final UidGenerator ug;
-    private EventUtilities eventUtilities;
     
     private Event selectedEvent;
     private Course selectedCourse;
 
     public MyCalendarControl(Calendar calendar) throws SocketException {
         this.ug = new UidGenerator("uidGen");
-        this.eventUtilities = new EventUtilities();
         this.calendar = calendar;
         this.myCalendarParser = new MyCalendarParser(calendar);
         courses = this.myCalendarParser.getCourses();
@@ -120,6 +119,6 @@ public class MyCalendarControl {
      * @return Duration in minutes
      */
     public long getEventDuration(Event event) {
-        return eventUtilities.getDuration(event);
+        return Utility.getDuration(event);
     }
 }

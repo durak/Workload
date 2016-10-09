@@ -6,7 +6,7 @@ package workloadstats.ui;
  * 
  * @author Ilkka
  */
-public enum EvPropId {
+public enum PropId {
     COURSENAME("Kurssin nimi"),
     EVENTNAME("Tapahtuman nimi"),
     DATE("Alkupvm (VVVVKKPP"),
@@ -17,12 +17,12 @@ public enum EvPropId {
     
     private String descr;
 
-    private EvPropId(String title) {
-        this.descr = title;
+    private PropId(String description) {
+        this.descr = description;
     }
     
     /**
-     * Get identifier value
+     * Get identifier description
      * @return 
      */
     public String getDescr() {

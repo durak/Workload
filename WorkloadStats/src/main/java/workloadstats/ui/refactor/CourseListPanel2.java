@@ -60,6 +60,7 @@ public class CourseListPanel2 extends JPanel {
         list.setCellRenderer(new CourseListRenderer());
         JScrollPane scrollPane = new JScrollPane(list);
         
+        
 
         
         
@@ -68,6 +69,8 @@ public class CourseListPanel2 extends JPanel {
         newCourseButton.setActionCommand(Ac.NEWCOURSE.name());
         newCourseButton.addActionListener(cebl);
         JButton deleteCourseButton = new JButton("Poista kurssi");
+        deleteCourseButton.setActionCommand(Ac.DELETECOURSE.name());
+        deleteCourseButton.addActionListener(cebl);
 
         JButton newEventButton = new JButton("Uusi tapahtuma");
         newEventButton.setActionCommand(Ac.NEWEVENT.name());
@@ -81,44 +84,21 @@ public class CourseListPanel2 extends JPanel {
         buttons.add(newEventButton);
         buttons.add(deleteEventButton);
 
-//        newCourseButton.addActionListener(new ActionListener() {
+
+//        deleteCourseButton.addActionListener(new ActionListener() {
 //            public void actionPerformed(ActionEvent e) {
 //
-//                NewCoursePanel newCoursePanel = new NewCoursePanel();
-//                int choice = JOptionPane.showConfirmDialog(scrollPane, newCoursePanel,
-//                        "Syötä uusi kurssi", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-//
-//                if (choice == JOptionPane.OK_OPTION) {
-//                    String summary = newCoursePanel.getNameText();
-//                    String date = newCoursePanel.getStartDateText();
-//                    date = date + "T000000";
-//
-//                    try {
-//                        Course newCourse = myCalendarControl.buildNewCourse(summary, date, date);
-//                        clm.addNewCourse(newCourse);                        
-//                    } catch (Exception ex) {
-//                        JOptionPane.showMessageDialog(scrollPane, "Virhe syötteessä", "Alert", JOptionPane.ERROR_MESSAGE);
-//
-//                        Logger.getLogger(CourseListPanel2.class.getName()).log(Level.SEVERE, null, ex);
+//                if (list.getSelectedValue() == null) {
+//                    JOptionPane.showMessageDialog(scrollPane, "Valitse ensin kurssi", "Alert", JOptionPane.ERROR_MESSAGE);
+//                } else {
+//                    int choice = JOptionPane.showConfirmDialog(scrollPane, "Haluatko varmasti poistaa kurssin?",
+//                            "Achtung!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+//                    if (choice == JOptionPane.OK_OPTION) {
+//                        clm.removeCourseAt(list.getSelectedIndex());
 //                    }
 //                }
-//
 //            }
 //        });
-        deleteCourseButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                if (list.getSelectedValue() == null) {
-                    JOptionPane.showMessageDialog(scrollPane, "Valitse ensin kurssi", "Alert", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    int choice = JOptionPane.showConfirmDialog(scrollPane, "Haluatko varmasti poistaa kurssin?",
-                            "Achtung!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-                    if (choice == JOptionPane.OK_OPTION) {
-                        clm.removeCourseAt(list.getSelectedIndex());
-                    }
-                }
-            }
-        });
 
         add(scrollPane);
 
