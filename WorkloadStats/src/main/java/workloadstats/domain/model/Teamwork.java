@@ -2,6 +2,7 @@ package workloadstats.domain.model;
 
 import workloadstats.domain.model.Event;
 import net.fortuna.ical4j.model.DateTime;
+import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.component.VEvent;
 
 /**
@@ -16,6 +17,10 @@ public class Teamwork extends Event {
     
     public Teamwork(VEvent ve) {
         super(ve);
+    }
+    
+    public Teamwork(PropertyList pl) {
+        super(pl);
     }
     
 }

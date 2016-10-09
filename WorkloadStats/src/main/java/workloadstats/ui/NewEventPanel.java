@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import workloadstats.calendardata.FieldTitle;
 
 /**
  * JPanel for user input of new calendar event information
@@ -17,29 +16,33 @@ import workloadstats.calendardata.FieldTitle;
  */
 public class NewEventPanel extends JPanel {
 
-    private Map<FieldTitle, JTextField> panelFields;
+    private final EvPropId[] userInputNeededFor = {EvPropId.EVENTNAME, EvPropId.EVENTTYPE, EvPropId.DATE, EvPropId.STARTTIME,
+        EvPropId.ENDTIME, EvPropId.STATUS};
+
+    private Map<EvPropId, JTextField> panelFields;
 
     public NewEventPanel() {
         this.setBorder(javax.swing.BorderFactory.createTitledBorder("Uuden tapahtuman tiedot"));
-        setLayout(new GridLayout(4, 2));
+        setLayout(new GridLayout(6, 2));
         panelFields = new HashMap<>();
 
-        List<FieldTitle> userInputNeededFor = new ArrayList<>();
-        userInputNeededFor.add(FieldTitle.EVENTNAME);
-        userInputNeededFor.add(FieldTitle.DATE);
-        userInputNeededFor.add(FieldTitle.STARTTIME);
-        userInputNeededFor.add(FieldTitle.ENDTIME);
-
-        for (FieldTitle fieldTitle : userInputNeededFor) {
+        for (EvPropId fieldTitle : userInputNeededFor) {
             panelFields.put(fieldTitle, new JTextField(10));
             add(new JLabel(fieldTitle.getDescr()));
             add(panelFields.get(fieldTitle));
         }
-
     }
 
-    public String getValue(FieldTitle field) {
+    public String getValue(EvPropId field) {
         return panelFields.get(field).getText();
+    }
+
+    public Map getValues() {
+        Map<EvPropId, String> values = new HashMap<>();
+        for (EvPropId evPropId : userInputNeededFor) {
+            values.put(evPropId, panelFields.get(evPropId).getText());
+        }
+        return values;
     }
 
 }

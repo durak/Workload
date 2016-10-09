@@ -26,7 +26,6 @@ import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import workloadstats.calendardata.FieldTitle;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
@@ -101,11 +100,11 @@ public class EventListPanel extends JPanel {
 
                 if (choice == JOptionPane.OK_OPTION) {
 
-                    String summary = newEventPanel.getValue(FieldTitle.EVENTNAME);
-                    String date = newEventPanel.getValue(FieldTitle.DATE);
-                    String startTime = newEventPanel.getValue(FieldTitle.STARTTIME);
+                    String summary = newEventPanel.getValue(EvPropId.EVENTNAME);
+                    String date = newEventPanel.getValue(EvPropId.DATE);
+                    String startTime = newEventPanel.getValue(EvPropId.STARTTIME);
                     String startDateTime = date + "T" + startTime + "00";
-                    String endTime = newEventPanel.getValue(FieldTitle.ENDTIME);
+                    String endTime = newEventPanel.getValue(EvPropId.ENDTIME);
                     String endDateTime = date + "T" + endTime + "00";
 
                     try {

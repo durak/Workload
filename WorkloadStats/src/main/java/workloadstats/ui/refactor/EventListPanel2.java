@@ -15,7 +15,7 @@ import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
-import workloadstats.calendardata.FieldTitle;
+import workloadstats.ui.EvPropId;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
@@ -81,11 +81,11 @@ public class EventListPanel2 extends JPanel implements ListDataListener {
 
                 if (choice == JOptionPane.OK_OPTION) {
 
-                    String summary = newEventPanel.getValue(FieldTitle.EVENTNAME);
-                    String date = newEventPanel.getValue(FieldTitle.DATE);
-                    String startTime = newEventPanel.getValue(FieldTitle.STARTTIME);
+                    String summary = newEventPanel.getValue(EvPropId.EVENTNAME);
+                    String date = newEventPanel.getValue(EvPropId.DATE);
+                    String startTime = newEventPanel.getValue(EvPropId.STARTTIME);
                     String startDateTime = date + "T" + startTime + "00";
-                    String endTime = newEventPanel.getValue(FieldTitle.ENDTIME);
+                    String endTime = newEventPanel.getValue(EvPropId.ENDTIME);
                     String endDateTime = date + "T" + endTime + "00";
 
                     try {

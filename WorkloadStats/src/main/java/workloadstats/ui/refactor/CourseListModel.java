@@ -6,6 +6,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
 import workloadstats.domain.model.Course;
+import workloadstats.domain.model.Event;
 
 /**
  * Model for courselist
@@ -15,7 +16,6 @@ import workloadstats.domain.model.Course;
 public class CourseListModel extends AbstractListModel {
 
     private List<Course> courses;
-    private Course selected;
 
     public CourseListModel(List<Course> courses) {
         this.courses = courses;
@@ -54,9 +54,12 @@ public class CourseListModel extends AbstractListModel {
         removeCourse((Course) getElementAt(i));
     }
     
-    public Course getSelectedCourse() {
-        
-        return null;
+    public void addEvent(int i, Event event) {
+        courses.get(i).addEvent(event);        
+    }
+    
+    public void removeEvent(int i, Event event) {
+        courses.get(i).removeEvent(event);        
     }
 
 }

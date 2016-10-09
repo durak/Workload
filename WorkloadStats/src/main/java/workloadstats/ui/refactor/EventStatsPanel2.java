@@ -157,8 +157,8 @@ public class EventStatsPanel2 extends JPanel implements ListSelectionListener {
         JList eventList = (JList) lse.getSource();
         Event selection = (Event) eventList.getSelectedValue();        
         resetEvent(selection);
-        System.out.println("EventStatsPanel2 " + eventList);
-        System.out.println(eventList.getModel());
+//        System.out.println("EventStatsPanel2 " + eventList);
+//        System.out.println(eventList.getModel());
     }
 
 }

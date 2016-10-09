@@ -18,6 +18,7 @@ import net.fortuna.ical4j.model.property.Summary;
 import net.fortuna.ical4j.util.UidGenerator;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
+import workloadstats.domain.model.EventType;
 import workloadstats.domain.model.Personal;
 import workloadstats.utils.EventUtilities;
 
@@ -94,6 +95,22 @@ public class MyCalendarControl {
         parent.addEvent(newPersonal);
         
         return newPersonal;
+    }
+    
+    public Event buildNewEvent(String summary, String startDate, String endDate, Course parent, EventType eventType) throws ParseException, IOException, URISyntaxException {
+        PropertyFactoryImpl pf = PropertyFactoryImpl.getInstance();
+        PropertyList props = new PropertyList();
+        props.add(new DtStart(startDate));
+        props.add(new DtEnd(endDate));
+        props.add(new DtStamp());
+        props.add(new Summary(summary));
+        props.add(ug.generateUid());
+        props.add(new Categories(eventType.name()));
+        Property status = pf.createProperty(Property.STATUS);
+        status.setValue("CONFIRMED");
+        props.add(status);     
+        
+        return null;
     }
 
     /**

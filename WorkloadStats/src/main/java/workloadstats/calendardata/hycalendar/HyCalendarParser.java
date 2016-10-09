@@ -59,8 +59,6 @@ public class HyCalendarParser {
     
     
     
-
-    //CalendarParserEventin tehtäviä
     /**
      * Find all VEvents in this calendar
      *

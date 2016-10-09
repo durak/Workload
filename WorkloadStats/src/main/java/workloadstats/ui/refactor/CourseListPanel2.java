@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Course;
+import workloadstats.ui.Ac;
+import workloadstats.ui.CalendarEventButtonListener;
 import workloadstats.ui.CourseListRenderer;
 import workloadstats.ui.NewCoursePanel;
 
@@ -47,41 +49,46 @@ public class CourseListPanel2 extends JPanel {
         BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
         this.setLayout(layout);
 
+        CalendarEventButtonListener cebl = new CalendarEventButtonListener(this, clm);
         
         list = new JList(clm);        
         list.addListSelectionListener(elm);
+        list.addListSelectionListener(cebl);
 
 
         JScrollPane scrollPane = new JScrollPane(list);
         list.setCellRenderer(new CourseListRenderer());
 
         JButton newCourseButton = new JButton("Uusi kurssi");
+        newCourseButton.setActionCommand(Ac.NEWEVENT.name());
+        newCourseButton.addActionListener(cebl);
         JButton deleteCourseButton = new JButton("Poista kurssi");
-
-        newCourseButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                NewCoursePanel newCoursePanel = new NewCoursePanel();
-                int choice = JOptionPane.showConfirmDialog(scrollPane, newCoursePanel,
-                        "Syötä uusi kurssi", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-                if (choice == JOptionPane.OK_OPTION) {
-                    String summary = newCoursePanel.getNameText();
-                    String date = newCoursePanel.getStartDateText();
-                    date = date + "T000000";
-
-                    try {
-                        Course newCourse = myCalendarControl.buildNewCourse(summary, date, date);
-                        clm.addNewCourse(newCourse);                        
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(scrollPane, "Virhe syötteessä", "Alert", JOptionPane.ERROR_MESSAGE);
-
-                        Logger.getLogger(CourseListPanel2.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-            }
-        });
+        
+        
+//        newCourseButton.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//
+//                NewCoursePanel newCoursePanel = new NewCoursePanel();
+//                int choice = JOptionPane.showConfirmDialog(scrollPane, newCoursePanel,
+//                        "Syötä uusi kurssi", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+//
+//                if (choice == JOptionPane.OK_OPTION) {
+//                    String summary = newCoursePanel.getNameText();
+//                    String date = newCoursePanel.getStartDateText();
+//                    date = date + "T000000";
+//
+//                    try {
+//                        Course newCourse = myCalendarControl.buildNewCourse(summary, date, date);
+//                        clm.addNewCourse(newCourse);                        
+//                    } catch (Exception ex) {
+//                        JOptionPane.showMessageDialog(scrollPane, "Virhe syötteessä", "Alert", JOptionPane.ERROR_MESSAGE);
+//
+//                        Logger.getLogger(CourseListPanel2.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                }
+//
+//            }
+//        });
 
         deleteCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
