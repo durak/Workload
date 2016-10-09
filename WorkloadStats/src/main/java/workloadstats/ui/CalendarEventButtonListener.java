@@ -1,5 +1,7 @@
 package workloadstats.ui;
 
+import workloadstats.utils.PropId;
+import workloadstats.utils.Ac;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +17,6 @@ import javax.swing.event.ListSelectionListener;
 import workloadstats.domain.control.EventBuilder;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
-import workloadstats.domain.model.EventType;
 import workloadstats.ui.refactor.CourseListModel;
 
 /**

@@ -16,9 +16,9 @@ import workloadstats.domain.model.Event;
  * Static helper utility methods
  * @author Ilkka
  */
-public class Utility {
+public class EventUtility {
     
-    private Utility() {       
+    private EventUtility() {       
     }
     
     /**

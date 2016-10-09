@@ -12,8 +12,8 @@ import javax.swing.event.ListSelectionListener;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Event;
 import workloadstats.ui.EventStatusListener;
-import workloadstats.ui.Ac;
-import workloadstats.utils.Utility;
+import workloadstats.utils.Ac;
+import workloadstats.utils.EventUtility;
 
 /**
  *
@@ -68,7 +68,7 @@ public class EventStatsPanel2 extends JPanel implements ListSelectionListener {
             titleValue.setText(event.getEventName());
             dateValue.setText(event.getStartDateString());
             startTimeValue.setText(event.getStartTime());
-            String kestoLongToString = Long.toString(Utility.getDuration(event));
+            String kestoLongToString = Long.toString(EventUtility.getDuration(event));
             durationValue.setText(kestoLongToString);
             eventStatusListener.setEvent(selectedEvent);
         }

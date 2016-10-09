@@ -20,7 +20,7 @@ import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.domain.model.EventType;
 import workloadstats.domain.model.Personal;
-import workloadstats.utils.Utility;
+import workloadstats.utils.EventUtility;
 
 
 /**
@@ -119,6 +119,6 @@ public class MyCalendarControl {
      * @return Duration in minutes
      */
     public long getEventDuration(Event event) {
-        return Utility.getDuration(event);
+        return EventUtility.getDuration(event);
     }
 }

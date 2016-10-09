@@ -20,8 +20,8 @@ import javax.swing.event.ListSelectionListener;
 import workloadstats.domain.control.EventBuilder;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
-import workloadstats.ui.Ac;
-import workloadstats.ui.PropId;
+import workloadstats.utils.Ac;
+import workloadstats.utils.PropId;
 import workloadstats.ui.NewEventPanel;
 
 /**

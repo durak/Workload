@@ -1,4 +1,4 @@
-package workloadstats.ui;
+package workloadstats.utils;
 
 /**
  * Enumeration of event property identifiers needed in event creation,

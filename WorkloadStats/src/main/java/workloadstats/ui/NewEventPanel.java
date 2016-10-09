@@ -1,5 +1,6 @@
 package workloadstats.ui;
 
+import workloadstats.utils.PropId;
 import java.awt.GridLayout;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,15 +9,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * JPanel for user input of new calendar event information
- *
+ * JPanel for user input of new calendar event property information.
+ * Uses standardized field identificator PropId Enums which also provide the questions
+ * the user needs to answer.
  * @author Ilkka
  */
 public class NewEventPanel extends JPanel {
 
     private PropId[] userInputNeeded;
-
     private Map<PropId, JTextField> panelFields;
+    
 
     public NewEventPanel(PropId[] userInputNeeded, String title) {
         this.setBorder(javax.swing.BorderFactory.createTitledBorder(title));

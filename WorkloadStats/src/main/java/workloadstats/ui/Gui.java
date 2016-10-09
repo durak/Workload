@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -17,6 +18,7 @@ import workloadstats.ui.refactor.CourseListPanel2;
 import workloadstats.ui.refactor.EventListModel;
 import workloadstats.ui.refactor.EventListPanel2;
 import workloadstats.ui.refactor.EventStatsPanel2;
+import workloadstats.utils.Ac;
 
 /**
  *
@@ -52,26 +54,37 @@ public class Gui implements Runnable {
         CourseListModel clm = new CourseListModel(myCalendarControl.getCourses());
         EventListModel elm = new EventListModel(clm);
         clm.addListDataListener(elm);
-                        
+
         JList courseList = new JList(clm);
         JList eventList = new JList(elm);
 
-        MenuButtonPanel menuButtonPanel = new MenuButtonPanel();
+        Ac[] menuButtons = {Ac.NEWCALENDAR, Ac.LOADCALENDAR, Ac.IMPORTCALENDAR, Ac.SAVECALENDAR};
+        JPanel menuButtonPanel = new ButtonsPanel(menuButtons, "Main menu");
+        menuButtonPanel.setMaximumSize(new Dimension(300, 20));
+
+        Ac[] eventButtons = {Ac.NEWCOURSE, Ac.DELETECOURSE, Ac.NEWEVENT, Ac.DELETE_EVENT};
+        JPanel buttonsPanel = new ButtonsPanel(eventButtons, "Toiminnot");
+        buttonsPanel.setMaximumSize(new Dimension(300, 20));
+
         CourseStatsPanel courseStatsPanel = new CourseStatsPanel();
         EventStatsPanel2 eventStatsPanel = new EventStatsPanel2();
         EventListPanel2 eventListPanel = new EventListPanel2(eventList);
-        CourseListPanel2 courseListPanel = new CourseListPanel2(myCalendarControl, eventListPanel, clm, elm);
-        
+        CourseListPanel2 courseListPanel = new CourseListPanel2(courseList, clm, elm);
+
         eventList.addListSelectionListener(eventStatsPanel);
         elm.addListDataListener(eventListPanel);
 
-
-
-        JPanel west = new JPanel(new GridLayout(2, 1));
+//        JPanel west = new JPanel(new GridLayout(3, 1));
+        JPanel west = new JPanel();
+        west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
         west.add(menuButtonPanel);
         west.add(courseListPanel);
 
-        JPanel east = new JPanel(new GridLayout(2, 1));
+        west.add(buttonsPanel);
+
+//        JPanel east = new JPanel(new GridLayout(2, 1));
+        JPanel east = new JPanel();
+        east.setLayout(new BoxLayout(east, BoxLayout.Y_AXIS));
         east.add(eventStatsPanel);
         east.add(courseStatsPanel);
 

@@ -21,8 +21,7 @@ import workloadstats.domain.model.Exercise;
 import workloadstats.domain.model.Lecture;
 import workloadstats.domain.model.Personal;
 import workloadstats.domain.model.Teamwork;
-import workloadstats.ui.Ac;
-import workloadstats.ui.PropId;
+import workloadstats.utils.PropId;
 
 /**
  * Builder for event creation and verification

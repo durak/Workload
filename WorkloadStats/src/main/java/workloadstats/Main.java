@@ -19,7 +19,7 @@ import workloadstats.calendardata.mycalendar.MyCalendarParser;
 import workloadstats.calendardata.CalendarBuilderImpl;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.ui.Gui;
-import workloadstats.utils.Utility;
+import workloadstats.utils.EventUtility;
 
 /**
  *
@@ -89,13 +89,13 @@ public class Main {
             System.out.println(courses.size());
             for (Course course : courses) {
                 System.out.println(course);
-                System.out.println("sum of dur: " + Utility.getSumOfDurations(course.getAllEvents()));
+                System.out.println("sum of dur: " + EventUtility.getSumOfDurations(course.getAllEvents()));
 
                 System.out.println();
                 List<Event> events = course.getAllEvents();
                 for (Event event : events) {
                     System.out.println(event.getEventName());
-                    System.out.println("kesto: " + Utility.getDuration(event));
+                    System.out.println("kesto: " + EventUtility.getDuration(event));
                 }
             }
 

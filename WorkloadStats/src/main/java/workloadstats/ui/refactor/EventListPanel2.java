@@ -44,7 +44,8 @@ public class EventListPanel2 extends JPanel implements ListDataListener {
     }
 
     /**
-     * Listen to changes in the underlying data model
+     * ListDataListener
+     * Listen to changes in the underlying course data model
      *
      * @param lde
      */
@@ -52,22 +53,10 @@ public class EventListPanel2 extends JPanel implements ListDataListener {
     public void intervalAdded(ListDataEvent lde) {
         System.out.println("Interval added \n" + lde.toString());
     }
-
-    /**
-     * Listen to changes in the underlying data model
-     *
-     * @param lde
-     */
     @Override
     public void intervalRemoved(ListDataEvent lde) {
         System.out.println("Interval removed \n" + lde.toString());
     }
-
-    /**
-     * Listen to changes in the underlying data model
-     *
-     * @param lde
-     */
     @Override
     public void contentsChanged(ListDataEvent lde) {
         eventList.clearSelection();
