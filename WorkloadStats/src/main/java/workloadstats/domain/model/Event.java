@@ -77,7 +77,7 @@ public abstract class Event extends VEvent {
             if (this.getProperty(property) == null) {
                 this.getProperties().add(pf.createProperty(property));
             }
-            
+
             this.getProperty(property).setValue(value);
         } catch (IOException ex) {
 
@@ -103,7 +103,7 @@ public abstract class Event extends VEvent {
         this.status = "CONFIRMED";
         addPropertyToVEvent(Property.STATUS, "CONFIRMED");
     }
-    
+
     public void setStatusCancelled() {
         this.status = "CANCELLED";
         addPropertyToVEvent(Property.STATUS, "CANCELLED");
@@ -117,49 +117,57 @@ public abstract class Event extends VEvent {
     public String getEventName() {
         return this.getSummary().getValue();
     }
-    
+
     /**
      * Get event's status as a string
+     *
      * @return String of status, possible values CONFIRMED or TENTATIVE
      */
     public String getEventStatus() {
         if (this.getProperty(Property.STATUS) == null) {
             setStatusTentative();
         }
-        
+
         return this.getProperty(Property.STATUS).getValue();
     }
 
     /**
      * Get Start date as string, Helsinki timezone
      *
-     * @return date in format yyyyMMdd
+     * @return date in format yyyy.MM.dd
      */
     public String getStartDateString() {
         String date = toHelsinkiTime(this.getStartDate().getDate());
-        return date.substring(0, 8);
+        date = date.substring(0, 8);
+        date = date.substring(0, 4) + "." + date.substring(4, 6) + "." + date.substring(6, 8);
+
+        return date;
     }
 
     /**
      * Get End date as string, Helsinki timezone
      *
-     * @return date in format yyyyMMdd
+     * @return date in format yyyy.MM.dd
      */
     public String getEndDateString() {
         String date = toHelsinkiTime(this.getEndDate().getDate());
-        return date.substring(0, 8);
+        date = date.substring(0, 8);
+        date = date.substring(0, 4) + "." + date.substring(4, 6) + "." + date.substring(6, 8);
+
+        return date;
     }
 
     /**
      * Get Start time as string, Helsinki timezone
      *
-     * @return time in format HHmmss
+     * @return time in format HH.mm
      */
     public String getStartTime() {
         Date date = this.getStartDate().getDate();
         String time = toHelsinkiTime(date);
+        time = time.substring(9, 11) + "." + time.substring(11, 13);
 
-        return time.substring(9, 15);
+        return time;
     }
 
     private String toHelsinkiTime(Date date) {

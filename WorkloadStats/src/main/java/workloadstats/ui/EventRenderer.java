@@ -24,8 +24,10 @@ public class EventRenderer extends JLabel implements ListCellRenderer<Event> {
     @Override
     public Component getListCellRendererComponent(JList<? extends Event> list, Event event, int index,
             boolean isSelected, boolean cellHasFocus) {
+        
         String eventName = event.getEventName();
-        setText(eventName);
+        String eventDate = event.getStartDateString();
+        setText(eventDate + " " + eventName);
         if (isSelected) {
             setBackground(list.getSelectionBackground());
             setForeground(list.getSelectionForeground());
@@ -35,7 +37,6 @@ public class EventRenderer extends JLabel implements ListCellRenderer<Event> {
         }
 
         return this;
-
     }
 
 }

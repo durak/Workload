@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workloadstats.ui;
 
 import java.awt.BorderLayout;
@@ -31,7 +26,7 @@ import workloadstats.domain.model.Personal;
 public class EventStatsPanel extends JPanel {
 
     private MyCalendarControl myCalendarControl;
-    private Course selectedCourse;
+    
     private Event selectedEvent;
 
 //    private JTextField otsikkoSisalto2;
@@ -41,9 +36,9 @@ public class EventStatsPanel extends JPanel {
     private JLabel kestoSisalto;
     private JLabel paikkaSisalto;
 
-    JRadioButton yes;
-    JRadioButton no;
-    JRadioButton maybe;
+    private JRadioButton yes;
+    private JRadioButton no;
+    private JRadioButton maybe;
 
     private EventStatusListener eventStatusListener;
 
@@ -68,8 +63,8 @@ public class EventStatsPanel extends JPanel {
      *
      * @param event
      */
-    public void setEvent(Course course, Event event) {
-        selectedCourse = course;
+    public void setEvent(Event event) {
+        
         selectedEvent = event;
         otsikkoSisalto.setText(event.getEventName());
         pvmSisalto.setText(event.getStartDateString());
@@ -86,6 +81,7 @@ public class EventStatsPanel extends JPanel {
             JRadioButton reset = rbuttons[i];
             String command = reset.getActionCommand();
             reset.setSelected(selectedEvent.getEventStatus().equals(command));
+            reset.setEnabled(true);
         }
     }
 
@@ -123,46 +119,19 @@ public class EventStatsPanel extends JPanel {
         return upper;
     }
 
-    /*
-     Initialize lower part of panel
-     */
-//    private JPanel lowerInit() {
-//        JPanel lower = new JPanel();
-//        JButton paivita = new JButton("Päivitä");
-//
-//        lower.add(paivita);
-//
-//        paivita.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                String lasnaOloStatus = lasnaSisalto.getText();
-//                if (lasnaOloStatus.equals("TENTATIVE")) {
-//                    selectedEvent.setStatusTentative();
-//                } else if (lasnaOloStatus.equals("CONFIRMED")) {
-//                    selectedEvent.setStatusConfirmed();
-//                } else if (lasnaOloStatus.equals("CANCELLED")) {
-//                    selectedEvent.setStatusCancelled();
-//                } else {
-//                    JOptionPane.showMessageDialog(lower, "Virhe syötteessä", "Alert", JOptionPane.ERROR_MESSAGE);
-//                }
-//
-//            }
-//        });
-//        
-//        
-//
-//        return lower;
-//    }
     private JPanel lowerInit() {
         JPanel lower = new JPanel();
-//        lower.setLayout(new BoxLayout(lower, 2));
         lower.setBorder(javax.swing.BorderFactory.createTitledBorder("Osallistutko / osallistuitko tapahtumaan"));
 
         yes = new JRadioButton("Kyllä");
         yes.setActionCommand(StatusAc.CONFIRMED.name());
+        yes.setEnabled(selectedEvent != null);
         no = new JRadioButton("Ei");
         no.setActionCommand(StatusAc.CANCELLED.name());
+        no.setEnabled(selectedEvent != null);
         maybe = new JRadioButton("Harkitsen");
         maybe.setActionCommand(StatusAc.TENTATIVE.name());
+        maybe.setEnabled(selectedEvent != null);
 
         eventStatusListener = new EventStatusListener();
         yes.addActionListener(eventStatusListener);

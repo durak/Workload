@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package workloadstats.ui;
+package workloadstats.ui.refactor;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,66 +20,68 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import net.fortuna.ical4j.model.component.VEvent;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Course;
-import workloadstats.domain.model.Event;
-import workloadstats.ui.refactor.CourseListModel;
+import workloadstats.ui.CourseListRenderer;
+import workloadstats.ui.EventListPanel;
+import workloadstats.ui.NewCoursePanel;
+import workloadstats.ui.SingleSelectionListModel;
 
 /**
- * JPanel container for a JList of courses
  *
  * @author Ilkka
  */
-public class CourseListPanel extends JPanel {
+public class CourseListPanel2 extends JPanel {
 
     private MyCalendarControl myCalendarControl;
-    private EventListPanel eventListPanel;
+    private EventListPanel2 eventListPanel;
     private List<Course> courses;
     private JList list;
     //
-    DefaultListModel model;
+    
+    CourseListModel clm;
+    EventListModel elm;
     ListSelectionModel selectionModel;
     //            
     Course selectedCourse;
 
-    public CourseListPanel(MyCalendarControl myCalendarControl, EventListPanel eventListPanel) {
+    public CourseListPanel2(MyCalendarControl myCalendarControl, EventListPanel2 eventListPanel, CourseListModel clm, EventListModel elm) {
+        this.clm = clm;
+        this.elm = elm;
         this.myCalendarControl = myCalendarControl;
         this.eventListPanel = eventListPanel;
         this.courses = myCalendarControl.getCourses();
         initPanelComponents();
     }
 
-
     public void initPanelComponents() {
         this.setBorder(javax.swing.BorderFactory.createTitledBorder("Kurssilista"));
         BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
         this.setLayout(layout);
 
-        selectedCourse = null;
-        model = new DefaultListModel();
-        list = new JList(model);
+        selectedCourse = null;    
+        list = new JList(clm);
+        
+        list.addListSelectionListener(elm);
+        System.out.println(list.getModel().getClass());
 //        list = new JList();
         JScrollPane scrollPane = new JScrollPane(list);
         list.setCellRenderer(new CourseListRenderer());
 //        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         ////////////////////////////////
-        ListSelectionModel selectionModel = new SingleSelectionListModel() {
-            public void updateSingleSelection(int oldIndex, int newIndex) {
-                ListModel m = list.getModel();
-                selectedCourse = (Course) m.getElementAt(newIndex);
-                eventListPanel.reset(selectedCourse);
-            }
-        };
-        list.setSelectionModel(selectionModel);
+//        ListSelectionModel selectionModel = new SingleSelectionListModel() {
+//            public void updateSingleSelection(int oldIndex, int newIndex) {
+//                ListModel m = list.getModel();
+//                System.out.println(m.equals(clm));
+//                selectedCourse = (Course) m.getElementAt(newIndex);
+//                eventListPanel.reset(selectedCourse);
+//            }
+//        };
+//        list.setSelectionModel(selectionModel);
 
         ////////////////////////////////
-        for (Course course : courses) {
-            model.addElement(course);
-        }
+
 
         /*
         
@@ -119,12 +120,11 @@ public class CourseListPanel extends JPanel {
 
                     try {
                         Course newCourse = myCalendarControl.buildNewCourse(summary, date, date);
-                        model.addElement(newCourse);
-                        courses.add(newCourse);
+                        clm.addNewCourse(newCourse);                        
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(scrollPane, "Virhe syötteessä", "Alert", JOptionPane.ERROR_MESSAGE);
 
-                        Logger.getLogger(CourseListPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CourseListPanel2.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 
@@ -133,13 +133,15 @@ public class CourseListPanel extends JPanel {
 
         deleteCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                
+                
                 if (list.getSelectedValue() == null) {
                     JOptionPane.showMessageDialog(scrollPane, "Valitse ensin kurssi", "Alert", JOptionPane.ERROR_MESSAGE);
                 } else {
                     int choice = JOptionPane.showConfirmDialog(scrollPane, "Haluatko varmasti poistaa kurssin?",
                             "Achtung!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
                     if (choice == JOptionPane.OK_OPTION) {
-                        model.removeElementAt(list.getSelectedIndex());
+                        clm.removeCourseAt(list.getSelectedIndex());
                     }
                 }
             }
@@ -151,4 +153,5 @@ public class CourseListPanel extends JPanel {
 
     }
 
-}
+}    
+

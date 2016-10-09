@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.SwingUtilities;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.data.CalendarOutputter;
@@ -32,6 +33,8 @@ import workloadstats.domain.model.Lecture;
 import workloadstats.ui.CourseListPanel;
 import workloadstats.ui.EventListPanel;
 import workloadstats.ui.Gui;
+import workloadstats.ui.refactor.CourseListModel;
+import workloadstats.ui.refactor.EventListModel;
 import workloadstats.utils.EventUtilities;
 
 /**
@@ -135,7 +138,6 @@ public class Main {
 //        satunnainen.getProperties().remove(Property.RELATED_TO);
 //        satunnainen.getProperty(Property.STATUS).setValue("s");
 //        System.out.println(satunnainen);
-
 //        java.util.Calendar calendar = java.util.Calendar.getInstance();
 //        calendar.set(java.util.Calendar.MONTH, java.util.Calendar.DECEMBER);
 //        calendar.set(java.util.Calendar.DAY_OF_MONTH, 25);
@@ -158,9 +160,28 @@ public class Main {
 ////        joku.setStatusCancelled();
 //        System.out.println(joku);
 //        satunnainen.getProperty(Property.STATUS).setValue("VEVENT_CANCELLED");
-
-
-        
+//        MyCalendarParser myParser = new MyCalendarParser(myCal);
+//        List<Course> courses = myParser.getCourses();
+//        kurssitForGui = courses;
+//        CourseListModel clm = new CourseListModel(kurssitForGui);
+//        EventListModel elm = new EventListModel(clm);
+//        JList testJlist = new JList(clm);
+//        testJlist.addListSelectionListener(elm);
+//        clm.addListDataListener(elm);
+//        Course testOutput = (Course) clm.getElementAt(0);
+////        System.out.println(testOutput);
+////        System.out.println(clm.getSize());
+//        clm.addNewCourse(testOutput);
+////        System.out.println(clm.getSize());
+//        // uuden lisäämnen ei aiheuta toimenpiteitä nyt
+//        
+//        //selection
+//        testJlist.setSelectedIndex(5);
+//        
+//        Event e = (Event) clm.getElementAt(0);
+//        System.out.println(e.equals(clm.getElementAt(0)));
+//        System.out.println(e);
+//        elm.removeEvent(e);
     }
 
 }

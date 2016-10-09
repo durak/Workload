@@ -9,8 +9,8 @@ public enum FieldTitle {
     COURSENAME("Kurssin nimi"),
     EVENTNAME("Tapahtuman nimi"),
     DATE("Alkupvm (VVVVKKPP"),
-    STARTTIME("Aloitusaika (HHMMSS)"),
-    ENDTIME("Lopetusaika (HHMMSS");
+    STARTTIME("Aloitusaika (HHMM)"),
+    ENDTIME("Lopetusaika (HHMM");
     
     private String title;
 

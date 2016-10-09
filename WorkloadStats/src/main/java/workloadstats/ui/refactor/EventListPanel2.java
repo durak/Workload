@@ -1,20 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package workloadstats.ui;
+package workloadstats.ui.refactor;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
-import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -22,23 +14,25 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
-import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
-
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import workloadstats.calendardata.FieldTitle;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.domain.model.Personal;
+import workloadstats.ui.CourseListPanel;
+import workloadstats.ui.EventRenderer;
+import workloadstats.ui.EventStatsPanel;
+import workloadstats.ui.NewEventPanel;
+import workloadstats.ui.SingleSelectionListModel;
 
 /**
- * JPanel container for JList of events
  *
  * @author Ilkka
  */
-public class EventListPanel extends JPanel {
-
+public class EventListPanel2 extends JPanel implements ListDataListener {
+    
     private MyCalendarControl myCalendarControl;
     private EventStatsPanel eventStatsPanel;
     private Course selectedCourse;
@@ -46,15 +40,17 @@ public class EventListPanel extends JPanel {
 
     private List<Event> events;
     private JList list;
-    DefaultListModel model;
+    
+    private EventListModel elm;
 
-    public EventListPanel(List<Event> events, EventStatsPanel eventStatsPanel) {
+    public EventListPanel2(List<Event> events, EventStatsPanel eventStatsPanel) {
         this.eventStatsPanel = eventStatsPanel;
         this.events = events;
         initPanelComponents();
     }
 
-    public EventListPanel(MyCalendarControl myCalendarControl, Course course, EventStatsPanel eventStatsPanel) {
+    public EventListPanel2(MyCalendarControl myCalendarControl, Course course, EventStatsPanel eventStatsPanel, EventListModel elm) {
+        this.elm = elm;
         this.myCalendarControl = myCalendarControl;
         this.selectedCourse = course;
         events = course.getAllEvents();
@@ -69,19 +65,20 @@ public class EventListPanel extends JPanel {
         this.setLayout(layout);
 
         selectedEvent = null;
-        model = new DefaultListModel();
-        list = new JList(model);
+        elm.addListDataListener(this);
+        list = new JList(elm);
+//        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPane = new JScrollPane(list);
         list.setCellRenderer(new EventRenderer());
 
-        ////////////////////////
+        //////////////////////
         ListSelectionModel selectionModel = new SingleSelectionListModel() {
             public void updateSingleSelection(int oldIndex, int newIndex) {
                 ListModel m = list.getModel();
                 selectedEvent = (Event) m.getElementAt(newIndex);
                 eventStatsPanel.setEvent(selectedEvent);
 
-                System.out.println(selectedEvent.getEventName());
+//                System.out.println(selectedEvent.getEventName());
             }
         };
         list.setSelectionModel(selectionModel);
@@ -132,6 +129,24 @@ public class EventListPanel extends JPanel {
         Event[] ev = events.toArray(new Event[events.size()]);
         list.setListData(ev);
 //        list.setSelectedIndex(0);
+    }
+
+    @Override
+    public void intervalAdded(ListDataEvent lde) {
+        System.out.println("Interval added \n" + lde.toString());
+    }
+
+    @Override
+    public void intervalRemoved(ListDataEvent lde) {
+        System.out.println("Interval removed \n" + lde.toString());
+    }
+
+    @Override
+    public void contentsChanged(ListDataEvent lde) {
+        list.clearSelection();
+        
+        System.out.println("contents changed \n" + lde.toString());
+        System.out.println(lde.getSource());
     }
 
 }

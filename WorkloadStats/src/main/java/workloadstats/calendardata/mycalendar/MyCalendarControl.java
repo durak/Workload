@@ -33,6 +33,9 @@ public class MyCalendarControl {
     private MyCalendarParser myCalendarParser;
     private final UidGenerator ug;
     private EventUtilities eventUtilities;
+    
+    private Event selectedEvent;
+    private Course selectedCourse;
 
     public MyCalendarControl(Calendar calendar) throws SocketException {
         this.ug = new UidGenerator("uidGen");

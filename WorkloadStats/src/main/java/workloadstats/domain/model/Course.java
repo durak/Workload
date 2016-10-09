@@ -14,6 +14,7 @@ import net.fortuna.ical4j.model.property.Status;
 
 /**
  * Course type calendar event
+ *
  * @author Ilkka
  */
 public class Course extends Event {
@@ -31,7 +32,6 @@ public class Course extends Event {
     private List<Event> personal;
     private List<Event> teamwork;
     private List<Event> exams;
-    
 
     public Course(VEvent ve) {
         super(ve);
@@ -41,7 +41,7 @@ public class Course extends Event {
         this.personal = new ArrayList<>();
         this.teamwork = new ArrayList<>();
         this.exams = new ArrayList<>();
-    
+
     }
 
     public Course(PropertyList pl) {
@@ -52,17 +52,17 @@ public class Course extends Event {
         this.personal = new ArrayList<>();
         this.teamwork = new ArrayList<>();
         this.exams = new ArrayList<>();
-    
+
     }
-    
+
     public String getCourseName() {
         return this.name;
     }
-    
-    
+
     /**
      * Return a list of all events in this course
-     * @return 
+     *
+     * @return
      */
     public List<Event> getAllEvents() {
         List<Event> allEvents = new ArrayList<>();
@@ -71,40 +71,19 @@ public class Course extends Event {
         allEvents.addAll(personal);
         allEvents.addAll(teamwork);
         allEvents.addAll(exams);
-        
+
         return allEvents;
     }
-    
-    
 
-//    public Course(String courseId) {
-//        this.courseId = courseId;
-//        this.lectures = new ArrayList<>();
-//        this.exercises = new ArrayList<>();
-//        this.personal = new ArrayList<>();
-//        this.teamwork = new ArrayList<>();
-//        this.exams = new ArrayList<>();
-//        this.allEvents = new ArrayList<>();
-//
-//        allEvents.add(lectures);
-//        allEvents.add(exercises);
-//        allEvents.add(personal);
-//        allEvents.add(teamwork);
-//        allEvents.add(exams);
-//
-//    }
-//    public String getName() {
-//        return "";
-//    }
-    
     /**
      * Add calendar event to this course
-     * @param event 
+     *
+     * @param event
      */
     public void addEvent(Event event) {
         super.parentAnotherEvent(event);
-        
-        if (event.getClass() == Lecture.class) {            
+
+        if (event.getClass() == Lecture.class) {
             lectures.add(event);
         }
         if (event.getClass() == Exercise.class) {
@@ -117,13 +96,37 @@ public class Course extends Event {
             teamwork.add(event);
         }
         if (event.getClass() == Exam.class) {
-            exams.add(event);
+            exams.add(event);            
         }
     }
-    
+
+    /**
+     * Remove calendar event from this course
+     *
+     * @param event
+     */
+    public void removeEvent(Event event) {
+        if (event.getClass() == Lecture.class) {
+            lectures.remove(event);
+        }
+        if (event.getClass() == Exercise.class) {
+            exercises.remove(event);
+        }
+        if (event.getClass() == Personal.class) {
+            personal.remove(event);
+        }
+        if (event.getClass() == Teamwork.class) {
+            teamwork.remove(event);
+        }
+        if (event.getClass() == Exam.class) {
+            exams.remove(event);
+        }
+    }
+
     /**
      * Add list of events to this course
-     * @param list 
+     *
+     * @param list
      */
     public void addEventList(List<Event> list) {
         for (Event event : list) {
@@ -150,10 +153,6 @@ public class Course extends Event {
     public List<Event> getExams() {
         return this.exams;
     }
-    
-    
-    
-
 
 //    public void finishCourse() throws IOException, URISyntaxException, ParseException {
 //
@@ -166,5 +165,4 @@ public class Course extends Event {
 //            }
 //        }
 //    }
-
 }

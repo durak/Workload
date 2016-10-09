@@ -6,7 +6,7 @@ import javax.swing.JRadioButton;
 import workloadstats.domain.model.Event;
 
 /**
- *
+ * Change selected event's status
  * @author Ilkka
  */
 public class EventStatusListener implements ActionListener {
