@@ -1,6 +1,7 @@
 package workloadstats.ui;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -33,7 +34,17 @@ public class ButtonsPanel extends JPanel {
             buttons.add(jb);
             this.add(jb);
         }
-
     }
+    
+    public List<JButton> getButtons() {
+        return buttons;
+    }
+    
+    public void addListener(ActionListener al) {
+        for (JButton button : buttons) {
+            button.addActionListener(al);
+        }
+    }
+    
 
 }

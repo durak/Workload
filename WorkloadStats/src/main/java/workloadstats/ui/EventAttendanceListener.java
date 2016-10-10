@@ -3,18 +3,17 @@ package workloadstats.ui;
 import workloadstats.utils.Ac;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JRadioButton;
 import workloadstats.domain.model.Event;
 
 /**
- * Change selected event's status
+ * Change selected event's attendance status
  * @author Ilkka
  */
-public class EventStatusListener implements ActionListener {
+public class EventAttendanceListener implements ActionListener {
 
     private Event event;
     
-    public EventStatusListener() {        
+    public EventAttendanceListener() {        
     }
     
     public void setEvent(Event ev) {

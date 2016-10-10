@@ -13,11 +13,12 @@ import javax.swing.WindowConstants;
 import workloadstats.calendardata.hycalendar.HyCalendarControl;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Course;
+import workloadstats.ui.refactor.CalendarEventButtonListener2;
 import workloadstats.ui.refactor.CourseListModel;
 import workloadstats.ui.refactor.CourseListPanel2;
 import workloadstats.ui.refactor.EventListModel;
 import workloadstats.ui.refactor.EventListPanel2;
-import workloadstats.ui.refactor.EventStatsPanel2;
+import workloadstats.ui.refactor.EventInformationPanel;
 import workloadstats.utils.Ac;
 
 /**
@@ -53,21 +54,29 @@ public class Gui implements Runnable {
 
         CourseListModel clm = new CourseListModel(myCalendarControl.getCourses());
         EventListModel elm = new EventListModel(clm);
-        clm.addListDataListener(elm);
+//        clm.addListDataListener(elm);
 
         JList courseList = new JList(clm);
+        courseList.setName("courselist");
         JList eventList = new JList(elm);
+        eventList.setName("eventList");
 
         Ac[] menuButtons = {Ac.NEWCALENDAR, Ac.LOADCALENDAR, Ac.IMPORTCALENDAR, Ac.SAVECALENDAR};
-        JPanel menuButtonPanel = new ButtonsPanel(menuButtons, "Main menu");
-        menuButtonPanel.setMaximumSize(new Dimension(300, 20));
+        JPanel mainMenu = new ButtonsPanel(menuButtons, "Main menu");
+        mainMenu.setMaximumSize(new Dimension(300, 20));
+        
 
         Ac[] eventButtons = {Ac.NEWCOURSE, Ac.DELETECOURSE, Ac.NEWEVENT, Ac.DELETE_EVENT};
-        JPanel buttonsPanel = new ButtonsPanel(eventButtons, "Toiminnot");
+        ButtonsPanel buttonsPanel = new ButtonsPanel(eventButtons, "Toiminnot");
         buttonsPanel.setMaximumSize(new Dimension(300, 20));
+                
+        CalendarEventButtonListener2 cebl2 = new CalendarEventButtonListener2(container, courseList, eventList, buttonsPanel.getButtons());
+        courseList.addListSelectionListener(cebl2);
+        eventList.addListSelectionListener(cebl2);
+        buttonsPanel.addListener(cebl2);
 
-        CourseStatsPanel courseStatsPanel = new CourseStatsPanel();
-        EventStatsPanel2 eventStatsPanel = new EventStatsPanel2();
+        SelectionStatsPanel courseStatsPanel = new SelectionStatsPanel();
+        EventInformationPanel eventStatsPanel = new EventInformationPanel();
         EventListPanel2 eventListPanel = new EventListPanel2(eventList);
         CourseListPanel2 courseListPanel = new CourseListPanel2(courseList, clm, elm);
 
@@ -77,7 +86,7 @@ public class Gui implements Runnable {
 //        JPanel west = new JPanel(new GridLayout(3, 1));
         JPanel west = new JPanel();
         west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
-        west.add(menuButtonPanel);
+        west.add(mainMenu);
         west.add(courseListPanel);
 
         west.add(buttonsPanel);
@@ -85,6 +94,7 @@ public class Gui implements Runnable {
 //        JPanel east = new JPanel(new GridLayout(2, 1));
         JPanel east = new JPanel();
         east.setLayout(new BoxLayout(east, BoxLayout.Y_AXIS));
+//        east.setLayout(new GridLayout(2, 1));
         east.add(eventStatsPanel);
         east.add(courseStatsPanel);
 

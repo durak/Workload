@@ -19,7 +19,7 @@ import workloadstats.utils.EventComparatorChronological;
  *
  * @author Ilkka
  */
-public class EventListModel extends AbstractListModel implements ListSelectionListener, ListDataListener {
+public class EventListModel extends AbstractListModel implements ListSelectionListener {
 
     private CourseListModel clm;
 
@@ -78,21 +78,21 @@ public class EventListModel extends AbstractListModel implements ListSelectionLi
         fireContentsChanged(this, 0, getSize());
     }
 
-    @Override
-    public void intervalAdded(ListDataEvent lde) {
-        System.out.println("Interval added \n" + lde.toString());
-    }
-
-    @Override
-    public void intervalRemoved(ListDataEvent lde) {
-        System.out.println("Interval removed \n" + lde.toString());
-    }
-
-    @Override
-    public void contentsChanged(ListDataEvent lde) {
-        System.out.println("contents changed \n" + lde.toString());
-//        fireContentsChanged(this, 0, getSize());
-    }
+//    @Override
+//    public void intervalAdded(ListDataEvent lde) {
+//        System.out.println("Interval added \n" + lde.toString());
+//    }
+//
+//    @Override
+//    public void intervalRemoved(ListDataEvent lde) {
+//        System.out.println("Interval removed \n" + lde.toString());
+//    }
+//
+//    @Override
+//    public void contentsChanged(ListDataEvent lde) {
+//        System.out.println("contents changed \n" + lde.toString());
+////        fireContentsChanged(this, 0, getSize());
+//    }
 
 
 }

@@ -6,19 +6,19 @@
 package workloadstats.ui;
 
 import java.awt.GridLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
- * JPanel for stats of the chosen course
+ * Show statistics from user's selected events
  *
  * @author Ilkka
  */
-public class CourseStatsPanel extends JPanel {
+public class SelectionStatsPanel extends JPanel implements ListSelectionListener {
 
-    public CourseStatsPanel() {
+    public SelectionStatsPanel() {
         initPanelComponents();
     }
 
@@ -42,6 +42,11 @@ public class CourseStatsPanel extends JPanel {
         this.add(jl6);
         
         
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent lse) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

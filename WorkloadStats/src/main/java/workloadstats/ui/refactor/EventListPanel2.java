@@ -39,7 +39,7 @@ public class EventListPanel2 extends JPanel implements ListDataListener {
         JScrollPane scrollPane = new JScrollPane(eventList);
         add(scrollPane);
         
-        eventList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);        
+//        eventList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);        
         eventList.setCellRenderer(new EventRenderer());        
     }
 

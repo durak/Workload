@@ -6,9 +6,9 @@ package workloadstats.utils;
  * @author Ilkka
  */
 public enum Ac {
-    TENTATIVE(""),
-    CONFIRMED(""),
-    CANCELLED(""),
+    TENTATIVE("Harkitset"),
+    CONFIRMED("Kyllä"),
+    CANCELLED("En"),
     NEWCALENDAR("Uusi kalenteri"),
     IMPORTCALENDAR("Tuo merkintöjä"),
     LOADCALENDAR("Lataa kalenteri"),

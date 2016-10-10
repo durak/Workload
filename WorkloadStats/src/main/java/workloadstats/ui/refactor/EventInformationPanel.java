@@ -2,16 +2,15 @@ package workloadstats.ui.refactor;
 
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Event;
-import workloadstats.ui.EventStatusListener;
+import workloadstats.ui.EventAttendancePanel;
+import workloadstats.ui.EventAttendanceListener;
 import workloadstats.utils.Ac;
 import workloadstats.utils.EventUtility;
 
@@ -19,7 +18,7 @@ import workloadstats.utils.EventUtility;
  *
  * @author Ilkka
  */
-public class EventStatsPanel2 extends JPanel implements ListSelectionListener {
+public class EventInformationPanel extends JPanel implements ListSelectionListener {
 
     private Event selectedEvent;
 
@@ -33,12 +32,13 @@ public class EventStatsPanel2 extends JPanel implements ListSelectionListener {
     private JRadioButton attendNo;
     private JRadioButton attendMaybe;
 
-    private EventStatusListener eventStatusListener;
+    private EventAttendancePanel eventAttendancePanel;
+    private EventAttendanceListener eventAttendance;
 
-    public EventStatsPanel2() {
-        eventStatusListener = new EventStatusListener();
+    public EventInformationPanel() {
+        eventAttendance = new EventAttendanceListener();
         selectedEvent = null;
-        
+
         initPanelComponents();
     }
 
@@ -52,7 +52,7 @@ public class EventStatsPanel2 extends JPanel implements ListSelectionListener {
     }
 
     /**
-     * Set parameter's event as the current event and push information to upper
+     * Set panel view to current selected event
      *
      * @param event
      */
@@ -70,33 +70,20 @@ public class EventStatsPanel2 extends JPanel implements ListSelectionListener {
             startTimeValue.setText(event.getStartTime());
             String kestoLongToString = Long.toString(EventUtility.getDuration(event));
             durationValue.setText(kestoLongToString);
-            eventStatusListener.setEvent(selectedEvent);
+            eventAttendance.setEvent(selectedEvent);
         }
         resetRadioButtons();
     }
 
     private void resetRadioButtons() {
-        JRadioButton[] rbuttons = {attendYes, attendNo, attendMaybe};
-
-        for (int i = 0; i < rbuttons.length; i++) {
-            JRadioButton j = rbuttons[i];
-            if (selectedEvent == null) {
-                j.setEnabled(false);
-            } else {
-                String command = j.getActionCommand();
-                j.setSelected(selectedEvent.getEventStatus().equals(command));
-                j.setEnabled(true);
-            }
-        }
+        eventAttendancePanel.resetGroup(selectedEvent);
     }
 
     /*
       Initialize upper part of panel
      */
     private JPanel upperInit() {
-        JPanel upper = new JPanel();
-        GridLayout layout = new GridLayout(6, 2);
-        upper.setLayout(layout);
+        JPanel upper = new JPanel(new GridLayout(4, 2));
 
         JLabel title = new JLabel("Otsikko");
         JLabel date = new JLabel("Pvm");
@@ -123,40 +110,22 @@ public class EventStatsPanel2 extends JPanel implements ListSelectionListener {
     }
 
     private JPanel lowerInit() {
-        JPanel lower = new JPanel();
-        lower.setBorder(javax.swing.BorderFactory.createTitledBorder("Osallistutko / osallistuitko tapahtumaan"));
+        Ac[] buttonIds = {Ac.CONFIRMED, Ac.CANCELLED, Ac.TENTATIVE};
+        eventAttendancePanel = new EventAttendancePanel(buttonIds, "Osallistutko / osallistuitko tapahtumaan", eventAttendance);
 
-        attendYes = new JRadioButton("Kyllä");
-        attendYes.setActionCommand(Ac.CONFIRMED.name());
-        attendYes.setEnabled(selectedEvent != null);
-        attendNo = new JRadioButton("Ei");
-        attendNo.setActionCommand(Ac.CANCELLED.name());
-        attendNo.setEnabled(selectedEvent != null);
-        attendMaybe = new JRadioButton("Harkitsen");
-        attendMaybe.setActionCommand(Ac.TENTATIVE.name());
-        attendMaybe.setEnabled(selectedEvent != null);
-
-        attendYes.addActionListener(eventStatusListener);
-        attendNo.addActionListener(eventStatusListener);
-        attendMaybe.addActionListener(eventStatusListener);
-
-        lower.add(attendMaybe);
-        lower.add(attendYes);
-        lower.add(attendNo);
-
-        ButtonGroup eventStatusGroup = new ButtonGroup();
-        eventStatusGroup.add(attendMaybe);
-        eventStatusGroup.add(attendYes);
-        eventStatusGroup.add(attendNo);
-
-        return lower;
+        return eventAttendancePanel;
     }
 
     @Override
     public void valueChanged(ListSelectionEvent lse) {
         JList eventList = (JList) lse.getSource();
-        Event selection = (Event) eventList.getSelectedValue();        
-        resetEvent(selection);
+        if (eventList.getSelectedIndices().length > 1) {
+            resetEvent(null);
+        } else {
+            Event selection = (Event) eventList.getSelectedValue();
+            resetEvent(selection);
+        }
+
 //        System.out.println("EventStatsPanel2 " + eventList);
 //        System.out.println(eventList.getModel());
     }
