@@ -22,9 +22,9 @@ import workloadstats.utils.PropId;
 import workloadstats.ui.NewEventPanel;
 
 /**
- * Button listener for data model modification buttons Track user's selection on
- * both CourseList and EventList, allow data model modification only when 1
- * course and 1 event are selected.
+ * ActionListener for data model modification buttons. 
+ * ListSelectionListener to track user's selection on both CourseList and EventList.
+ * Allows data model modification only when 1 course and 1 event are selected.
  *
  * When user takes action, suitable dialog is shown to get input from the user.
  * If information is valid, data model is modified, else user gets an error
@@ -32,7 +32,7 @@ import workloadstats.ui.NewEventPanel;
  *
  * @author Ilkka
  */
-public class CalendarEventButtonListener implements ActionListener, ListSelectionListener {
+public class CalendarEventListener implements ActionListener, ListSelectionListener {
 
     private Container container;
     private CourseListModel clmodel;
@@ -42,7 +42,7 @@ public class CalendarEventButtonListener implements ActionListener, ListSelectio
     private List<JButton> buttons;
     private JList courseList;
 
-    public CalendarEventButtonListener(Container cntr, JList crsList, EventListModel elm, List<JButton> btns) {
+    public CalendarEventListener(Container cntr, JList crsList, EventListModel elm, List<JButton> btns) {
         this.container = cntr;
         this.courseList = crsList;
         this.clmodel = (CourseListModel) crsList.getModel();
@@ -152,7 +152,7 @@ public class CalendarEventButtonListener implements ActionListener, ListSelectio
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(container, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(CalendarEventButtonListener.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CalendarEventListener.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -198,7 +198,7 @@ public class CalendarEventButtonListener implements ActionListener, ListSelectio
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(container, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(CalendarEventButtonListener.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CalendarEventListener.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }

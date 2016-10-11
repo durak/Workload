@@ -181,22 +181,6 @@ public class Main {
 
 
 
-
-
-        List<Course> a = gui.testaustaVartenKurssitUlosGuista();
-        List<Event> evs = new ArrayList<>();
-        for (Course course : a) {
-            evs.addAll(course.getAllEvents());            
-        }
-        EventListAnalysis ela = new EventListAnalysis(evs);
-//        System.out.println(ela.getTotalDuration());
-        System.out.println(ela.getStatusTotalDuration(StatusType.TENTATIVE));
-        System.out.println(ela.getStatusTotalDuration(StatusType.CONFIRMED));
-        System.out.println(ela.getEventTypeTotalDuration(EventType.EXERCISE));
-        System.out.println(ela.getEventTypeTotalDuration(EventType.LECTURE));
-//        System.out.println(ela.getTimespan());
-
-
     }
     
 

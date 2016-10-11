@@ -115,10 +115,15 @@ public class EventListAnalysis {
     }
 
     private String minutesToHoursAndMinutes(Long l) {
+        if (l == 0) {
+            return "-";
+        }
+        
         int h = (int) (l / 60);
         int m = (int) (l % 60);
         String hours = String.format("%02d", h);
         String minutes = String.format("%02d", m);
+        
 
         return hours + ":" + minutes;
     }

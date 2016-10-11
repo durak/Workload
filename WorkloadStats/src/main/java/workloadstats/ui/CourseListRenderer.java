@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workloadstats.ui;
 
 import java.awt.Component;
@@ -12,7 +7,7 @@ import javax.swing.ListCellRenderer;
 import workloadstats.domain.model.Course;
 
 /**
- * Custom renderer for CourseListPanel (a Jlist of Courses)
+ * Custom renderer for JList of courses
  * @author Ilkka
  */
 public class CourseListRenderer extends JLabel implements ListCellRenderer<Course> {

@@ -46,22 +46,20 @@ public class EventListModel extends AbstractListModel implements ListSelectionLi
         fireContentsChanged(this, 0, getSize());
     }
 
-    
-    
     public void removeEvent(Event ev) {
         System.out.println(ev);
         this.course.removeEvent(ev);
         fireContentsChanged(this, 0, getSize());
     }
-    
+
     public List<Event> getEvents() {
         return events;
     }
 
     /**
      * A bit complicated process: Listens to ListSelectionEvents from
-     * CourseListModel, and updates this model with events. User can freely select any
-     * number of courses to add.
+     * CourseListModel, and updates this model with events. User can freely
+     * select any number of courses to add.
      *
      * @param lse
      */
@@ -70,34 +68,17 @@ public class EventListModel extends AbstractListModel implements ListSelectionLi
         JList courseList = (JList) lse.getSource();
         int[] selectedIndices = courseList.getSelectedIndices();
         List<Event> newCollectionOfEventsToShow = new ArrayList<>();
-        
+
         //Add all events from courses the user has selected
         for (int i = 0; i < selectedIndices.length; i++) {
             Course oneOfSelected = (Course) clm.getElementAt(selectedIndices[i]);
             newCollectionOfEventsToShow.addAll(oneOfSelected.getAllEvents());
         }
-        
+
         //Sort events chronologically
         Collections.sort(newCollectionOfEventsToShow, new EventComparatorChronological());
         events = newCollectionOfEventsToShow;
         fireContentsChanged(this, 0, getSize());
     }
-
-//    @Override
-//    public void intervalAdded(ListDataEvent lde) {
-//        System.out.println("Interval added \n" + lde.toString());
-//    }
-//
-//    @Override
-//    public void intervalRemoved(ListDataEvent lde) {
-//        System.out.println("Interval removed \n" + lde.toString());
-//    }
-//
-//    @Override
-//    public void contentsChanged(ListDataEvent lde) {
-//        System.out.println("contents changed \n" + lde.toString());
-////        fireContentsChanged(this, 0, getSize());
-//    }
-
 
 }

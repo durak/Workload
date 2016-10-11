@@ -35,7 +35,13 @@ public class EventInformationPanel extends JPanel implements ListSelectionListen
 
     private EventAttendancePanel eventAttendancePanel;
     private EventAttendanceListener eventAttendance;
-
+    
+    
+    /**
+     * Panel for current Event list selection information
+     * Uses EventAttendance panel & EventAttendanceListener for attendance input from the user
+     * If selection size > 1, everything is disabled;
+     */
     public EventInformationPanel() {
         eventAttendance = new EventAttendanceListener();
         selectedEvent = null;
@@ -47,9 +53,6 @@ public class EventInformationPanel extends JPanel implements ListSelectionListen
         this.setBorder(javax.swing.BorderFactory.createTitledBorder("Kalenterimerkinnän tiedot"));
         BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
         this.setLayout(layout);
-        Dimension size = new Dimension(400, 500);
-//        this.setMaximumSize(size);
-//        this.setMinimumSize(size);
 
         this.add(upperInit());
         this.add(lowerInit());
@@ -119,7 +122,11 @@ public class EventInformationPanel extends JPanel implements ListSelectionListen
 
         return eventAttendancePanel;
     }
-
+    
+    /**
+     * Listen to selection changes in the Event List
+     * @param lse 
+     */
     @Override
     public void valueChanged(ListSelectionEvent lse) {
         JList eventList = (JList) lse.getSource();

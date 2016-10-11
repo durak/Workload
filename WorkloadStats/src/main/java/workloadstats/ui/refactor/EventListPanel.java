@@ -24,9 +24,8 @@ public class EventListPanel extends JPanel implements ListDataListener {
     private List<Event> events;
     private JList eventList;
 
-
     public EventListPanel(JList eventList) {
-        
+
         this.eventList = eventList;
         initPanelComponents();
     }
@@ -37,25 +36,29 @@ public class EventListPanel extends JPanel implements ListDataListener {
         this.setLayout(layout);
         JScrollPane scrollPane = new JScrollPane(eventList);
         add(scrollPane);
-        
-//        eventList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);        
-        eventList.setCellRenderer(new EventRenderer());        
+
+        //eventList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);   
+        // Set custom renderer for event list
+        eventList.setCellRenderer(new EventRenderer());
     }
 
     /**
-     * ListDataListener
-     * Listen to changes in the underlying course data model
+     * ListDataListener Listen to changes in the underlying course data model
+     * Only function is to clear event list selections in case the course
+     * data model changes.
      *
      * @param lde
      */
     @Override
     public void intervalAdded(ListDataEvent lde) {
-        System.out.println("Interval added \n" + lde.toString());
+//        System.out.println("Interval added \n" + lde.toString());
     }
+
     @Override
     public void intervalRemoved(ListDataEvent lde) {
-        System.out.println("Interval removed \n" + lde.toString());
+//        System.out.println("Interval removed \n" + lde.toString());
     }
+
     @Override
     public void contentsChanged(ListDataEvent lde) {
         eventList.clearSelection();
