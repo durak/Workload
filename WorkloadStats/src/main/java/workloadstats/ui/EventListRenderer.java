@@ -10,9 +10,9 @@ import workloadstats.domain.model.Event;
  * Custom rendered for a JList of events
  * @author Ilkka
  */
-public class EventRenderer extends JLabel implements ListCellRenderer<Event> {
+public class EventListRenderer extends JLabel implements ListCellRenderer<Event> {
 
-    public EventRenderer() {
+    public EventListRenderer() {
         setOpaque(true);
     }
 

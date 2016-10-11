@@ -14,22 +14,22 @@ import javax.swing.JTextField;
  * the user needs to answer.
  * @author Ilkka
  */
-public class NewEventPanel extends JPanel {
+public class UserInputPanel extends JPanel {
 
     private PropId[] userInputNeeded;
     private Map<PropId, JTextField> panelFields;
     
 
-    public NewEventPanel(PropId[] userInputNeeded, String title) {
+    public UserInputPanel(PropId[] userInputNeeded, String title) {
         this.setBorder(javax.swing.BorderFactory.createTitledBorder(title));
         setLayout(new GridLayout(6, 2));
         this.userInputNeeded = userInputNeeded;
         panelFields = new HashMap<>();
 
-        for (PropId evPropId : userInputNeeded) {
-            panelFields.put(evPropId, new JTextField(10));
-            add(new JLabel(evPropId.getDescr()));
-            add(panelFields.get(evPropId));
+        for (PropId id : userInputNeeded) {
+            panelFields.put(id, new JTextField(10));
+            add(new JLabel(id.getDescr()));
+            add(panelFields.get(id));
         }
     }
 
@@ -44,10 +44,9 @@ public class NewEventPanel extends JPanel {
      */
     public Map getValues() {
         Map<PropId, String> values = new HashMap<>();
-        for (PropId evPropId : userInputNeeded) {
-            values.put(evPropId, panelFields.get(evPropId).getText());
+        for (PropId id : userInputNeeded) {
+            values.put(id, panelFields.get(id).getText());
         }
         return values;
     }
-
 }

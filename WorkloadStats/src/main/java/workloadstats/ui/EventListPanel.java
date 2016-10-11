@@ -1,4 +1,4 @@
-package workloadstats.ui.refactor;
+package workloadstats.ui;
 
 import java.util.List;
 import javax.swing.BoxLayout;
@@ -10,7 +10,7 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
-import workloadstats.ui.EventRenderer;
+import workloadstats.ui.EventListRenderer;
 
 /**
  *
@@ -39,7 +39,7 @@ public class EventListPanel extends JPanel implements ListDataListener {
 
         //eventList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);   
         // Set custom renderer for event list
-        eventList.setCellRenderer(new EventRenderer());
+        eventList.setCellRenderer(new EventListRenderer());
     }
 
     /**

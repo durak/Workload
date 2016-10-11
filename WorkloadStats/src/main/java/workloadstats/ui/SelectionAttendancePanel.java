@@ -12,14 +12,14 @@ import workloadstats.utils.Ac;
  * Radiobuttonpanel for event attendance status changes
  * @author Ilkka
  */
-public class EventAttendancePanel extends JPanel {
+public class SelectionAttendancePanel extends JPanel {
     
     private Ac[] buttonIds;
     private List<JRadioButton> buttons;
     private ButtonGroup group;
-    private EventAttendanceListener esl;
+    private SelectionAttendanceListener esl;
 
-    public EventAttendancePanel(Ac[] buttonIds, String title, EventAttendanceListener esl) {
+    public SelectionAttendancePanel(Ac[] buttonIds, String title, SelectionAttendanceListener esl) {
         this.setBorder(javax.swing.BorderFactory.createTitledBorder(title));
         this.buttonIds = buttonIds;
         this.esl = esl;

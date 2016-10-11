@@ -9,11 +9,11 @@ import workloadstats.domain.model.Event;
  * Change selected event's attendance status
  * @author Ilkka
  */
-public class EventAttendanceListener implements ActionListener {
+public class SelectionAttendanceListener implements ActionListener {
 
     private Event event;
     
-    public EventAttendanceListener() {        
+    public SelectionAttendanceListener() {        
     }
     
     public void setEvent(Event ev) {

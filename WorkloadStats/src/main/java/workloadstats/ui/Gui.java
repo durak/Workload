@@ -15,11 +15,6 @@ import javax.swing.WindowConstants;
 import workloadstats.calendardata.hycalendar.HyCalendarControl;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Course;
-import workloadstats.ui.refactor.CalendarEventListener;
-import workloadstats.ui.refactor.CourseListPanel;
-import workloadstats.ui.refactor.EventListModel;
-import workloadstats.ui.refactor.EventListPanel;
-import workloadstats.ui.refactor.EventInformationPanel;
 import workloadstats.utils.Ac;
 
 /**
@@ -66,7 +61,7 @@ public class Gui implements Runnable {
         eventList.setName("eventlist");
         
         // Initialize CourseListPanel and EventListPanel
-        CourseListPanel courseListPanel = new CourseListPanel(courseList, clm, elm);
+        CourseListPanel courseListPanel = new CourseListPanel(courseList);
         EventListPanel middleEventListPanel = new EventListPanel(eventList);
 
         // Initialize Main menu
@@ -79,9 +74,9 @@ public class Gui implements Runnable {
         ButtonsPanel buttonsPanel = new ButtonsPanel(eventButtons, "Toiminnot");
         buttonsPanel.setMaximumSize(new Dimension(400, 20));
         
-        // Initialize Selection Statistics & Event Information panels
+        // Initialize Selection Statistics & Selection Information panels
         SelectionStatsPanel selectionStatsPanel = new SelectionStatsPanel(elm);
-        EventInformationPanel eventInfoPanel = new EventInformationPanel();
+        SelectionInformationPanel eventInfoPanel = new SelectionInformationPanel();
         
         
         /*
@@ -92,10 +87,12 @@ public class Gui implements Runnable {
          *   -> Calendar buttons (ActionListener)
          *  SelectionStatsPanel
          *   -> EventList (ListSelectionListener)
-         *  EventInformationPanel
+         *  SelectionInformationPanel
          *   -> EventList (ListSelectionListener)
          *  EventListPanel
          *   -> EventListModel (ListDataListener)
+         *  EventDataModel
+         *   -> CourseList (ListSelectionListener)
          */
         
         CalendarEventListener calEvButLstr = new CalendarEventListener(container, courseList, elm, buttonsPanel.getButtons());
@@ -105,7 +102,7 @@ public class Gui implements Runnable {
         eventList.addListSelectionListener(selectionStatsPanel);
         eventList.addListSelectionListener(eventInfoPanel);
         elm.addListDataListener(middleEventListPanel);
-        
+        courseList.addListSelectionListener(elm);
         
         // Construct user interface with initialized parts
         JPanel west = new JPanel();

@@ -1,4 +1,4 @@
-package workloadstats.ui.refactor;
+package workloadstats.ui;
 
 import workloadstats.ui.CourseListModel;
 import javax.swing.BoxLayout;
@@ -16,13 +16,9 @@ import workloadstats.ui.CourseListRenderer;
 public class CourseListPanel extends JPanel {
     
     private JList courseList;
-    private CourseListModel clm;
-    private EventListModel elm;   
     private Course selectedCourse;
 
-    public CourseListPanel(JList courseList, CourseListModel clm, EventListModel elm) {
-        this.clm = clm;
-        this.elm = elm;     
+    public CourseListPanel(JList courseList) {        
         this.courseList = courseList;
         initComponents();
     }
@@ -32,7 +28,6 @@ public class CourseListPanel extends JPanel {
         BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
         this.setLayout(layout);        
         
-        courseList.addListSelectionListener(elm);
         courseList.setCellRenderer(new CourseListRenderer());
         JScrollPane scrollPane = new JScrollPane(courseList);                               
         add(scrollPane);

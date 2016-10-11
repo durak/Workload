@@ -9,8 +9,9 @@ import javax.swing.JPanel;
 import workloadstats.utils.Ac;
 
 /**
+ * Generic button panel creator
  * Create a panel of buttons with array of Ac enums.
- * Button text if Ac.value and actionCommand Ac.name
+ * Button text is Ac.value and actionCommand is Ac.name
  * @author Ilkka
  */
 public class ButtonsPanel extends JPanel {

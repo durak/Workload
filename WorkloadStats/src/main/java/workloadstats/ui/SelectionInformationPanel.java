@@ -1,4 +1,4 @@
-package workloadstats.ui.refactor;
+package workloadstats.ui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -10,16 +10,19 @@ import javax.swing.JRadioButton;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import workloadstats.domain.model.Event;
-import workloadstats.ui.EventAttendancePanel;
-import workloadstats.ui.EventAttendanceListener;
+import workloadstats.ui.SelectionAttendancePanel;
+import workloadstats.ui.SelectionAttendanceListener;
 import workloadstats.utils.Ac;
 import workloadstats.utils.EventUtility;
 
 /**
+ * Panel for current Event list selection information 
+ * Uses EventAttendance panel & SelectionAttendanceListener for attendance input from the user.
+ * If selection size > 1, everything is disabled;
  *
  * @author Ilkka
  */
-public class EventInformationPanel extends JPanel implements ListSelectionListener {
+public class SelectionInformationPanel extends JPanel implements ListSelectionListener {
 
     private Event selectedEvent;
 
@@ -33,17 +36,12 @@ public class EventInformationPanel extends JPanel implements ListSelectionListen
     private JRadioButton attendNo;
     private JRadioButton attendMaybe;
 
-    private EventAttendancePanel eventAttendancePanel;
-    private EventAttendanceListener eventAttendance;
-    
-    
-    /**
-     * Panel for current Event list selection information
-     * Uses EventAttendance panel & EventAttendanceListener for attendance input from the user
-     * If selection size > 1, everything is disabled;
-     */
-    public EventInformationPanel() {
-        eventAttendance = new EventAttendanceListener();
+    private SelectionAttendancePanel eventAttendancePanel;
+    private SelectionAttendanceListener eventAttendance;
+
+
+    public SelectionInformationPanel() {
+        eventAttendance = new SelectionAttendanceListener();
         selectedEvent = null;
 
         initPanelComponents();
@@ -118,14 +116,15 @@ public class EventInformationPanel extends JPanel implements ListSelectionListen
 
     private JPanel lowerInit() {
         Ac[] buttonIds = {Ac.CONFIRMED, Ac.CANCELLED, Ac.TENTATIVE};
-        eventAttendancePanel = new EventAttendancePanel(buttonIds, "Osallistutko / osallistuitko tapahtumaan", eventAttendance);
+        eventAttendancePanel = new SelectionAttendancePanel(buttonIds, "Osallistutko / osallistuitko tapahtumaan", eventAttendance);
 
         return eventAttendancePanel;
     }
-    
+
     /**
      * Listen to selection changes in the Event List
-     * @param lse 
+     *
+     * @param lse
      */
     @Override
     public void valueChanged(ListSelectionEvent lse) {

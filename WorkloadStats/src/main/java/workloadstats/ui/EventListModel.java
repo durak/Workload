@@ -1,4 +1,4 @@
-package workloadstats.ui.refactor;
+package workloadstats.ui;
 
 import workloadstats.ui.CourseListModel;
 import edu.emory.mathcs.backport.java.util.Collections;

@@ -1,4 +1,4 @@
-package workloadstats.ui.refactor;
+package workloadstats.ui;
 
 import workloadstats.ui.CourseListModel;
 import java.awt.Container;
@@ -19,7 +19,7 @@ import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.utils.Ac;
 import workloadstats.utils.PropId;
-import workloadstats.ui.NewEventPanel;
+import workloadstats.ui.UserInputPanel;
 
 /**
  * ActionListener for data model modification buttons. 
@@ -138,7 +138,7 @@ public class CalendarEventListener implements ActionListener, ListSelectionListe
     private void newCourseAction() {
         // Create dialog to prompt user for input on needed PropIds
         PropId[] userInputNeeded = {PropId.COURSENAME, PropId.DATE};
-        NewEventPanel newCoursePanel = new NewEventPanel(userInputNeeded, "Uuden kurssin tiedot");
+        UserInputPanel newCoursePanel = new UserInputPanel(userInputNeeded, "Uuden kurssin tiedot");
         int choice = JOptionPane.showConfirmDialog(container, newCoursePanel,
                 "Syötä uusi kurssi", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
@@ -183,7 +183,7 @@ public class CalendarEventListener implements ActionListener, ListSelectionListe
             PropId.EVENTTYPE, PropId.DATE, PropId.STARTTIME,
             PropId.ENDTIME, PropId.STATUS};
 
-        NewEventPanel newEventPanel = new NewEventPanel(neededAnswers, "Uuden tapahtuman tiedot");
+        UserInputPanel newEventPanel = new UserInputPanel(neededAnswers, "Uuden tapahtuman tiedot");
         int choice = JOptionPane.showConfirmDialog(container, newEventPanel,
                 "Syötä uusi tapahtuma", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         
@@ -212,7 +212,7 @@ public class CalendarEventListener implements ActionListener, ListSelectionListe
         // Fetch toBeDeleted courses from data model
         for (int i = 0; i < oldSize; i++) {
             Event del = (Event) elmodel.getElementAt(oldSelection[i]);
-            int choice = JOptionPane.showConfirmDialog(container, "Haluatko varmasti poistaa tapahtuman?\n" + del.getEventName(),
+            int choice = JOptionPane.showConfirmDialog(container, "Haluatko varmasti poistaa tapahtuman?\n" + del.getStartDateString() + " " + del.getEventName(),
                     "Huomio!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             if (choice == JOptionPane.OK_OPTION) {
                 toBeDeleted.add(del);
