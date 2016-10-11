@@ -121,7 +121,7 @@ public abstract class Event extends VEvent {
     /**
      * Get event's status as a string
      *
-     * @return String of status, possible values CONFIRMED or TENTATIVE
+     * @return String of status, possible values CONFIRMED, CANCELLED or TENTATIVE
      */
     public String getEventStatus() {
         if (this.getProperty(Property.STATUS) == null) {

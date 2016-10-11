@@ -26,7 +26,7 @@ public class EventUtility {
      * @param event
      * @return duration in minutes
      */
-    public static long getDuration(VEvent event) {
+    public static long getDuration(Event event) {
         Instant start = event.getStartDate().getDate().toInstant();
         Instant end = event.getEndDate().getDate().toInstant();
         
@@ -42,10 +42,10 @@ public class EventUtility {
      */
     public static long getSumOfDurations(List<Event> events) {
         long sum = 0;
-        for (VEvent event : events) {
+        for (Event event : events) {
             sum += getDuration(event);
         }
         return sum;
-    }    
+    }            
 
 }

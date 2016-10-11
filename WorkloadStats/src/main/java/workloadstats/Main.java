@@ -6,20 +6,32 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import javax.swing.SwingUtilities;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.DateTime;
+import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.ValidationException;
+import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.property.Categories;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.calendardata.mycalendar.MyCalendarParser;
 import workloadstats.calendardata.CalendarBuilderImpl;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
+import workloadstats.domain.model.EventType;
+import workloadstats.domain.model.Exercise;
 import workloadstats.ui.Gui;
+import workloadstats.utils.EventListAnalysis;
 import workloadstats.utils.EventUtility;
+import workloadstats.utils.StatusType;
 
 /**
  *
@@ -35,7 +47,6 @@ public class Main {
         Boolean test = false;
         Boolean test2 = false;
 
-        
         File calendarFile = new File("mycalendar2.ics");
         FileInputStream my = new FileInputStream(calendarFile);
         CalendarBuilderImpl builder = new CalendarBuilderImpl();
@@ -166,6 +177,28 @@ public class Main {
 //        System.out.println(e.equals(clm.getElementAt(0)));
 //        System.out.println(e);
 //        elm.removeEvent(e);
+        
+
+
+
+
+
+        List<Course> a = gui.testaustaVartenKurssitUlosGuista();
+        List<Event> evs = new ArrayList<>();
+        for (Course course : a) {
+            evs.addAll(course.getAllEvents());            
+        }
+        EventListAnalysis ela = new EventListAnalysis(evs);
+//        System.out.println(ela.getTotalDuration());
+        System.out.println(ela.getStatusTotalDuration(StatusType.TENTATIVE));
+        System.out.println(ela.getStatusTotalDuration(StatusType.CONFIRMED));
+        System.out.println(ela.getEventTypeTotalDuration(EventType.EXERCISE));
+        System.out.println(ela.getEventTypeTotalDuration(EventType.LECTURE));
+//        System.out.println(ela.getTimespan());
+
+
     }
+    
+
 
 }

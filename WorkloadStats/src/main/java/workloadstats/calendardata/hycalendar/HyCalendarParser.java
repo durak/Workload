@@ -17,7 +17,7 @@ import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Summary;
 import workloadstats.domain.model.Event;
-import workloadstats.domain.model.Uncategorized;
+import workloadstats.domain.model.Trash;
 
 /**
  * Parser functions for imported University calendar data
@@ -70,7 +70,7 @@ public class HyCalendarParser {
         for (Iterator i = calendar.getComponents(Component.VEVENT).iterator(); i.hasNext();) {
             Component component = (Component) i.next();
             VEvent ve = (VEvent) component;
-            Uncategorized un = new Uncategorized(ve);
+            Trash un = new Trash(ve);
 
             allEvents.add(un);
         }

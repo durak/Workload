@@ -16,7 +16,7 @@ import workloadstats.ui.EventRenderer;
  *
  * @author Ilkka
  */
-public class EventListPanel2 extends JPanel implements ListDataListener {
+public class EventListPanel extends JPanel implements ListDataListener {
 
     private Course selectedCourse;
     private Event selectedEvent;
@@ -24,10 +24,9 @@ public class EventListPanel2 extends JPanel implements ListDataListener {
     private List<Event> events;
     private JList eventList;
 
-    private EventListModel elm;
 
-    public EventListPanel2(JList eventList) {
-        this.elm = elm;
+    public EventListPanel(JList eventList) {
+        
         this.eventList = eventList;
         initPanelComponents();
     }
@@ -61,8 +60,8 @@ public class EventListPanel2 extends JPanel implements ListDataListener {
     public void contentsChanged(ListDataEvent lde) {
         eventList.clearSelection();
 
-        System.out.println("contents changed \n" + lde.toString());
-        System.out.println("eventListPanel2 " + lde.getSource());
+//        System.out.println("contents changed \n" + lde.toString());
+//        System.out.println("eventListPanel2 " + lde.getSource());
     }
 
 }

@@ -5,16 +5,17 @@ import workloadstats.domain.model.Event;
 import net.fortuna.ical4j.model.component.VEvent;
 
 /**
- * Uncategorized calendar event
+ * Calendar VEvent identified as TRASH and not belonging to our data model.
+ * 
  * @author Ilkka
  */
-public class Uncategorized extends Event {
+public class Trash extends Event {
     
-    public Uncategorized(VEvent ve) {
+    public Trash(VEvent ve) {
         super(ve);
     }
     
-    public Uncategorized(PropertyList pl) {
+    public Trash(PropertyList pl) {
         super(pl);
     }
     

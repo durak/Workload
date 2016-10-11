@@ -13,7 +13,6 @@ import net.fortuna.ical4j.model.property.Categories;
 import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStamp;
 import net.fortuna.ical4j.model.property.DtStart;
-import static net.fortuna.ical4j.model.property.Status.VEVENT_TENTATIVE;
 import net.fortuna.ical4j.model.property.Summary;
 import net.fortuna.ical4j.util.UidGenerator;
 import workloadstats.domain.model.Course;

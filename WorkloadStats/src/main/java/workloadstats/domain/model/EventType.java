@@ -1,6 +1,5 @@
 package workloadstats.domain.model;
 
-import java.util.EnumSet;
 
 
 /**

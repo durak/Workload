@@ -9,12 +9,12 @@ import javax.swing.JPanel;
 import workloadstats.utils.Ac;
 
 /**
- * Create a panel for possible calendar event changes by the user
+ * Create a panel of buttons with array of Ac enums.
+ * Button text if Ac.value and actionCommand Ac.name
  * @author Ilkka
  */
 public class ButtonsPanel extends JPanel {
-
-    private CalendarEventButtonListener cebl;
+    
     private Ac[] buttonIds;
     private List<JButton> buttons;
 

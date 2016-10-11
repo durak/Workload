@@ -1,12 +1,11 @@
 package workloadstats.ui.refactor;
 
+import workloadstats.ui.CourseListModel;
 import edu.emory.mathcs.backport.java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.JList;
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import workloadstats.domain.model.Course;
@@ -47,10 +46,16 @@ public class EventListModel extends AbstractListModel implements ListSelectionLi
         fireContentsChanged(this, 0, getSize());
     }
 
+    
+    
     public void removeEvent(Event ev) {
         System.out.println(ev);
         this.course.removeEvent(ev);
         fireContentsChanged(this, 0, getSize());
+    }
+    
+    public List<Event> getEvents() {
+        return events;
     }
 
     /**

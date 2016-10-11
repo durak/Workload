@@ -19,7 +19,7 @@ import workloadstats.domain.model.Exercise;
 import workloadstats.domain.model.Lecture;
 import workloadstats.domain.model.Personal;
 import workloadstats.domain.model.Teamwork;
-import workloadstats.domain.model.Uncategorized;
+import workloadstats.domain.model.Trash;
 
 /**
  * Parser for programs own calendar data & domain model object builder
@@ -63,6 +63,10 @@ public class MyCalendarParser {
         return courseWithUid.get(uid);
     }
 
+    /**
+     * Initialize storage map with known EventTypes in data model.
+     * @return 
+     */
     private Map<EventType, List<Event>> initializeEventsMap() {
         Map<EventType, List<Event>> evpt = new HashMap<>();
         EnumSet<EventType> set = EnumSet.allOf(EventType.class);
@@ -71,7 +75,12 @@ public class MyCalendarParser {
         }
         return evpt;
     }
-
+    
+    /**
+     * Iterate all calendar VEvents found in the subject calendar.
+     * Identify Events as model objects and store them in a Map
+     * with EventType as key
+     */
     private void allEvents() {
 
         for (Iterator i = calendar.getComponents(Component.VEVENT).iterator(); i.hasNext();) {
@@ -104,7 +113,7 @@ public class MyCalendarParser {
                     eventsPerType.get(t).add(iNeedAHome);
                     break;
                 case TRASH:
-                    iNeedAHome = new Uncategorized(ve);
+                    iNeedAHome = new Trash(ve);
                     eventsPerType.get(t).add(iNeedAHome);
                     break;
             }
@@ -112,7 +121,15 @@ public class MyCalendarParser {
         }
 
     }
-
+    /**
+     * Helper method for AllEvents()
+     * Identify raw calendar VEvent with model EventType
+     * Match is based on event type information saved in Categories property of the 
+     * calendar event. If calendar VEvent is not identified as model object, it is 
+     * identified as TRASH.
+     * @param unidentifiedEvent raw calendar VEvent
+     * @return EventType enum for identified model object.
+     */
     private EventType eventIdentifier(VEvent unidentifiedEvent) {
         EnumSet<EventType> set = EnumSet.allOf(EventType.class);
         EventType search = EventType.TRASH;
@@ -128,7 +145,10 @@ public class MyCalendarParser {
 
         return search;
     }
-
+    /**
+     * Identified model object Events are added to their parent Courses.
+     * Unidentified TRASH is discarded.
+     */
     private void addEventstoCourses() {
         for (EventType eventType : eventsPerType.keySet()) {
             List<Event> li = eventsPerType.get(eventType);

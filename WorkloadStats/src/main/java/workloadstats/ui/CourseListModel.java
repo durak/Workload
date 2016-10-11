@@ -1,4 +1,4 @@
-package workloadstats.ui.refactor;
+package workloadstats.ui;
 
 import java.util.List;
 import javax.swing.AbstractListModel;
@@ -6,7 +6,7 @@ import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 
 /**
- * Model for courselist
+ * Data Model for courselist, connects domain objects with the user interface
  *
  * @author Ilkka
  */
@@ -37,11 +37,12 @@ public class CourseListModel extends AbstractListModel {
     }
 
     public void removeCourse(Course course) {
+        int index = courses.indexOf(course);
         boolean removed = this.courses.remove(course);
         if (removed) {
             fireContentsChanged(this, 0, getSize());
         }
-        int index = courses.indexOf(course);
+        
         if (index >= 0) {
             fireIntervalRemoved(this, index, index);
         }
@@ -57,10 +58,12 @@ public class CourseListModel extends AbstractListModel {
 
     public void addEvent(int i, Event event) {
         courses.get(i).addEvent(event);
+        fireContentsChanged(this, 0, getSize());
     }
 
     public void removeEvent(int i, Event event) {
         courses.get(i).removeEvent(event);
+        fireContentsChanged(this, 0, getSize());
     }
 
 }

@@ -1,5 +1,6 @@
 package workloadstats.ui.refactor;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -46,6 +47,9 @@ public class EventInformationPanel extends JPanel implements ListSelectionListen
         this.setBorder(javax.swing.BorderFactory.createTitledBorder("Kalenterimerkinnän tiedot"));
         BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
         this.setLayout(layout);
+        Dimension size = new Dimension(400, 500);
+//        this.setMaximumSize(size);
+//        this.setMinimumSize(size);
 
         this.add(upperInit());
         this.add(lowerInit());
@@ -127,7 +131,7 @@ public class EventInformationPanel extends JPanel implements ListSelectionListen
         }
 
 //        System.out.println("EventStatsPanel2 " + eventList);
-//        System.out.println(eventList.getModel());
+//        System.out.println("kukkuu" + eventList.getName());
     }
 
 }

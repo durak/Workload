@@ -17,6 +17,7 @@ import net.fortuna.ical4j.util.UidGenerator;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.domain.model.EventType;
+import workloadstats.domain.model.Exam;
 import workloadstats.domain.model.Exercise;
 import workloadstats.domain.model.Lecture;
 import workloadstats.domain.model.Personal;
@@ -46,13 +47,13 @@ public class EventBuilder {
         Property status = pf.createProperty(Property.STATUS);
         status.setValue(statusValue);
         props.add(status);
-        
+
         EventType search = null;
-        
+
         for (EventType et : EventType.values()) {
             if (et.name().equals(type)) {
                 search = et;
-            }            
+            }
         }
 
         Event iNeedAHome = null;
@@ -72,30 +73,33 @@ public class EventBuilder {
             case TEAMWORK:
                 iNeedAHome = new Teamwork(props);
                 break;
+            case EXAM:
+                iNeedAHome = new Exam(props);
+                break;
         }
 
         return iNeedAHome;
     }
-    
-    public static Event buildNewEvent(Map<PropId, String> userAnswers) throws ParseException, IOException, URISyntaxException {        
+
+    public static Event buildNewEvent(Map<PropId, String> userAnswers) throws ParseException, IOException, URISyntaxException {
         String summary = userAnswers.get(PropId.EVENTNAME);
         String sDate = userAnswers.get(PropId.DATE);
         String sTime = userAnswers.get(PropId.STARTTIME);
         String eTime = userAnswers.get(PropId.ENDTIME);
         String type = userAnswers.get(PropId.EVENTTYPE);
         String status = userAnswers.get(PropId.STATUS);
-        
+        System.out.println(type);
         String startDateTime = sDate + "T" + sTime + "00";
         String endDateTime = sDate + "T" + eTime + "00";
-        
+
         return buildNewEvent(summary, startDateTime, endDateTime, type, status);
     }
-    
+
     public static Course buildNewCourse(Map<PropId, String> userAnswers) throws ParseException, IOException, URISyntaxException {
         String summary = userAnswers.get(PropId.COURSENAME);
         String sDate = userAnswers.get(PropId.DATE);
-        String startDateTime = sDate + "T000000";        
-                
+        String startDateTime = sDate + "T000000";
+
         return (Course) buildNewEvent(summary, startDateTime, startDateTime, EventType.COURSE.name(), "TENTATIVE");
     }
 }
