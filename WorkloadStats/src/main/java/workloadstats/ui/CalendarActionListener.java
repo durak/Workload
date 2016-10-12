@@ -20,9 +20,9 @@ import workloadstats.utils.Ac;
 import workloadstats.utils.PropId;
 
 /**
- * ActionListener for data model modification buttons. 
- * ListSelectionListener to track user's selection on both CourseList and EventList.
- * Allows data model modification only when 1 course and 1 event are selected.
+ * ActionListener for data model modification buttons. ListSelectionListener to
+ * track user's selection on both CourseList and EventList. Allows data model
+ * modification only when 1 course and 1 event are selected.
  *
  * When user takes action, suitable dialog is shown to get input from the user.
  * If information is valid, data model is modified, else user gets an error
@@ -136,18 +136,18 @@ public class CalendarActionListener implements ActionListener, ListSelectionList
     private void newCourseAction() {
         // Create dialog to prompt user for input on needed PropIds
         PropId[] userInputNeeded = {PropId.COURSENAME, PropId.DATE};
-        UserInputPanel2 newCoursePanel = new UserInputPanel2(userInputNeeded, "Uuden kurssin tiedot");
+        UserInputPanel newCoursePanel = new UserInputPanel(userInputNeeded, "Uuden kurssin tiedot");
         int choice = JOptionPane.showConfirmDialog(container, newCoursePanel,
                 "Syötä uusi kurssi", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         // Try to create a new course with user input, if ok insert to datamodel
         if (choice == JOptionPane.OK_OPTION) {
             Map<PropId, String> answers = newCoursePanel.getValues();
-            for (PropId propId : userInputNeeded) {
-                System.out.println(answers.get(propId));
-            }
 
             try {
+                if (EventBuilder.verifyCourseData(answers)) {
+                    throw new Exception("");
+                }
                 Course newCourse = EventBuilder.buildNewCourse(answers);
                 clmodel.addNewCourse(newCourse);
 
@@ -184,15 +184,18 @@ public class CalendarActionListener implements ActionListener, ListSelectionList
             PropId.EVENTTYPE, PropId.DATE, PropId.STARTTIME,
             PropId.ENDTIME, PropId.STATUS};
 
-        UserInputPanel2 newEventPanel = new UserInputPanel2(neededAnswers, "Uuden tapahtuman tiedot");
+        UserInputPanel newEventPanel = new UserInputPanel(neededAnswers, "Uuden tapahtuman tiedot");
         int choice = JOptionPane.showConfirmDialog(container, newEventPanel,
                 "Syötä uusi tapahtuma", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        
+
         // Try to create a new event with user input, if ok insert to datamodel
         if (choice == JOptionPane.OK_OPTION) {
             Map<PropId, String> answers = newEventPanel.getValues();
 
             try {
+                if (EventBuilder.verifyEventData(answers)) {
+                    throw new Exception("");
+                }
                 Event newEvent = EventBuilder.buildNewEvent(answers);
                 clmodel.addEvent(courseSelections[0], newEvent);
                 courseList.setSelectedIndices(courseSelections);
@@ -226,7 +229,7 @@ public class CalendarActionListener implements ActionListener, ListSelectionList
         /*
         Refresh courseList selection, so that eventList will be notified of the
         changes and refresh.
-        */
+         */
         int oldindex = courseSelections[0];
         courseList.clearSelection();
         courseList.setSelectedIndex(oldindex);

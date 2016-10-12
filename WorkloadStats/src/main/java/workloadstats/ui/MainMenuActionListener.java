@@ -5,6 +5,7 @@
  */
 package workloadstats.ui;
 
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -20,8 +21,10 @@ public class MainMenuActionListener implements ActionListener {
 
     private MyCalendarControl myCalendarControl;
     private CourseListModel courseListModel;
+    private Container container;
     
-    public MainMenuActionListener(MyCalendarControl mcc, CourseListModel clm) {
+    public MainMenuActionListener(Container cntr, MyCalendarControl mcc, CourseListModel clm) {
+        this.container = cntr;
         this.myCalendarControl = mcc;
         this.courseListModel = clm;
     }
@@ -35,7 +38,7 @@ public class MainMenuActionListener implements ActionListener {
 
         if (ae.getActionCommand().equals(Ac.LOADCALENDAR.name())) {
             JFileChooser fileChooser = new JFileChooser();
-            int returnValue = fileChooser.showOpenDialog(null);
+            int returnValue = fileChooser.showOpenDialog(container);
             if (returnValue == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
                 System.out.println(selectedFile.getName());

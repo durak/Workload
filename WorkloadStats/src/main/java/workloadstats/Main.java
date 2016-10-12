@@ -7,9 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.TimeZone;
 import javax.swing.SwingUtilities;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.data.ParserException;
@@ -34,8 +37,6 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, IOException, ParserException, URISyntaxException, ParseException, ValidationException {
 
-
-
         List<Course> kurssitForGui = null;
         Calendar calendarTestGui = null;
         Scanner lukija = new Scanner(System.in);
@@ -48,7 +49,6 @@ public class Main {
 //        CalendarBuilderImpl builder = new CalendarBuilderImpl();
 //        Calendar myCal = builder.build(my);
 //        Calendar empty = builder.getCalendar();
-
         MyCalendarControl myCalendarControl = new MyCalendarControl();
 
         Gui gui = new Gui(myCalendarControl);
@@ -110,7 +110,6 @@ public class Main {
 //            }
 //
 //        }
-
 //        JFrame frame = new JFrame("List Model Example");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        frame.setContentPane(new CourseListPanel(kurssitForGui));
@@ -128,7 +127,6 @@ public class Main {
 //        DateTime dt = new DateTime("19980118T230000");
 //
 //        System.out.println(dt);
-
 //        List<Course> kurssit = gui.testaustaVartenKurssitUlosGuista();
 //        Event satunnainen = kurssit.get(0).getAllEvents().get(0);
 //        System.out.println(satunnainen);
@@ -180,6 +178,18 @@ public class Main {
 //        System.out.println(e.equals(clm.getElementAt(0)));
 //        System.out.println(e);
 //        elm.removeEvent(e);
+        String eka = "20161012T025900Z";
+        String toka = "20161012T095900";
+
+        SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
+        sourceFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat destinationFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
+        destinationFormat.setTimeZone(TimeZone.getTimeZone("Europe/Helsinki"));
+        Date dat;
+        dat = sourceFormat.parse(toka);
+        System.out.println(dat);
+        System.out.println(destinationFormat.format(dat));
+        
     }
 
 }

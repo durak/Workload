@@ -89,8 +89,9 @@ public class EventBuilder {
         String type = userAnswers.get(PropId.EVENTTYPE);
         String status = userAnswers.get(PropId.STATUS);
         System.out.println(type);
-        String startDateTime = sDate + "T" + sTime + "00Z";
-        String endDateTime = sDate + "T" + eTime + "00Z";
+        String startDateTime = sDate + "T" + sTime + "00";
+        String endDateTime = sDate + "T" + eTime + "00";
+        endDateTime = DateTools.checkAndCorrectMidnight(startDateTime, endDateTime);
 
         return buildNewEvent(summary, startDateTime, endDateTime, type, status);
     }
@@ -98,13 +99,21 @@ public class EventBuilder {
     public static Course buildNewCourse(Map<PropId, String> userAnswers) throws ParseException, IOException, URISyntaxException {
         String summary = userAnswers.get(PropId.COURSENAME);
         String sDate = userAnswers.get(PropId.DATE);
-        String startDateTime = sDate + "T000000Z";
+        String startDateTime = sDate + "T120000";
 
         return (Course) buildNewEvent(summary, startDateTime, startDateTime, EventType.COURSE.name(), "TENTATIVE");
     }
-    
-    
-        private class HostNfo implements HostInfo {
+
+    public static boolean verifyEventData(Map<PropId, String> userAnswers) {
+        return userAnswers.get(PropId.EVENTNAME).isEmpty();
+    }
+
+    public static boolean verifyCourseData(Map<PropId, String> userAnswers) {
+        return userAnswers.get(PropId.COURSENAME).isEmpty();
+    }
+
+    private class HostNfo implements HostInfo {
+
         @Override
         public String getHostName() {
             return "mynonrealhost";
