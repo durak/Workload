@@ -1,4 +1,4 @@
-package workloadstats.domain.model;
+package workloadstats.utils;
 
 
 

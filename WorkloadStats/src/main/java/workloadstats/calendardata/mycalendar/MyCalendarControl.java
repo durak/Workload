@@ -1,26 +1,13 @@
 package workloadstats.calendardata.mycalendar;
 
-import java.io.IOException;
-import java.net.SocketException;
-import java.net.URISyntaxException;
-import java.text.ParseException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.fortuna.ical4j.model.Calendar;
-import net.fortuna.ical4j.model.Property;
-import net.fortuna.ical4j.model.PropertyFactoryImpl;
-import net.fortuna.ical4j.model.PropertyList;
-import net.fortuna.ical4j.model.property.Categories;
-import net.fortuna.ical4j.model.property.DtEnd;
-import net.fortuna.ical4j.model.property.DtStamp;
-import net.fortuna.ical4j.model.property.DtStart;
-import net.fortuna.ical4j.model.property.Summary;
-import net.fortuna.ical4j.util.UidGenerator;
+import workloadstats.calendardata.CalendarFileManager;
 import workloadstats.domain.model.Course;
-import workloadstats.domain.model.Event;
-import workloadstats.domain.model.EventType;
-import workloadstats.domain.model.Personal;
-import workloadstats.utils.EventUtility;
-
 
 /**
  * Control class for program's own calendar data & domain model object handling
@@ -29,95 +16,48 @@ import workloadstats.utils.EventUtility;
  */
 public class MyCalendarControl {
 
-    private Calendar calendar;
+    private Calendar currentCalendar;
     private List<Course> courses;
     private MyCalendarParser myCalendarParser;
-    private final UidGenerator ug;
-    
-    private Event selectedEvent;
-    private Course selectedCourse;
+    private CalendarFileManager calendarFileManager;
 
-    public MyCalendarControl(Calendar calendar) throws SocketException {
-        this.ug = new UidGenerator("uidGen");
-        this.calendar = calendar;
-        this.myCalendarParser = new MyCalendarParser(calendar);
+    public MyCalendarControl() {
+        this.calendarFileManager = new CalendarFileManager();
+        this.currentCalendar = calendarFileManager.getEmptyCalendar();
+        this.myCalendarParser = new MyCalendarParser(currentCalendar);
         courses = this.myCalendarParser.getCourses();
+        
+        
+    }
 
+    public void initEmptyCalendar() {
+        this.currentCalendar = calendarFileManager.getEmptyCalendar();        
     }
 
     public List<Course> getCourses() {
         return courses;
     }
-
-    /**
-     * Build a new Course event with input from the user
-     *
-     * @param summary
-     * @param startDate
-     * @param endDate
-     * @return
-     * @throws ParseException
-     */
-    public Course buildNewCourse(String summary, String startDate, String endDate) throws ParseException, IOException, URISyntaxException {
-        PropertyFactoryImpl pf = PropertyFactoryImpl.getInstance();
-        PropertyList props = new PropertyList();
-        props.add(new DtStart(startDate));
-        props.add(new DtEnd(endDate));
-        props.add(new DtStamp());
-        props.add(new Summary(summary));
-        props.add(ug.generateUid());
-        props.add(new Categories("COURSE"));
-        Property status = pf.createProperty(Property.STATUS);
-        status.setValue("TENTATIVE");
-        props.add(status);
-        Course newCourse = new Course(props);
-
-        return newCourse;
-    }
-
-    public Personal buildNewPersonal(String summary, String startDate, String endDate, Course parent) throws ParseException, IOException, URISyntaxException {
-        PropertyFactoryImpl pf = PropertyFactoryImpl.getInstance();
-        PropertyList props = new PropertyList();
-        props.add(new DtStart(startDate));
-        props.add(new DtEnd(endDate));
-        props.add(new DtStamp());
-        props.add(new Summary(summary));
-        props.add(ug.generateUid());
-        props.add(new Categories("PERSONAL"));
-        Property status = pf.createProperty(Property.STATUS);
-        status.setValue("CONFIRMED");
-        props.add(status);
-        
-        Personal newPersonal = new Personal(props);
-        parent.parentAnotherEvent(parent);
-        parent.addEvent(newPersonal);
-        
-        return newPersonal;
+    
+    public void updateCalendar() {
+        Calendar updated = calendarFileManager.getEmptyCalendar();
+        for (Course course : courses) {
+            updated.getComponents().add(course);
+            updated.getComponents().addAll(course.getAllEvents());            
+        }
+        currentCalendar = updated;
     }
     
-    public Event buildNewEvent(String summary, String startDate, String endDate, Course parent, EventType eventType) throws ParseException, IOException, URISyntaxException {
-        PropertyFactoryImpl pf = PropertyFactoryImpl.getInstance();
-        PropertyList props = new PropertyList();
-        props.add(new DtStart(startDate));
-        props.add(new DtEnd(endDate));
-        props.add(new DtStamp());
-        props.add(new Summary(summary));
-        props.add(ug.generateUid());
-        props.add(new Categories(eventType.name()));
-        Property status = pf.createProperty(Property.STATUS);
-        status.setValue("CONFIRMED");
-        props.add(status);     
-        
-        return null;
+    public Calendar getCalendar() {
+        return currentCalendar;
+    }
+    
+    public boolean saveCalendar() {
+        try {
+            return calendarFileManager.saveCalendarToFile(currentCalendar);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MyCalendarControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
-    /**
-     * Calculate parameter event's duration in minutes
-     *
-     * @param event
-     * @return Duration in minutes
-     */
-    public long getEventDuration(Event event) {
-        return EventUtility.getDuration(event);
-    }
 }

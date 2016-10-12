@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -48,16 +49,20 @@ public class Gui implements Runnable {
 
     private void initComponent(Container container) {
 
+        List<Course> empty = new ArrayList<>();
+        CourseListModel courseListModel = new CourseListModel(myCalendarControl.getCourses());
+        
+        
         // Initialize Data model
-        CourseListModel clm = new CourseListModel(myCalendarControl.getCourses());
-        EventListModel elm = new EventListModel(clm);
+//        CourseListModel clm = new CourseListModel(myCalendarControl.getCourses());        
+        EventListModel eventListModel = new EventListModel(courseListModel);
 
         // Initialize Course and Event lists with Data models
         // datalistener not needed in current setup
         // clm.addListDataListener(elm);
-        JList courseList = new JList(clm);
+        JList courseList = new JList(courseListModel);
         courseList.setName("courselist");
-        JList eventList = new JList(elm);
+        JList eventList = new JList(eventListModel);
         eventList.setName("eventlist");
         
         // Initialize CourseListPanel and EventListPanel
@@ -66,25 +71,27 @@ public class Gui implements Runnable {
 
         // Initialize Main menu
         Ac[] menuButtons = {Ac.NEWCALENDAR, Ac.LOADCALENDAR, Ac.IMPORTCALENDAR, Ac.SAVECALENDAR};
-        JPanel mainMenu = new ButtonsPanel(menuButtons, "Main menu");
+        ButtonsPanel mainMenu = new ButtonsPanel(menuButtons, "Main menu");        
         mainMenu.setMaximumSize(new Dimension(400, 20));
 
         // Initialize Calendar buttons
         Ac[] eventButtons = {Ac.NEWCOURSE, Ac.DELETECOURSE, Ac.NEWEVENT, Ac.DELETE_EVENT};
-        ButtonsPanel buttonsPanel = new ButtonsPanel(eventButtons, "Toiminnot");
-        buttonsPanel.setMaximumSize(new Dimension(400, 20));
+        ButtonsPanel calendarActionPanel = new ButtonsPanel(eventButtons, "Toiminnot");
+        calendarActionPanel.setMaximumSize(new Dimension(400, 20));
         
         // Initialize Selection Statistics & Selection Information panels
-        SelectionStatsPanel selectionStatsPanel = new SelectionStatsPanel(elm);
+        SelectionStatsPanel selectionStatsPanel = new SelectionStatsPanel(eventListModel);
         SelectionInformationPanel eventInfoPanel = new SelectionInformationPanel();
         
         
         /*
          *  Add listeners:
-         *  CalendarEventListener
+         *  CalendarActionListener
          *   -> Course list (ListSelectionListener)
          *   -> Event list (ListSelectionListener)
          *   -> Calendar buttons (ActionListener)
+         *  MainMenuActionListener
+         *   -> mainMenu
          *  SelectionStatsPanel
          *   -> EventList (ListSelectionListener)
          *  SelectionInformationPanel
@@ -95,21 +102,24 @@ public class Gui implements Runnable {
          *   -> CourseList (ListSelectionListener)
          */
         
-        CalendarEventListener calEvButLstr = new CalendarEventListener(container, courseList, elm, buttonsPanel.getButtons());
+        CalendarActionListener calEvButLstr = new CalendarActionListener(container, courseList, eventListModel, calendarActionPanel.getButtons());
+        MainMenuActionListener mainMenuLstr = new MainMenuActionListener(myCalendarControl, courseListModel);
+        
         courseList.addListSelectionListener(calEvButLstr);
         eventList.addListSelectionListener(calEvButLstr);
-        buttonsPanel.addListener(calEvButLstr);       
+        calendarActionPanel.addListener(calEvButLstr);       
+        mainMenu.addListener(mainMenuLstr);
         eventList.addListSelectionListener(selectionStatsPanel);
         eventList.addListSelectionListener(eventInfoPanel);
-        elm.addListDataListener(middleEventListPanel);
-        courseList.addListSelectionListener(elm);
+        eventListModel.addListDataListener(middleEventListPanel);
+        courseList.addListSelectionListener(eventListModel);
         
         // Construct user interface with initialized parts
         JPanel west = new JPanel();
         west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
         west.add(mainMenu);
         west.add(courseListPanel);
-        west.add(buttonsPanel);
+        west.add(calendarActionPanel);
 
         JPanel east = new JPanel();
         east.setLayout(new BoxLayout(east, BoxLayout.Y_AXIS));

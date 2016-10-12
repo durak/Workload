@@ -9,7 +9,7 @@ package workloadstats.utils;
 public enum PropId {
     COURSENAME("Kurssin nimi"),
     EVENTNAME("Tapahtuman nimi"),
-    DATE("Alkupvm (VVVVKKPP"),
+    DATE("Pvm (VVVVKKPP"),
     STARTTIME("Aloitusaika (HHMM)"),
     ENDTIME("Lopetusaika (HHMM"),
     EVENTTYPE("Tyyppi"),

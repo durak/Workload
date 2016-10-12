@@ -1,6 +1,5 @@
 package workloadstats.ui;
 
-import workloadstats.ui.CourseListModel;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,12 +13,11 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import workloadstats.domain.control.EventBuilder;
+import workloadstats.utils.EventBuilder;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.utils.Ac;
 import workloadstats.utils.PropId;
-import workloadstats.ui.UserInputPanel;
 
 /**
  * ActionListener for data model modification buttons. 
@@ -32,7 +30,7 @@ import workloadstats.ui.UserInputPanel;
  *
  * @author Ilkka
  */
-public class CalendarEventListener implements ActionListener, ListSelectionListener {
+public class CalendarActionListener implements ActionListener, ListSelectionListener {
 
     private Container container;
     private CourseListModel clmodel;
@@ -42,7 +40,7 @@ public class CalendarEventListener implements ActionListener, ListSelectionListe
     private List<JButton> buttons;
     private JList courseList;
 
-    public CalendarEventListener(Container cntr, JList crsList, EventListModel elm, List<JButton> btns) {
+    public CalendarActionListener(Container cntr, JList crsList, EventListModel elm, List<JButton> btns) {
         this.container = cntr;
         this.courseList = crsList;
         this.clmodel = (CourseListModel) crsList.getModel();
@@ -138,13 +136,16 @@ public class CalendarEventListener implements ActionListener, ListSelectionListe
     private void newCourseAction() {
         // Create dialog to prompt user for input on needed PropIds
         PropId[] userInputNeeded = {PropId.COURSENAME, PropId.DATE};
-        UserInputPanel newCoursePanel = new UserInputPanel(userInputNeeded, "Uuden kurssin tiedot");
+        UserInputPanel2 newCoursePanel = new UserInputPanel2(userInputNeeded, "Uuden kurssin tiedot");
         int choice = JOptionPane.showConfirmDialog(container, newCoursePanel,
                 "Syötä uusi kurssi", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         // Try to create a new course with user input, if ok insert to datamodel
         if (choice == JOptionPane.OK_OPTION) {
             Map<PropId, String> answers = newCoursePanel.getValues();
+            for (PropId propId : userInputNeeded) {
+                System.out.println(answers.get(propId));
+            }
 
             try {
                 Course newCourse = EventBuilder.buildNewCourse(answers);
@@ -152,7 +153,7 @@ public class CalendarEventListener implements ActionListener, ListSelectionListe
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(container, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(CalendarEventListener.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CalendarActionListener.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -183,7 +184,7 @@ public class CalendarEventListener implements ActionListener, ListSelectionListe
             PropId.EVENTTYPE, PropId.DATE, PropId.STARTTIME,
             PropId.ENDTIME, PropId.STATUS};
 
-        UserInputPanel newEventPanel = new UserInputPanel(neededAnswers, "Uuden tapahtuman tiedot");
+        UserInputPanel2 newEventPanel = new UserInputPanel2(neededAnswers, "Uuden tapahtuman tiedot");
         int choice = JOptionPane.showConfirmDialog(container, newEventPanel,
                 "Syötä uusi tapahtuma", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         
@@ -198,7 +199,7 @@ public class CalendarEventListener implements ActionListener, ListSelectionListe
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(container, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(CalendarEventListener.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CalendarActionListener.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }

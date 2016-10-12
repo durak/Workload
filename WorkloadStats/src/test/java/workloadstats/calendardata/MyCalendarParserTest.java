@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
@@ -14,7 +15,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import workloadstats.calendardata.CalendarBuilderImpl;
+import workloadstats.calendardata.CalendarFileManager;
+import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.calendardata.mycalendar.MyCalendarParser;
 import workloadstats.domain.model.Course;
 
@@ -45,8 +47,10 @@ public class MyCalendarParserTest {
 //        EventUtilities eu = new EventUtilities();
         File calendarFile = new File("testCalendar.ics");
         FileInputStream my = new FileInputStream(calendarFile);
-        CalendarBuilderImpl builder = new CalendarBuilderImpl();
-        calendar = builder.build(my);
+        MyCalendarControl mcc = new MyCalendarControl();
+        CalendarFileManager builder = new CalendarFileManager();
+        CalendarBuilder cb = new CalendarBuilder();
+        calendar = cb.build(my);
         MyCalendarParser myParser = new MyCalendarParser(calendar);
         courses = myParser.getCourses();
     }

@@ -29,10 +29,7 @@ public abstract class Event extends VEvent {
     private String status;
     private String relatedTo;
 
-    public Event(DateTime start, DateTime end) {
-        super(start, end, "testinimi");
-        this.status = "TENTATIVE";
-    }
+
 
     public Event(DateTime start, DateTime end, String summary) {
         super(start, end, summary);

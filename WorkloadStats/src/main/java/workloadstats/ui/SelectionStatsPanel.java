@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import workloadstats.domain.model.Event;
-import workloadstats.domain.model.EventType;
+import workloadstats.utils.EventType;
 import workloadstats.utils.EventListAnalysis;
 import workloadstats.utils.StatusType;
 

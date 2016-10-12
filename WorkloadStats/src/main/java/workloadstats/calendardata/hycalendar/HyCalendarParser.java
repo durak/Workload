@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workloadstats.calendardata.hycalendar;
 
 import java.util.ArrayList;
@@ -21,12 +16,13 @@ import workloadstats.domain.model.Trash;
 
 /**
  * Parser functions for imported University calendar data
+ *
  * @author Ilkka
  */
 public class HyCalendarParser {
 
     private Calendar calendar;
-    
+
     private final List<Event> allEvents;
     private final Set<String> uniqueEventSummaryStrings;
     private final Map<String, List<Event>> eventsPerSummaryString;
@@ -36,29 +32,26 @@ public class HyCalendarParser {
         this.allEvents = allEvents();
         this.uniqueEventSummaryStrings = uniqueEventSummaryStrings();
         this.eventsPerSummaryString = eventsPerSummaryString();
-        
+
     }
-    
-    
+
     public List<Event> getAllEvents() {
         return allEvents;
     }
-    
+
     public Set<String> getUniqueSummaries() {
         return uniqueEventSummaryStrings;
     }
-    
+
     public Map<String, List<Event>> getEventsPerSummaryString() {
         return eventsPerSummaryString;
     }
-    
+
     public List<Event> getEventsOfASummary(String summary) {
         List<Event> events = eventsPerSummaryString.get(summary);
         return events;
     }
-    
-    
-    
+
     /**
      * Find all VEvents in this calendar
      *
@@ -98,7 +91,7 @@ public class HyCalendarParser {
      * Produce a Map of found unique summaryStrings as keys, and Lists of the
      * Events with that summary as values.
      *
-     * @return key= SummaryString : value= List of Events with that
+     * @return key = SummaryString : value= List of Events with that
      * summaryString
      */
     private Map<String, List<Event>> eventsPerSummaryString() {
@@ -108,59 +101,6 @@ public class HyCalendarParser {
             for (Event ve : this.allEvents) {
                 if (ve.getSummary().getValue().equals(uniqueEventSummaryString)) {
                     vps.get(uniqueEventSummaryString).add(ve);
-                }
-            }
-        }
-
-        return vps;
-    }
-
-    
-    /*
-    *
-    *
-    *
-    *
-    * SUMMARY (as opposed to String) versions below
-    *
-    *
-    *
-    *
-    
-    */
-    
-    
-    
-    
-    /**
-     * Find unique calendar summaries from VEvents in this calendar (meaning the
-     * descriptions shown for the events)
-     *
-     * @return a Set of unique summaries
-     */
-    public Set<Summary> uniqueEventSummaries() {
-        Set<Summary> uniqueCourseSummaries = new HashSet<>();
-        for (Event ve : allEvents()) {
-            Summary s = ve.getSummary();
-            uniqueCourseSummaries.add(s);
-        }
-
-        return uniqueCourseSummaries;
-    }
-
-    /**
-     * Produce a Map of found unique summaries as keys, and Lists of the Events
-     * with that summary as values.
-     *
-     * @return key= Summary : value= List of Events with that summary
-     */
-    public Map<Summary, List<Event>> eventsPerSummary() {
-        Map<Summary, List<Event>> vps = new HashMap<>();
-        for (Summary uniqueEventSummary : uniqueEventSummaries()) {
-            vps.put(uniqueEventSummary, new ArrayList<>());
-            for (Event ve : allEvents()) {
-                if (ve.getSummary().equals(uniqueEventSummary)) {
-                    vps.get(uniqueEventSummary).add(ve);
                 }
             }
         }

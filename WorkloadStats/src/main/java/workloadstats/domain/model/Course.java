@@ -1,19 +1,15 @@
 package workloadstats.domain.model;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
+
 import java.util.List;
+import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.property.Status;
 
 /**
- * Course type calendar event
+ * Course type calendar event All other events must belong to a course
  *
  * @author Ilkka
  */
@@ -21,9 +17,6 @@ public class Course extends Event {
 
     private String courseId;
     private String name;
-    private int credit;
-    private Date start;
-    private Date end;
 
     private boolean finished;
 
@@ -78,48 +71,50 @@ public class Course extends Event {
     /**
      * Add calendar event to this course
      *
-     * @param event
+     * @param ev
      */
-    public void addEvent(Event event) {
-        super.parentAnotherEvent(event);
+    public void addEvent(Event ev) {
+        super.parentAnotherEvent(ev);
+        updateStartDateOnAddition(ev);
+        updateEndDateOnAddition(ev);
 
-        if (event.getClass() == Lecture.class) {
-            lectures.add(event);
+        if (ev.getClass() == Lecture.class) {
+            lectures.add(ev);
         }
-        if (event.getClass() == Exercise.class) {
-            exercises.add(event);
+        if (ev.getClass() == Exercise.class) {
+            exercises.add(ev);
         }
-        if (event.getClass() == Personal.class) {
-            personal.add(event);
+        if (ev.getClass() == Personal.class) {
+            personal.add(ev);
         }
-        if (event.getClass() == Teamwork.class) {
-            teamwork.add(event);
+        if (ev.getClass() == Teamwork.class) {
+            teamwork.add(ev);
         }
-        if (event.getClass() == Exam.class) {
-            exams.add(event);            
+        if (ev.getClass() == Exam.class) {
+            exams.add(ev);
         }
     }
 
     /**
      * Remove calendar event from this course
      *
-     * @param event
+     * @param ev
      */
-    public void removeEvent(Event event) {
-        if (event.getClass() == Lecture.class) {
-            lectures.remove(event);
+    public void removeEvent(Event ev) {
+        if (ev.getClass() == Lecture.class) {
+            lectures.remove(ev);
         }
-        if (event.getClass() == Exercise.class) {
-            exercises.remove(event);
+        if (ev.getClass() == Exercise.class) {
+            exercises.remove(ev);
         }
-        if (event.getClass() == Personal.class) {
-            personal.remove(event);
+        if (ev.getClass() == Personal.class) {
+            personal.remove(ev);
         }
-        if (event.getClass() == Teamwork.class) {
-            teamwork.remove(event);
+        if (ev.getClass() == Teamwork.class) {
+            teamwork.remove(ev);
         }
-        if (event.getClass() == Exam.class) {
-            exams.remove(event);
+        if (ev.getClass() == Exam.class) {
+            exams.remove(ev);
         }
     }
 
@@ -154,15 +149,35 @@ public class Course extends Event {
         return this.exams;
     }
 
-//    public void finishCourse() throws IOException, URISyntaxException, ParseException {
-//
-//        for (List eventList : this.allEvents) {
-//            for (Iterator it = eventList.iterator(); it.hasNext();) {
-//                Event e = (Event) it.next();
-//                Property status = e.getProperties().getProperty("STATUS");
-//                status.setValue("CONFIRMED");
-//
-//            }
-//        }
-//    }
+    /**
+     * If event added to this course has earlier start date or later end date,
+     * adjust course duration.
+     */
+    private void updateStartDateOnAddition(Event ev) {
+        Date evStartDate = null;
+        if (ev.getStartDate() != null) {
+            evStartDate = ev.getStartDate().getDate();
+        }
+        if (evStartDate != null) {
+            if (this.getStartDate().getDate().after(evStartDate)) {
+                this.getStartDate().setDate(evStartDate);
+            }
+        }
+
+    }
+
+    private void updateEndDateOnAddition(Event ev) {
+        Date evEndDate = null;
+
+        if (ev.getEndDate() != null) {
+            evEndDate = ev.getEndDate().getDate();
+        }
+
+        if (evEndDate != null) {
+            if (this.getEndDate().getDate().before(evEndDate)) {
+                this.getEndDate().setDate(evEndDate);
+            }
+        }
+
+    }
 }

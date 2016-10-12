@@ -1,7 +1,6 @@
-package workloadstats.domain.control;
+package workloadstats.utils;
 
 import java.io.IOException;
-import java.net.SocketException;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.Map;
@@ -13,10 +12,11 @@ import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStamp;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.Summary;
+import net.fortuna.ical4j.util.HostInfo;
 import net.fortuna.ical4j.util.UidGenerator;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
-import workloadstats.domain.model.EventType;
+import workloadstats.utils.EventType;
 import workloadstats.domain.model.Exam;
 import workloadstats.domain.model.Exercise;
 import workloadstats.domain.model.Lecture;
@@ -31,10 +31,10 @@ import workloadstats.utils.PropId;
  */
 public class EventBuilder {
 
-    private EventBuilder() throws SocketException {
+    private EventBuilder() {
     }
 
-    public static Event buildNewEvent(String summary, String startDate, String endDate, String type, String statusValue) throws ParseException, IOException, URISyntaxException {
+    private static Event buildNewEvent(String summary, String startDate, String endDate, String type, String statusValue) throws ParseException, IOException, URISyntaxException {
         PropertyFactoryImpl pf = PropertyFactoryImpl.getInstance();
         UidGenerator ug = new UidGenerator("uidGen");
         PropertyList props = new PropertyList();
@@ -89,8 +89,8 @@ public class EventBuilder {
         String type = userAnswers.get(PropId.EVENTTYPE);
         String status = userAnswers.get(PropId.STATUS);
         System.out.println(type);
-        String startDateTime = sDate + "T" + sTime + "00";
-        String endDateTime = sDate + "T" + eTime + "00";
+        String startDateTime = sDate + "T" + sTime + "00Z";
+        String endDateTime = sDate + "T" + eTime + "00Z";
 
         return buildNewEvent(summary, startDateTime, endDateTime, type, status);
     }
@@ -98,8 +98,17 @@ public class EventBuilder {
     public static Course buildNewCourse(Map<PropId, String> userAnswers) throws ParseException, IOException, URISyntaxException {
         String summary = userAnswers.get(PropId.COURSENAME);
         String sDate = userAnswers.get(PropId.DATE);
-        String startDateTime = sDate + "T000000";
+        String startDateTime = sDate + "T000000Z";
 
         return (Course) buildNewEvent(summary, startDateTime, startDateTime, EventType.COURSE.name(), "TENTATIVE");
+    }
+    
+    
+        private class HostNfo implements HostInfo {
+        @Override
+        public String getHostName() {
+            return "mynonrealhost";
+        }
+
     }
 }

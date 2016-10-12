@@ -2,23 +2,25 @@ package workloadstats.ui;
 
 import workloadstats.utils.PropId;
 import java.awt.GridLayout;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 
 /**
- * JPanel for user input of new calendar event property information.
- * Uses standardized field identificator PropId Enums which also provide the questions
- * the user needs to answer.
+ * JPanel for user input Uses standardized field identificator PropId Enums
+ * which also provide the questions the user needs to answer.
+ *
  * @author Ilkka
  */
 public class UserInputPanel extends JPanel {
 
     private PropId[] userInputNeeded;
     private Map<PropId, JTextField> panelFields;
-    
 
     public UserInputPanel(PropId[] userInputNeeded, String title) {
         this.setBorder(javax.swing.BorderFactory.createTitledBorder(title));
@@ -31,6 +33,7 @@ public class UserInputPanel extends JPanel {
             add(new JLabel(id.getDescr()));
             add(panelFields.get(id));
         }
+
     }
 
     public String getValue(PropId field) {
@@ -49,4 +52,5 @@ public class UserInputPanel extends JPanel {
         }
         return values;
     }
+
 }

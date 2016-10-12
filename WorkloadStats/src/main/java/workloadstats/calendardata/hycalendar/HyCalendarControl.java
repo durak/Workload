@@ -1,6 +1,6 @@
 package workloadstats.calendardata.hycalendar;
 
-import workloadstats.domain.model.EventType;
+import workloadstats.utils.EventType;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.HashMap;

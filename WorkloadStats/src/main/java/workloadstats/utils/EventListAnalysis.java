@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import workloadstats.domain.model.Event;
-import workloadstats.domain.model.EventType;
 import workloadstats.domain.model.Exam;
 import workloadstats.domain.model.Exercise;
 import workloadstats.domain.model.Lecture;
