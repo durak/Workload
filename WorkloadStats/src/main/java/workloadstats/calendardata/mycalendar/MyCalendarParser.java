@@ -43,7 +43,7 @@ public class MyCalendarParser {
 
         allEvents();
         addEventstoCourses();
-    }
+    }    
     
     /**
      * Get list of Course events parsed from data

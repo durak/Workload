@@ -103,7 +103,7 @@ public class Gui implements Runnable {
          */
         
         CalendarActionListener calEvButLstr = new CalendarActionListener(container, courseList, eventListModel, calendarActionPanel.getButtons());
-        MainMenuActionListener mainMenuLstr = new MainMenuActionListener(container, myCalendarControl, courseListModel);
+        MainMenuActionListener mainMenuLstr = new MainMenuActionListener(container, myCalendarControl, courseListModel, courseList);
         
         courseList.addListSelectionListener(calEvButLstr);
         eventList.addListSelectionListener(calEvButLstr);

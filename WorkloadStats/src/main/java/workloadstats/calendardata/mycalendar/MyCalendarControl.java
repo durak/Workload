@@ -1,10 +1,13 @@
 package workloadstats.calendardata.mycalendar;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import workloadstats.calendardata.CalendarFileManager;
 import workloadstats.domain.model.Course;
@@ -26,31 +29,32 @@ public class MyCalendarControl {
         this.currentCalendar = calendarFileManager.getEmptyCalendar();
         this.myCalendarParser = new MyCalendarParser(currentCalendar);
         courses = this.myCalendarParser.getCourses();
-        
-        
+
     }
 
     public void initEmptyCalendar() {
-        this.currentCalendar = calendarFileManager.getEmptyCalendar();        
+        this.currentCalendar = calendarFileManager.getEmptyCalendar();
+        this.myCalendarParser = new MyCalendarParser(currentCalendar);
+        courses = this.myCalendarParser.getCourses();
     }
 
     public List<Course> getCourses() {
         return courses;
     }
-    
+
     public void updateCalendar() {
         Calendar updated = calendarFileManager.getEmptyCalendar();
         for (Course course : courses) {
             updated.getComponents().add(course);
-            updated.getComponents().addAll(course.getAllEvents());            
+            updated.getComponents().addAll(course.getAllEvents());
         }
         currentCalendar = updated;
     }
-    
+
     public Calendar getCalendar() {
         return currentCalendar;
     }
-    
+
     public boolean saveCalendar() {
         try {
             return calendarFileManager.saveCalendarToFile(currentCalendar);
@@ -58,6 +62,23 @@ public class MyCalendarControl {
             Logger.getLogger(MyCalendarControl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public boolean loadFile(File selectedFile) {
+        try {
+            Calendar loaded = calendarFileManager.loadCalendarFile(selectedFile);
+            myCalendarParser = new MyCalendarParser(loaded);
+            currentCalendar = loaded;
+
+            courses = myCalendarParser.getCourses();
+            System.out.println(courses.size());
+            return true;
+        } catch (Exception ex) {
+            return false;
+//            Logger.getLogger(MyCalendarControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }
 
 }

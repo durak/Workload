@@ -65,5 +65,10 @@ public class CourseListModel extends AbstractListModel {
         courses.get(i).removeEvent(event);
         fireContentsChanged(this, 0, getSize());
     }
+    
+    public void updateCourses(List<Course> newCourses) {
+        courses = newCourses;
+        fireContentsChanged(this, 0, getSize());
+    }
 
 }

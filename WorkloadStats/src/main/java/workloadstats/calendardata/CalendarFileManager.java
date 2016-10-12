@@ -38,7 +38,6 @@ public class CalendarFileManager {
     public CalendarFileManager() {
         this.calendarBuilder = new CalendarBuilder();
         this.calendarOutputter = new CalendarOutputter();
-        
 
     }
 
@@ -52,8 +51,8 @@ public class CalendarFileManager {
         Calendar calendar = null;
         try {
             calendar = calendarBuilder.build(in);
-            TimeZoneRegistry  r = calendarBuilder.getRegistry();
-            
+            TimeZoneRegistry r = calendarBuilder.getRegistry();
+
         } catch (IOException ex) {
             Logger.getLogger(CalendarFileManager.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParserException ex) {
@@ -93,4 +92,10 @@ public class CalendarFileManager {
 //    public void addVEvents(List<VEvent> vevents) {
 //        currentCalendar.getComponents().addAll(vevents);
 //    }
+    public Calendar loadCalendarFile(File selectedFile) throws FileNotFoundException, IOException, ParserException {
+        FileInputStream selection = new FileInputStream(selectedFile);
+        System.out.println(selectedFile.getAbsoluteFile());
+//        System.out.println(selection.toString());
+        return calendarBuilder.build(selection);
+    }
 }
