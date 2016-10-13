@@ -1,0 +1,251 @@
+package workloadstats.ui;
+
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SpinnerListModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import workloadstats.utils.EventType;
+import workloadstats.utils.TransferFocus;
+
+/**
+ *
+ * @author Ilkka
+ */
+public class CalendarEventIdentifierPanel extends JPanel {
+
+    private final EventType[] availableEventTypes = {EventType.LECTURE, EventType.EXERCISE, EventType.TRASH, EventType.PERSONAL, EventType.TEAMWORK};
+
+    private Set<String> summaries;
+    private Map<String, JTextArea> userInputOnSummaries;
+    private Map<String, JTextArea> userMatchesOnSummaries;
+    private Map<String, JSpinner> userInputOnEventType;
+    private Map<String, JCheckBox> userInputOnCourse;
+    private Map<String, JSpinner> userMatch;
+
+    public CalendarEventIdentifierPanel(Set<String> smrs, String title) {
+        this.summaries = smrs;
+        this.userInputOnSummaries = new HashMap<>();
+        this.userInputOnEventType = new HashMap<>();
+        this.userInputOnCourse = new HashMap<>();
+        this.userMatchesOnSummaries = new HashMap<>();
+        this.userMatch = new HashMap<>();
+
+        setBorder(javax.swing.BorderFactory.createTitledBorder(title));
+        setLayout(new GridLayout(summaries.size() + 1, 4));
+        GridLayout g = new GridLayout();
+
+        initComponents();
+    }
+
+    private void initComponents() {
+        String[] titles = {"Tapahtuma", "Tyyppi", "\"Päätapahtuma kurssilla\"", "Pyöritä alitapahtumien kohdalle päätapahtuma"};
+        for (String title : titles) {
+            JPanel jp = new JPanel();
+            jp.add(new JLabel(title));
+            add(jp);
+        }
+
+//        for (String summary : summaries) {
+//
+//            JTextArea jta = new JTextArea(3, 30);
+//            jta.setLineWrap(true);
+//            TransferFocus.patch(jta);
+//            jta.setText(summary);
+//            JScrollPane scr = new JScrollPane(jta);
+//
+//            JCheckBox jcb = new JCheckBox();
+//            JPanel jcbWrap = new JPanel();
+//            jcbWrap.add(jcb);
+//            
+//            JSpinner js = eventTypeSpinner(availableEventTypes);
+//            
+//            this.userInputOnSummaries.put(summary, jta);
+//            this.userInputOnEventType.put(summary, js);
+//            this.userInputOnCourse.put(summary, jcb);
+//            
+//            add(scr);
+//            add(js);
+//            add(jcbWrap);
+//        }
+        JSpinner[] spinners = new JSpinner[summaries.size()];
+        JScrollPane[] userInputs = new JScrollPane[summaries.size()];
+        JTextArea[] matches = new JTextArea[summaries.size()];
+
+        int i = 0;
+        for (String summary : summaries) {
+            JTextArea userInput = new JTextArea(3, 30);
+            userInput.setLineWrap(true);
+            TransferFocus.patch(userInput);
+            userInput.setText(summary);
+            this.userInputOnSummaries.put(summary, userInput);
+            JScrollPane userScroll = new JScrollPane(userInput);
+
+            JTextArea match = new JTextArea(3, 30);
+            match.setLineWrap(true);
+            match.setEditable(false);
+            match.setText(summary);
+
+            this.userMatchesOnSummaries.put(summary, match);
+
+            MyDocumentListener userListener = new MyDocumentListener(match, userInput);
+            userInput.getDocument().addDocumentListener(userListener);
+
+            userInputs[i] = userScroll;
+            matches[i] = match;
+
+            i++;
+        }
+        int j = 0;
+        for (String summary : summaries) {
+
+            JCheckBox jcb = new JCheckBox();
+            JPanel jcbWrap = new JPanel();
+            jcbWrap.add(jcb);
+
+            JSpinner js = eventTypeSpinner(availableEventTypes);
+
+            this.userInputOnEventType.put(summary, js);
+            this.userInputOnCourse.put(summary, jcb);
+
+            add(userInputs[j]);
+            add(js);
+            add(jcbWrap);
+            JSpinner jsMatch = JTextSpinner(matches);
+            this.userMatch.put(summary, jsMatch);
+            add(jsMatch);
+            j++;
+        }
+
+    }
+
+    public Map<String, String> getNewSummaries() {
+        Map<String, String> m = new HashMap<>();
+        for (String summary : summaries) {
+            if (notTrash(summary)) {
+                m.put(summary, userInputOnSummaries.get(summary).getText());
+            }
+
+        }
+        return m;
+    }
+
+    public Map<String, EventType> getIdentifiedEventTypes() {
+        Map<String, EventType> m = new HashMap<>();
+        for (String summary : summaries) {
+            
+            if (notTrash(summary)) {
+                JSpinner js = (JSpinner) userInputOnEventType.get(summary);
+                EventType et = (EventType) js.getValue();
+                m.put(summary, et);
+            }
+        }
+        return m;
+    }
+
+    public Map<String, Boolean> getCourseSummaries() {
+        Map<String, Boolean> m = new HashMap<>();
+        for (String summary : summaries) {
+            if (notTrash(summary)) {
+                m.put(summary, userInputOnCourse.get(summary).isSelected());
+            }
+        }
+        return m;
+    }
+
+    public Map<String, String> getEventParents() {
+        Map<String, String> m = new HashMap<>();
+        for (String summary : summaries) {
+            if (notTrash(summary)) {
+                m.put(summary, (String) userMatch.get(summary).getValue());
+            }
+        }
+        return m;
+    }
+
+    private boolean notTrash(String summary) {
+        JSpinner js = userInputOnEventType.get(summary);
+        EventType et = (EventType) js.getValue();
+        return !et.equals(EventType.TRASH);
+    }
+
+    /**
+     * JSpinner with String array values
+     *
+     * @param values
+     * @return
+     */
+    private JSpinner eventTypeSpinner(EventType[] values) {
+        JSpinner statusSpinner = new JSpinner(new SpinnerListModel(values));
+        if (statusSpinner.getEditor() instanceof JSpinner.DefaultEditor) {
+            JSpinner.DefaultEditor spinEdit = (JSpinner.DefaultEditor) statusSpinner.getEditor();
+            spinEdit.getTextField().setHorizontalAlignment(JTextField.LEFT);
+        }
+
+        return statusSpinner;
+    }
+
+    private JSpinner JTextSpinner(JTextArea[] values) {
+        JSpinner statusSpinner = new JSpinner();
+        statusSpinner.setModel(new SpinnerListModel(values) {
+            @Override
+            public Object getValue() {
+                JTextArea jta = (JTextArea) super.getValue();
+
+                return jta.getText();
+            }
+        });
+
+        return statusSpinner;
+    }
+
+    class MyDocumentListener implements DocumentListener {
+
+        JTextArea toUpdate;
+        JTextArea toListen;
+
+        public MyDocumentListener(JTextArea tu, JTextArea tl) {
+            toUpdate = tu;
+            toListen = tl;
+        }
+
+        private void updateValue() {
+            StringBuffer sb = new StringBuffer();
+            String str = toListen.getText();
+            sb.append(str);
+            if (str != null) {
+                toUpdate.setText(sb.toString());
+            }
+        }
+
+        @Override
+        public void insertUpdate(DocumentEvent de) {
+            updateValue();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent de) {
+            updateValue();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent de) {
+            updateValue();
+        }
+
+    }
+}

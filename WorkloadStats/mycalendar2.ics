@@ -1,7 +1,7 @@
 BEGIN:VCALENDAR
 VERSION:2.0
 CALSCALE:GREGORIAN
-PRODID:-//Events Calendar//iCal4j 1.0//EN
+PRODID:-//WorkLoadStats//iCal4j 1.0//EN
 BEGIN:VTIMEZONE
 TZID:Europe/Helsinki
 TZURL:http://tzurl.org/zoneinfo/Europe/Helsinki

@@ -10,6 +10,9 @@ import java.util.logging.Logger;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import workloadstats.calendardata.CalendarFileManager;
+import workloadstats.calendardata.hycalendar.CalendarImportManager;
+import workloadstats.calendardata.hycalendar.CalendarImportParser;
+import workloadstats.calendardata.hycalendar.CalendarImportSorter;
 import workloadstats.domain.model.Course;
 
 /**
@@ -23,6 +26,7 @@ public class MyCalendarControl {
     private List<Course> courses;
     private MyCalendarParser myCalendarParser;
     private CalendarFileManager calendarFileManager;
+            
 
     public MyCalendarControl() {
         this.calendarFileManager = new CalendarFileManager();
@@ -55,7 +59,8 @@ public class MyCalendarControl {
         return currentCalendar;
     }
 
-    public boolean saveCalendar() {
+    public boolean saveCalendar() {        
+        updateCalendar();
         try {
             return calendarFileManager.saveCalendarToFile(currentCalendar);
         } catch (FileNotFoundException ex) {
@@ -67,18 +72,39 @@ public class MyCalendarControl {
     public boolean loadFile(File selectedFile) {
         try {
             Calendar loaded = calendarFileManager.loadCalendarFile(selectedFile);
+            if (!calendarFileManager.wasCalendarFileBuiltWithThisProgram(loaded)) {
+                return false;
+            }                        
             myCalendarParser = new MyCalendarParser(loaded);
             currentCalendar = loaded;
-
             courses = myCalendarParser.getCourses();
-            System.out.println(courses.size());
             return true;
-        } catch (Exception ex) {
+
+        } catch (Exception ex) {            
+            Logger.getLogger(MyCalendarControl.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-//            Logger.getLogger(MyCalendarControl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    public CalendarImportManager getCalendarImportManager(File selectedFile) {
+        CalendarImportManager calImpMan = null;        
+        try {
+            
+            Calendar imported = calendarFileManager.loadCalendarFile(selectedFile);
+            calImpMan = new CalendarImportManager(imported);
+//            myCalendarParser = new MyCalendarParser(loaded);
+//            currentCalendar = loaded;
+//            courses = myCalendarParser.getCourses();
+            
 
+        } catch (Exception ex) {
+            Logger.getLogger(MyCalendarControl.class.getName()).log(Level.SEVERE, null, ex);                        
+        }
+        return calImpMan;
+    }
+    
+    public void importNewCourses(List<Course> imports) {
+        this.courses = imports;
     }
 
 }

@@ -20,12 +20,12 @@ import workloadstats.utils.PropId;
  *
  * @author Ilkka
  */
-public class UserInputPanel extends JPanel {
+public class CalendarEventUserInputPanel extends JPanel {
 
     private PropId[] userInputNeeded;
     private Map<PropId, JComponent> panelFields;
 
-    public UserInputPanel(PropId[] userInputNeeded, String title) {
+    public CalendarEventUserInputPanel(PropId[] userInputNeeded, String title) {
         this.setBorder(javax.swing.BorderFactory.createTitledBorder(title));
         setLayout(new GridLayout(6, 2));
         this.userInputNeeded = userInputNeeded;
@@ -33,7 +33,7 @@ public class UserInputPanel extends JPanel {
 
         for (PropId id : userInputNeeded) {
             if (id.equals(PropId.DATE)) {
-                JSpinner ds = dateSpinner("dd.MM.yyyy");                                
+                JSpinner ds = dateSpinner("dd.MM.yyyy");
                 ds.setName(id.name());
                 panelFields.put(id, ds);
             } else if (id.equals(PropId.STARTTIME)) {
@@ -59,18 +59,13 @@ public class UserInputPanel extends JPanel {
                 jt.setName(id.name());
                 panelFields.put(id, jt);
             }
+
             add(new JLabel(id.getDescr()));
             add(panelFields.get(id));
-            
-
         }
 
     }
 
-    public String getValue(PropId field) {
-//        return panelFields.get(field).getText();
-        return "";
-    }
 
     /**
      * Return a map of user's answers
@@ -81,22 +76,22 @@ public class UserInputPanel extends JPanel {
         Map<PropId, String> values = new HashMap<>();
         for (PropId id : userInputNeeded) {
             JComponent jc = panelFields.get(id);
-            
+
             if (jc.getName().equals(PropId.DATE.name())) {
                 JSpinner js = (JSpinner) jc;
                 Date d = (Date) js.getValue();
                 values.put(id, DateTools.dateFormatter(d));
-                
+
             } else if (jc.getName().equals(PropId.STARTTIME.name())) {
                 JSpinner js = (JSpinner) jc;
-                Date d = (Date) js.getValue();                
+                Date d = (Date) js.getValue();
 //                values.put(id, dateFormatter(d, "HHmm"));
                 values.put(id, DateTools.timeFormatter(d));
             } else if (jc.getName().equals(PropId.ENDTIME.name())) {
                 JSpinner js = (JSpinner) jc;
-                Date d = (Date) js.getValue();                
+                Date d = (Date) js.getValue();
 //                values.put(id, dateFormatter(d, "HHmm"));
-                values.put(id, DateTools.timeFormatter(d));                
+                values.put(id, DateTools.timeFormatter(d));
             } else if (jc.getName().equals(PropId.STATUS.name())) {
                 JSpinner js = (JSpinner) jc;
                 String s = (String) js.getValue();
@@ -113,15 +108,15 @@ public class UserInputPanel extends JPanel {
         }
         return values;
     }
-    
+
     /**
-     * Date JSpinner with format as input
-     * This is unfortunately very problematic, as it doesn't keep time correctly,
-     * When formatted to HH:mm, the spinner jumps to epoch time on user interaction.
-     * DateTools class is needed to dodge this problem.
+     * Date JSpinner with format as input This is unfortunately very
+     * problematic, as it doesn't keep time correctly, When formatted to HH:mm,
+     * the spinner jumps to epoch time on user interaction. DateTools class is
+     * needed to dodge this problem.
      *
      * @param inputFormat
-     * @return 
+     * @return
      */
     private JSpinner dateSpinner(String inputFormat) {
         JSpinner dateSpinner = new JSpinner(new SpinnerDateModel());
@@ -136,8 +131,9 @@ public class UserInputPanel extends JPanel {
 
     /**
      * JSpinner with String array values
+     *
      * @param values
-     * @return 
+     * @return
      */
     private JSpinner stringSpinner(String[] values) {
         JSpinner statusSPinner = new JSpinner(new SpinnerListModel(values));

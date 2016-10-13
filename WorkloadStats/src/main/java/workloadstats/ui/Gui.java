@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import workloadstats.calendardata.hycalendar.HyCalendarControl;
+import workloadstats.calendardata.hycalendar.CalendarImportManager;
 import workloadstats.calendardata.mycalendar.MyCalendarControl;
 import workloadstats.domain.model.Course;
 import workloadstats.utils.Ac;
@@ -24,7 +24,7 @@ import workloadstats.utils.Ac;
  */
 public class Gui implements Runnable {
 
-    private HyCalendarControl hyCalendarControl;
+    private CalendarImportManager hyCalendarControl;
     private MyCalendarControl myCalendarControl;
 
     private JFrame frame;

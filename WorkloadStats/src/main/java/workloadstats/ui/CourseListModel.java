@@ -70,5 +70,9 @@ public class CourseListModel extends AbstractListModel {
         courses = newCourses;
         fireContentsChanged(this, 0, getSize());
     }
+    
+    public List<Course> getCourses() {
+        return courses;
+    }
 
 }

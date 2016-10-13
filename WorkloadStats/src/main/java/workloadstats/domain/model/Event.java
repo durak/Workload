@@ -16,6 +16,7 @@ import net.fortuna.ical4j.model.PropertyFactoryImpl;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Categories;
+import net.fortuna.ical4j.model.property.Status;
 import net.fortuna.ical4j.model.property.Summary;
 
 /**
@@ -28,8 +29,6 @@ public abstract class Event extends VEvent {
     private String eventSummary;
     private String status;
     private String relatedTo;
-
-
 
     public Event(DateTime start, DateTime end, String summary) {
         super(start, end, summary);
@@ -76,6 +75,7 @@ public abstract class Event extends VEvent {
             }
 
             this.getProperty(property).setValue(value);
+
         } catch (IOException ex) {
 
         } catch (URISyntaxException ex) {
@@ -90,7 +90,9 @@ public abstract class Event extends VEvent {
      */
     public void setStatusTentative() {
         this.status = "TENTATIVE";
-        addPropertyToVEvent(Property.STATUS, "TENTATIVE");
+        this.getProperties().remove(this.getStatus());
+        Status s = new Status("TENTATIVE");
+        this.getProperties().add(s);
     }
 
     /**
@@ -98,12 +100,18 @@ public abstract class Event extends VEvent {
      */
     public void setStatusConfirmed() {
         this.status = "CONFIRMED";
-        addPropertyToVEvent(Property.STATUS, "CONFIRMED");
+        this.getProperties().remove(this.getStatus());
+        Status s = new Status("CONFIRMED");
+        this.getProperties().add(s);
+//        addPropertyToVEvent(Property.STATUS, "CONFIRMED");
     }
 
     public void setStatusCancelled() {
         this.status = "CANCELLED";
-        addPropertyToVEvent(Property.STATUS, "CANCELLED");
+        this.getProperties().remove(this.getStatus());
+        Status s = new Status("CANCELLED");
+        this.getProperties().add(s);
+//        addPropertyToVEvent(Property.STATUS, "CANCELLED");
     }
 
     /**
@@ -118,17 +126,16 @@ public abstract class Event extends VEvent {
     /**
      * Get event's status as a string
      *
-     * @return String of status, possible values CONFIRMED, CANCELLED or TENTATIVE
+     * @return String of status, possible values CONFIRMED, CANCELLED or
+     * TENTATIVE
      */
     public String getEventStatus() {
         if (this.getProperty(Property.STATUS) == null) {
             setStatusTentative();
         }
-        
+
         return this.getProperty(Property.STATUS).getValue();
     }
-    
-
 
     /**
      * Get Start date as string, Helsinki timezone

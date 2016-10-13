@@ -10,7 +10,6 @@ import java.util.Set;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.property.Summary;
 import workloadstats.domain.model.Event;
 import workloadstats.domain.model.Trash;
 
@@ -19,7 +18,7 @@ import workloadstats.domain.model.Trash;
  *
  * @author Ilkka
  */
-public class HyCalendarParser {
+public class CalendarImportParser {
 
     private Calendar calendar;
 
@@ -27,7 +26,7 @@ public class HyCalendarParser {
     private final Set<String> uniqueEventSummaryStrings;
     private final Map<String, List<Event>> eventsPerSummaryString;
 
-    public HyCalendarParser(Calendar calendar) {
+    public CalendarImportParser(Calendar calendar) {
         this.calendar = calendar;
         this.allEvents = allEvents();
         this.uniqueEventSummaryStrings = uniqueEventSummaryStrings();
@@ -95,17 +94,17 @@ public class HyCalendarParser {
      * summaryString
      */
     private Map<String, List<Event>> eventsPerSummaryString() {
-        Map<String, List<Event>> vps = new HashMap<>();
+        Map<String, List<Event>> eps = new HashMap<>();
         for (String uniqueEventSummaryString : this.uniqueEventSummaryStrings) {
-            vps.put(uniqueEventSummaryString, new ArrayList<>());
+            eps.put(uniqueEventSummaryString, new ArrayList<>());
             for (Event ve : this.allEvents) {
                 if (ve.getSummary().getValue().equals(uniqueEventSummaryString)) {
-                    vps.get(uniqueEventSummaryString).add(ve);
+                    eps.get(uniqueEventSummaryString).add(ve);
                 }
             }
         }
 
-        return vps;
+        return eps;
     }
 
 }

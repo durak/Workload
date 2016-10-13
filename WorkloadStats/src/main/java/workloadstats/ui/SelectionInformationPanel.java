@@ -74,7 +74,7 @@ public class SelectionInformationPanel extends JPanel implements ListSelectionLi
             dateValue.setText(event.getStartDateString());
             startTimeValue.setText(event.getStartTime());
             String kestoLongToString = Long.toString(EventUtility.getDuration(event));
-            durationValue.setText(kestoLongToString);
+            durationValue.setText(kestoLongToString + " min");
             eventAttendance.setEvent(selectedEvent);
         }
         resetRadioButtons();

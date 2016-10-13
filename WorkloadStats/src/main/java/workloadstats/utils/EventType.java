@@ -7,13 +7,23 @@ package workloadstats.utils;
  * @author Ilkka
  */
 public enum EventType {
-    COURSE,
-    LECTURE,
-    EXERCISE,
-    EXAM,    
-    PERSONAL,
-    TEAMWORK,
-    TRASH
+    COURSE("Kurssi"),
+    LECTURE("Luento"),
+    EXERCISE("Harkka"),
+    EXAM("Koe"),    
+    PERSONAL("Personal"),
+    TEAMWORK("Teamwork"),
+    TRASH("Roskaa");
+    
+    private String descr;
+    
+    private EventType(String description) {
+        this.descr = description;
+    }
+    
+    public String getDescr() {
+        return descr;
+    }
 
 
 }

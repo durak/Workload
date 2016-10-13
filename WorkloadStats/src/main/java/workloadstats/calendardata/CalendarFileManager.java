@@ -1,13 +1,11 @@
 package workloadstats.calendardata;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.fortuna.ical4j.data.CalendarBuilder;
@@ -17,10 +15,8 @@ import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.TimeZoneRegistry;
 import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
 import net.fortuna.ical4j.model.ValidationException;
-import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.ProdId;
-import net.fortuna.ical4j.model.property.Version;
+
 
 /**
  * Calendar file operations
@@ -28,7 +24,8 @@ import net.fortuna.ical4j.model.property.Version;
  * @author Ilkka
  */
 public class CalendarFileManager {
-
+    
+    private final String programIdentifier = "WorkLoadStats";
     private final String calendarconfig = "calendarconfig.ics";
     private CalendarBuilder calendarBuilder;
     private CalendarOutputter calendarOutputter;
@@ -94,8 +91,20 @@ public class CalendarFileManager {
 //    }
     public Calendar loadCalendarFile(File selectedFile) throws FileNotFoundException, IOException, ParserException {
         FileInputStream selection = new FileInputStream(selectedFile);
-        System.out.println(selectedFile.getAbsoluteFile());
-//        System.out.println(selection.toString());
+
         return calendarBuilder.build(selection);
     }
+    
+    public boolean wasCalendarFileBuiltWithThisProgram(Calendar calendar) {
+        ProdId id = calendar.getProductId();
+        if (id == null) {
+            return false;
+        }
+        return (id.getValue().contains(programIdentifier));                
+    }
+    
+//    public void validateFile(File selectedFile) throws ValidationException, IOException, FileNotFoundException, ParserException {
+//        Calendar test = loadCalendarFile(selectedFile);
+//        test.validate();
+//    }
 }

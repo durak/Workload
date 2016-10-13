@@ -136,7 +136,7 @@ public class CalendarActionListener implements ActionListener, ListSelectionList
     private void newCourseAction() {
         // Create dialog to prompt user for input on needed PropIds
         PropId[] userInputNeeded = {PropId.COURSENAME, PropId.DATE};
-        UserInputPanel newCoursePanel = new UserInputPanel(userInputNeeded, "Uuden kurssin tiedot");
+        CalendarEventUserInputPanel newCoursePanel = new CalendarEventUserInputPanel(userInputNeeded, "Uuden kurssin tiedot");
         int choice = JOptionPane.showConfirmDialog(container, newCoursePanel,
                 "Syötä uusi kurssi", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
@@ -184,7 +184,7 @@ public class CalendarActionListener implements ActionListener, ListSelectionList
             PropId.EVENTTYPE, PropId.DATE, PropId.STARTTIME,
             PropId.ENDTIME, PropId.STATUS};
 
-        UserInputPanel newEventPanel = new UserInputPanel(neededAnswers, "Uuden tapahtuman tiedot");
+        CalendarEventUserInputPanel newEventPanel = new CalendarEventUserInputPanel(neededAnswers, "Uuden tapahtuman tiedot");
         int choice = JOptionPane.showConfirmDialog(container, newEventPanel,
                 "Syötä uusi tapahtuma", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
