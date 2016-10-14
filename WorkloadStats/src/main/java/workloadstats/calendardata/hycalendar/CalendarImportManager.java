@@ -3,7 +3,6 @@ package workloadstats.calendardata.hycalendar;
 import workloadstats.utils.EventType;
 import java.net.SocketException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -11,7 +10,9 @@ import java.util.Set;
 import net.fortuna.ical4j.model.Calendar;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
-import workloadstats.domain.model.Lecture;
+import workloadstats.utils.EventUtility;
+
+
 
 /**
  * Control class for handling University calendar data importing
@@ -53,60 +54,62 @@ public class CalendarImportManager {
      * @return Map with summaries as keys and identification EventTypes as
      * values
      */
-//    private Map<String, EventType> identifyUniqueSummaries() {
-//        Map<String, EventType> identifiedSummaries = new HashMap<>();
-//
-//        Set<String> uniqueSummaries = calendarImportParser.getUniqueSummaries();
-//        for (String uniqueSummary : uniqueSummaries) {
-//            EventType identified = getId(uniqueSummary);
-//            identifiedSummaries.put(uniqueSummary, identified);
-//        }
-//
-//        return identifiedSummaries;
-//    }
+
     public Set<String> getSummariesToIdentify() {
         return calendarImportParser.getUniqueSummaries();
     }
 
+    /**
+     * Giant method for parsing imported data with userinput. To be refactored in the future.
+     * @param newSummaries
+     * @param identifiedTypes
+     * @param identifiedCourses
+     * @param eventParents
+     * @return 
+     */
     public List<Course> userIdentifiedEvents(Map<String, String> newSummaries, Map<String, EventType> identifiedTypes, Map<String, Boolean> identifiedCourses, Map<String, String> eventParents) {
         List<Course> crs = new ArrayList<>();
 
         for (String oldSummary : identifiedCourses.keySet()) {
-            String newSummary = newSummaries.get(oldSummary);
-            EventType eventType = identifiedTypes.get(oldSummary);
+
             boolean isCourse = identifiedCourses.get(oldSummary);
-
-            List<String> childSummaries = new ArrayList<>();
-            childSummaries.add(oldSummary);
-            for (String oldEventSummary : newSummaries.keySet()) {
-                String parentForOldSummary = eventParents.get(oldEventSummary);
-                if (newSummary.equals(parentForOldSummary) && !identifiedCourses.get(oldEventSummary)) {
-                    childSummaries.add(oldEventSummary);
-                }
-
-            }
-
-            // Turn dummy event into a course with user inputted summary
             if (isCourse) {
-                Event dummy = calendarImportParser.getEventsPerSummaryString().get(oldSummary).get(0);
-                Course finallyIamCourse = (calendarImportSorter.getNewCourse(dummy, oldSummary, newSummaries.get(oldSummary)));
+                String newSummary = newSummaries.get(oldSummary);
+                EventType eventType = identifiedTypes.get(oldSummary);
 
-                for (String childSummary : childSummaries) {
-                    EventType et = identifiedTypes.get(childSummary);
-                    String newEventSummary = newSummaries.get(childSummary);
-                    List<Event> dummies = calendarImportParser.getEventsOfASummary(childSummary);
-                    finallyIamCourse.addEventList(dummies);
+                List<String> oldSummariesThatBelongToThisCourse = new ArrayList<>();
+                //base event for the course itself is some event too -> we need to add it too
+                oldSummariesThatBelongToThisCourse.add(oldSummary);
+                for (String s : eventParents.keySet()) {
+                    if (eventParents.get(s).equals(newSummary)) {
+                        if (!identifiedCourses.get(s)) {
+                            oldSummariesThatBelongToThisCourse.add(s);
+                        }
+                    }
                 }
-                crs.add(finallyIamCourse);
-            }
 
+                //let's make a course
+                Event dummy = calendarImportParser.getEventsOfASummary(oldSummary).get(0);                
+                Course course = calendarImportSorter.getNewCourse(dummy, oldSummary, newSummary);                
+
+                //let's add events to this course
+                for (String s : oldSummariesThatBelongToThisCourse) {
+                    String newChildSummary = newSummaries.get(s);
+                    EventType newChildEt = identifiedTypes.get(s);
+                    List<Event> oldUnidentifiedEvents = calendarImportParser.getEventsOfASummary(s);
+                    List<Event> newIdentifiedEvents = calendarImportSorter.getEventsForParent(oldUnidentifiedEvents, eventType, newChildSummary);
+                    course.addEventList(newIdentifiedEvents);
+                }
+                
+                crs.add(course);      
+                
+                
+            }
         }
+        
         return crs;
     }
 
-    private List<Event> turnEventsToUserInputtedType(List<Event> rawEvents, EventType et) {
-        return null;
-    }
 
 //    /**
 //     * Get type identification from the user
@@ -114,30 +117,12 @@ public class CalendarImportManager {
 //     * @param summary to be identified
 //     * @return identified EventType
 //     */
-//    private EventType getId(String summary) {
-//        System.out.println(summary);
-//        System.out.print("Mikä tämä on: ");
-//        String tyyppi = lukija.nextLine();
-//        EventType t = EventType.valueOf(tyyppi);
-//        return t;
-//    }
+
 ////////////////////////////////////////////////////////////////////////////////    
     /**
      * Build Course-events from calendar events identified as courses
      */
-//    public void buildCoursesFromIdentifiedEvents() {
-//        for (String identifiedSummary : identifiedSummaries.keySet()) {
-//            if (identifiedSummaries.get(identifiedSummary).equals(EventType.COURSE)) {
-//                String newSummary = getBetterName(identifiedSummary);
-//                List<Event> courseEvents = calendarImportParser.getEventsOfASummary(identifiedSummary);
-//                Course newCourse = calendarImportSorter.getNewCourse(identifiedSummary, newSummary, courseEvents);
-//                courses.add(newCourse);
-//
-//                List<Event> lectures = calendarImportSorter.getNewLectures(newSummary, courseEvents);
-//                newCourse.addEventList(lectures);
-//            }
-//        }
-//    }
+
 //    /**
 //     * Get new names for summaries from the user Helper method for
 //     * buildCoursesFromIdentifiedEvents
@@ -145,48 +130,8 @@ public class CalendarImportManager {
 //     * @param summary old summary name
 //     * @return new summary from user input
 //     */
-//    private String getBetterName(String summary) {
-//        System.out.println(summary);
-//        System.out.print("Anna parempi nimi tälle: ");
-//        String name = lukija.nextLine();
-//        return name;
-//    }
+
 ////////////////////////////////////////////////////////////////////////////////    
-    /**
-     * Build Exercise-events from calendar events identified as Exercises
-     */
-    public void buildExercisesFromIdentifiedEvents() {
-        for (String identifiedSummary : identifiedSummaries.keySet()) {
-            if (identifiedSummaries.get(identifiedSummary).equals(EventType.EXERCISE)) {
-                Course relatedCourse = getRelatedCourse(identifiedSummary);
-                String newSummary = relatedCourse.getCourseName();
-                List<Event> exerciseEvents = calendarImportParser.getEventsOfASummary(identifiedSummary);
 
-                List<Event> exercises = calendarImportSorter.getNewExercises(newSummary, exerciseEvents);
-                relatedCourse.addEventList(exercises);
-            }
-        }
-    }
-
-    /**
-     * Ask the user what course is related to this exercise summary
-     *
-     * @param exerciseSummary
-     * @return related course
-     */
-    private Course getRelatedCourse(String exerciseSummary) {
-        System.out.println(exerciseSummary);
-        System.out.print("Mihin kurssiin tämä kuuluu: ");
-        String kurssi = lukija.nextLine();
-
-        Course chosenCourse = null;
-        for (Course course : courses) {
-            if (course.getCourseName().equals(kurssi)) {
-                chosenCourse = course;
-            }
-        }
-
-        return chosenCourse;
-    }
 
 }

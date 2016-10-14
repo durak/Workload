@@ -62,13 +62,16 @@ public class CalendarImportSorter {
 //        return new Course(props);
 //    }
     public Course getNewCourse(Event dummy, String oldSummary, String newSummary) {
-        Course crs = new Course(dummy);
-        crs.getSummary().setValue(newSummary);
-        crs.getProperties().remove(crs.getUid());
-        crs.getProperties().add(ug.generateUid());
-        crs.getProperties().add(new Categories(oldSummary));
-        crs.getProperties().add(new Categories("COURSE"));
-        crs.getProperties().add(new DtStamp());
+        PropertyList props = new PropertyList();
+        props.add(new DtStart(dummy.getStartDate().getDate()));
+        props.add(new DtEnd(dummy.getEndDate().getDate()));
+        props.add(new DtStamp());
+        props.add(new Summary(newSummary));
+        props.add(ug.generateUid());
+        props.add(new Categories(oldSummary));
+        props.add(new Categories("COURSE"));
+
+        Course crs = new Course(props);
         crs.setStatusTentative();
 
         return crs;

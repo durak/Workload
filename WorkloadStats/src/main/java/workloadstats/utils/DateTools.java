@@ -28,7 +28,11 @@ public class DateTools {
         }
         return newEnd;
     }
-
+    /**
+     * Turn Date object into a string with only Year, Month ad Day
+     * @param de
+     * @return String in format yyyyMMdd
+     */
     public static String dateFormatter(Date de) {
         Calendar c = Calendar.getInstance();
         c.setTime(de);
@@ -39,7 +43,12 @@ public class DateTools {
 
         return date;
     }
-
+    
+    /**
+     * Turn Date object into a string with only Hours and Minutes
+     * @param date
+     * @return String in format HHmm
+     */
     public static String timeFormatter(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);

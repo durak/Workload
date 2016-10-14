@@ -16,13 +16,11 @@ import net.fortuna.ical4j.util.HostInfo;
 import net.fortuna.ical4j.util.UidGenerator;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
-import workloadstats.utils.EventType;
 import workloadstats.domain.model.Exam;
 import workloadstats.domain.model.Exercise;
 import workloadstats.domain.model.Lecture;
 import workloadstats.domain.model.Personal;
 import workloadstats.domain.model.Teamwork;
-import workloadstats.utils.PropId;
 
 /**
  * Builder for event creation and verification

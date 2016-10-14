@@ -13,7 +13,7 @@ import workloadstats.domain.model.Personal;
 import workloadstats.domain.model.Teamwork;
 
 /**
- * Analysis class that tells us things about a list of calendar events Private
+ * Analysis class that tells us things about a list of calendar events. Private
  * analysis methods are listed in their chronological order, getters after that.
  *
  * @author Ilkka

@@ -131,10 +131,10 @@ public class MainMenuActionListener implements ActionListener {
         Map<String, Boolean> identifiedCourses = eip.getCourseSummaries();
         Map<String, String> eventParents = eip.getEventParents();
 
-        System.out.println(newSummaries.size() + ", " + identifiedTypes.size() + ", " + identifiedCourses.size() + ", " + eventParents.size());
 
         List<Course> newImports = calendImpMan.userIdentifiedEvents(newSummaries, identifiedTypes, identifiedCourses, eventParents);
-
+        
+        
         myCalendarControl.importNewCourses(newImports);
         courseListModel.updateCourses(myCalendarControl.getCourses());
         courseList.clearSelection();

@@ -1,15 +1,19 @@
 package workloadstats.ui;
 
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,10 +21,12 @@ import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import workloadstats.utils.EventType;
-import workloadstats.utils.TransferFocus;
+import workloadstats.ui.utils.TransferFocus;
 
 /**
  *
@@ -37,6 +43,8 @@ public class CalendarEventIdentifierPanel extends JPanel {
     private Map<String, JCheckBox> userInputOnCourse;
     private Map<String, JSpinner> userMatch;
 
+    private List<JTextArea> availableMatches;
+
     public CalendarEventIdentifierPanel(Set<String> smrs, String title) {
         this.summaries = smrs;
         this.userInputOnSummaries = new HashMap<>();
@@ -44,6 +52,8 @@ public class CalendarEventIdentifierPanel extends JPanel {
         this.userInputOnCourse = new HashMap<>();
         this.userMatchesOnSummaries = new HashMap<>();
         this.userMatch = new HashMap<>();
+        //
+        this.availableMatches = new ArrayList<>();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(title));
         setLayout(new GridLayout(summaries.size() + 1, 4));
@@ -59,30 +69,8 @@ public class CalendarEventIdentifierPanel extends JPanel {
             jp.add(new JLabel(title));
             add(jp);
         }
+        JTextArea[] userInputTextAreas = new JTextArea[summaries.size()];
 
-//        for (String summary : summaries) {
-//
-//            JTextArea jta = new JTextArea(3, 30);
-//            jta.setLineWrap(true);
-//            TransferFocus.patch(jta);
-//            jta.setText(summary);
-//            JScrollPane scr = new JScrollPane(jta);
-//
-//            JCheckBox jcb = new JCheckBox();
-//            JPanel jcbWrap = new JPanel();
-//            jcbWrap.add(jcb);
-//            
-//            JSpinner js = eventTypeSpinner(availableEventTypes);
-//            
-//            this.userInputOnSummaries.put(summary, jta);
-//            this.userInputOnEventType.put(summary, js);
-//            this.userInputOnCourse.put(summary, jcb);
-//            
-//            add(scr);
-//            add(js);
-//            add(jcbWrap);
-//        }
-        JSpinner[] spinners = new JSpinner[summaries.size()];
         JScrollPane[] userInputs = new JScrollPane[summaries.size()];
         JTextArea[] matches = new JTextArea[summaries.size()];
 
@@ -105,15 +93,22 @@ public class CalendarEventIdentifierPanel extends JPanel {
             MyDocumentListener userListener = new MyDocumentListener(match, userInput);
             userInput.getDocument().addDocumentListener(userListener);
 
+            //
+            userInputTextAreas[i] = userInput;
+            //
             userInputs[i] = userScroll;
             matches[i] = match;
 
             i++;
         }
         int j = 0;
+        
+        JCheckBox[] courseCheckBoxes = new JCheckBox[summaries.size()];
+        JSpinner[] matchSpinners =new JSpinner[summaries.size()];
         for (String summary : summaries) {
 
             JCheckBox jcb = new JCheckBox();
+
             JPanel jcbWrap = new JPanel();
             jcbWrap.add(jcb);
 
@@ -128,7 +123,39 @@ public class CalendarEventIdentifierPanel extends JPanel {
             JSpinner jsMatch = JTextSpinner(matches);
             this.userMatch.put(summary, jsMatch);
             add(jsMatch);
+
+            //
+            courseCheckBoxes[j] = jcb;
+            matchSpinners[j] = jsMatch;
+//            jcb.addItemListener(new MatchListener(matches[j]));
+            jcb.addItemListener(new ItemListener() {
+
+                @Override
+                public void itemStateChanged(ItemEvent ie) {
+                    if (ie.getStateChange() == ItemEvent.SELECTED) {
+
+                        jsMatch.setEnabled(false);
+                    }
+                    if (ie.getStateChange() == ItemEvent.DESELECTED) {
+                        jsMatch.setEnabled(true);
+                    }
+                }
+            });            
+//            jcb.addActionListener((ActionEvent ae) -> {
+//                jsMatch.setEnabled(false);
+//            });
+//            jcb.addChangeListener(new ChangeListener() {
+//                @Override
+//                public void stateChanged(ChangeEvent ce) {
+//                    jsMatch.setEnabled(false);
+//                }
+//            });
+            //
             j++;
+        }
+        
+        for (int k = 0; k < summaries.size(); k++) {
+            courseCheckBoxes[k].addItemListener(new MatchListener(userInputTextAreas[k], matchSpinners));
         }
 
     }
@@ -147,7 +174,7 @@ public class CalendarEventIdentifierPanel extends JPanel {
     public Map<String, EventType> getIdentifiedEventTypes() {
         Map<String, EventType> m = new HashMap<>();
         for (String summary : summaries) {
-            
+
             if (notTrash(summary)) {
                 JSpinner js = (JSpinner) userInputOnEventType.get(summary);
                 EventType et = (EventType) js.getValue();
@@ -199,9 +226,28 @@ public class CalendarEventIdentifierPanel extends JPanel {
         return statusSpinner;
     }
 
+    /**
+     * JSpinner with JTextArea array values
+     *
+     * @param values
+     * @return
+     */
     private JSpinner JTextSpinner(JTextArea[] values) {
+        JTextArea title = new JTextArea(3, 30);
+        title.setLineWrap(true);
+        title.setEditable(false);
+        title.setText("Nimettyäsi ja valittuasi päätapahtumat, pyöritä alitapahtumien kohdalle päätapahtuma");
+//        availableMatches.add(title);
+        JTextArea[] beginning = new JTextArea[1];
+        beginning[0] = title;
+//        JTextArea[] titlesPlusValues = new JTextArea[values.length + 1];
+//        titlesPlusValues[0] = title;
+//        for (int i = 0; i < values.length; i++) {
+//            titlesPlusValues[i + 1] = values[i];
+//        }
+
         JSpinner statusSpinner = new JSpinner();
-        statusSpinner.setModel(new SpinnerListModel(values) {
+        statusSpinner.setModel(new SpinnerListModel(beginning) {
             @Override
             public Object getValue() {
                 JTextArea jta = (JTextArea) super.getValue();
@@ -248,4 +294,42 @@ public class CalendarEventIdentifierPanel extends JPanel {
         }
 
     }
+
+    class MatchListener implements ItemListener {
+
+        JTextArea toEnableOrDisable;
+        JSpinner[] toUpdate;
+
+        public MatchListener(JTextArea toEoD, JSpinner[] toUpdate) {
+            toEnableOrDisable = toEoD;
+            this.toUpdate = toUpdate;
+        }
+
+        @Override
+        public void itemStateChanged(ItemEvent ie) {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                availableMatches.add(toEnableOrDisable);
+                for (JSpinner jSpinnerToUpdate : toUpdate) {
+                    SpinnerListModel slm = (SpinnerListModel) jSpinnerToUpdate.getModel();
+                    slm.setList(availableMatches);
+                }
+
+            }
+
+            if (ie.getStateChange() == ItemEvent.DESELECTED) {
+                availableMatches.remove(toEnableOrDisable);
+                if (availableMatches.isEmpty()) {
+                    availableMatches.add(new JTextArea("Valitse ainakin yksi päätapahtuma"));
+                }
+            }
+            
+            for (JSpinner jSpinnerToUpdate : toUpdate) {
+                SpinnerListModel slm = (SpinnerListModel) jSpinnerToUpdate.getModel();
+                slm.setList(availableMatches);
+            }
+
+        }
+
+    }
+
 }

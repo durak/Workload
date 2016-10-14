@@ -1,0 +1,712 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:Europe/Helsinki
+TZURL:http://tzurl.org/zoneinfo/Europe/Helsinki
+X-LIC-LOCATION:Europe/Helsinki
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0300
+TZNAME:EEST
+DTSTART:19830327T030000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0300
+TZOFFSETTO:+0200
+TZNAME:EET
+DTSTART:19961027T040000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+BEGIN:STANDARD
+TZOFFSETFROM:+013949
+TZOFFSETTO:+013949
+TZNAME:HMT
+DTSTART:18780531T000000
+RDATE:18780531T000000
+END:STANDARD
+BEGIN:STANDARD
+TZOFFSETFROM:+013949
+TZOFFSETTO:+0200
+TZNAME:EET
+DTSTART:19210501T002011
+RDATE:19210501T002011
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0300
+TZNAME:EEST
+DTSTART:19420402T235959
+RDATE:19420402T235959
+RDATE:19810329T020000
+RDATE:19820328T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0300
+TZOFFSETTO:+0200
+TZNAME:EET
+DTSTART:19421004T010000
+RDATE:19421004T010000
+RDATE:19810927T030000
+RDATE:19820926T030000
+RDATE:19830925T040000
+RDATE:19840930T040000
+RDATE:19850929T040000
+RDATE:19860928T040000
+RDATE:19870927T040000
+RDATE:19880925T040000
+RDATE:19890924T040000
+RDATE:19900930T040000
+RDATE:19910929T040000
+RDATE:19920927T040000
+RDATE:19930926T040000
+RDATE:19940925T040000
+RDATE:19950924T040000
+END:STANDARD
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0200
+TZNAME:EET
+DTSTART:19830101T000000
+RDATE:19830101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART:20160510T091500Z
+DTEND:20160510T124500Z
+SUMMARY:Avoin yo: Johdatus tietojenkäsittelytieteeseen/ Kesä 2016\, Ryhmä 3\, Johdatus tietojenkäsittelytieteeseen/ Kesä 2016\, Ryhmä 3
+LOCATION:
+UID:263b692c-aeb8-4c29-88ba-b3877d23a23e
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160517T091500Z
+DTEND:20160517T124500Z
+SUMMARY:Avoin yo: Johdatus tietojenkäsittelytieteeseen/ Kesä 2016\, Ryhmä 3\, Johdatus tietojenkäsittelytieteeseen/ Kesä 2016\, Ryhmä 3
+LOCATION:
+UID:e24320b1-6f9d-464b-ab61-71aac40d9eac
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160524T091500Z
+DTEND:20160524T124500Z
+SUMMARY:Avoin yo: Johdatus tietojenkäsittelytieteeseen/ Kesä 2016\, Ryhmä 3\, Johdatus tietojenkäsittelytieteeseen/ Kesä 2016\, Ryhmä 3
+LOCATION:
+UID:9257c074-6ca1-4397-bcc5-a6c2ccb0529d
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160531T091500Z
+DTEND:20160531T114500Z
+SUMMARY:Avoin yo: Johdatus tietojenkäsittelytieteeseen/ Kesä 2016\, Ryhmä 3\, Johdatus tietojenkäsittelytieteeseen/ Kesä 2016\, Ryhmä 3
+LOCATION:
+UID:b26fcff3-d182-495d-a7a4-dccc06394675
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160831T071500Z
+DTEND:20160831T090000Z
+SUMMARY:Henkilökohtainen opintosuunnitelma ja osallistuminen opettajatuutorointiin (LuK-HOPS)\, Henkilökohtainen opintosuunnitelma ja osallistuminen opettajatuutorointiin (LuK-HOPS)
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:04b342eb-3849-45be-8813-19842d984294
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160902T101500Z
+DTEND:20160902T120000Z
+SUMMARY:Tietokone työvälineenä\, Tietokone työvälineenä
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:fb0a573a-f49e-4be3-88b7-f330bc2a625f
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160906T091500Z
+DTEND:20160906T110000Z
+SUMMARY:Aineopintojen harjoitustyö: Ohjelmointi (periodi I)\, Aineopintojen harjoitustyö: Ohjelmointi (periodi I)
+LOCATION:B221 (Exactum)\, Gustaf Hällströmin katu 2 B
+UID:b5c66795-8520-4e79-88c0-a674583f24d6
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160907T111500Z
+DTEND:20160907T130000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:def0efd0-4a4e-4abd-b038-5d361c92dc13
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160907T131500Z
+DTEND:20160907T150000Z
+SUMMARY:Tietotekniikka-ala ammattina\, Tietotekniikka-ala ammattina
+LOCATION:Exactum\, CK112\, Gustaf Hällströmin katu 2 B
+UID:60f4dcac-0642-4c21-90b6-f9b121500b9b
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160908T071500Z
+DTEND:20160908T090000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:447ac493-7e32-4f31-9580-c9ce644e9b4f
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160909T051500Z
+DTEND:20160909T070000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:c16c3bca-1086-43ec-9a35-ffae03545b1b
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160909T091500Z
+DTEND:20160909T110000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:6f1230e2-a3ae-4f84-b23c-9628caea7e43
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160909T111500Z
+DTEND:20160909T124500Z
+SUMMARY:Johdatus... Ryhmä 6\, Ryhmä 6
+LOCATION:Exactum\, C322\, Gustaf Hällströmin katu 2 B
+UID:28f578fe-ad54-40e8-8b0c-e4c4406bbe57
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160909T111500Z
+DTEND:20160909T130000Z
+SUMMARY:Henkilökohtainen opintosuunnitelma ja osallistuminen opettajatuutorointiin (LuK-HOPS)\, Henkilökohtainen opintosuunnitelma ja osallistuminen opettajatuutorointiin (LuK-HOPS)
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:3ce5788a-c5da-4446-aecd-7bda93e8c852
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160912T091500Z
+DTEND:20160912T110000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:b60bbdd5-15db-430c-ae47-f78998cdee38
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160913T111500Z
+DTEND:20160913T130000Z
+SUMMARY:Tietorak... Ryhmä 1\, Ryhmä 1
+LOCATION:Exactum\, C222\, Gustaf Hällströmin katu 2 B
+UID:800cb255-8054-464f-9df9-ead1b912b55c
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160914T111500Z
+DTEND:20160914T130000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:d99d5dc6-ee60-4be8-abd9-6c20334fe4fd
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160914T131500Z
+DTEND:20160914T150000Z
+SUMMARY:Tietotekniikka-ala ammattina\, Tietotekniikka-ala ammattina
+LOCATION:Exactum\, CK112\, Gustaf Hällströmin katu 2 B
+UID:3e7f57d2-d4b0-4a46-a31d-8425928aa51d
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160915T071500Z
+DTEND:20160915T090000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:f2a6518a-0d4a-43df-9224-c36cf4da22f4
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160916T051500Z
+DTEND:20160916T070000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:07018050-b4b9-45b3-bdd6-5819145ad378
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160916T091500Z
+DTEND:20160916T110000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:a24ad202-ddba-4ac1-9514-33b7c7383cdf
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160916T111500Z
+DTEND:20160916T124500Z
+SUMMARY:Johdatus... Ryhmä 6\, Ryhmä 6
+LOCATION:Exactum\, C322\, Gustaf Hällströmin katu 2 B
+UID:498ada1c-3b9b-4735-93db-1536e11de14e
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160919T091500Z
+DTEND:20160919T110000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:5f84d977-2799-41a9-a1e1-a4a3f7376232
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160920T111500Z
+DTEND:20160920T130000Z
+SUMMARY:Tietorak... Ryhmä 1\, Ryhmä 1
+LOCATION:Exactum\, C222\, Gustaf Hällströmin katu 2 B
+UID:fd91bb93-35b7-4eaf-b009-ac375e3a2510
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160921T111500Z
+DTEND:20160921T130000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:459ed73f-244e-4141-8f77-d7e8b214eaf0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160921T131500Z
+DTEND:20160921T150000Z
+SUMMARY:Tietotekniikka-ala ammattina\, Tietotekniikka-ala ammattina
+LOCATION:Exactum\, CK112\, Gustaf Hällströmin katu 2 B
+UID:89a549ee-d6b2-4230-a2b4-bcf2095ae7b6
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160922T071500Z
+DTEND:20160922T090000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:9e16b41f-4b1b-45ee-90f4-5f4b4d115f60
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160923T051500Z
+DTEND:20160923T070000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:36488917-4cf3-4a61-a570-f43e82871af8
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160923T091500Z
+DTEND:20160923T110000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:33a37d7f-a814-457a-b585-4bfe53f36e31
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160923T111500Z
+DTEND:20160923T124500Z
+SUMMARY:Johdatus... Ryhmä 6\, Ryhmä 6
+LOCATION:Exactum\, C322\, Gustaf Hällströmin katu 2 B
+UID:71b99bce-e311-4ff2-b6c6-8752f61be17a
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160923T111500Z
+DTEND:20160923T130000Z
+SUMMARY:Henkilökohtainen opintosuunnitelma ja osallistuminen opettajatuutorointiin (LuK-HOPS)\, Henkilökohtainen opintosuunnitelma ja osallistuminen opettajatuutorointiin (LuK-HOPS)
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:d1c9a464-43ba-4714-b39d-baf5550c6073
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160926T091500Z
+DTEND:20160926T110000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:2aa290fe-67db-4799-901d-4edf524c4bfc
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160927T111500Z
+DTEND:20160927T130000Z
+SUMMARY:Tietorak... Ryhmä 1\, Ryhmä 1
+LOCATION:Exactum\, C222\, Gustaf Hällströmin katu 2 B
+UID:12b598e7-8c81-4bdd-acc7-590a01bc2d54
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160928T111500Z
+DTEND:20160928T130000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:709bbe69-b0b4-4cad-a959-f5a52ab29e50
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160928T131500Z
+DTEND:20160928T150000Z
+SUMMARY:Tietotekniikka-ala ammattina\, Tietotekniikka-ala ammattina
+LOCATION:Exactum\, CK112\, Gustaf Hällströmin katu 2 B
+UID:ed1ff02c-331f-4e73-b012-27169be687a6
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160929T071500Z
+DTEND:20160929T090000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:5ef66848-4035-4273-b2f0-48d87fd4e242
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160930T051500Z
+DTEND:20160930T070000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:ced2adbb-ec7c-408d-bf2e-df2c91e539c8
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160930T091500Z
+DTEND:20160930T110000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:ff6f227b-aa65-4b0c-9e71-9554fea8b906
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20160930T111500Z
+DTEND:20160930T124500Z
+SUMMARY:Johdatus... Ryhmä 6\, Ryhmä 6
+LOCATION:Exactum\, C322\, Gustaf Hällströmin katu 2 B
+UID:e53b7424-9eb6-46e6-8e4c-e282d416b3ad
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161003T091500Z
+DTEND:20161003T110000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:398d168a-4f32-4ad4-bc9e-6576fd27ebd7
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161004T111500Z
+DTEND:20161004T130000Z
+SUMMARY:Tietorak... Ryhmä 1\, Ryhmä 1
+LOCATION:Exactum\, C222\, Gustaf Hällströmin katu 2 B
+UID:fda3817c-5923-47f8-a5e9-37a296ea4b0e
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161005T071500Z
+DTEND:20161005T090000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:3d605d9a-5fe3-48f8-90c1-073e595b4b0c
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161005T111500Z
+DTEND:20161005T130000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:3b17ea19-45a9-4c10-ad0b-8ac104640d6a
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161005T131500Z
+DTEND:20161005T150000Z
+SUMMARY:Tietotekniikka-ala ammattina\, Tietotekniikka-ala ammattina
+LOCATION:Exactum\, CK112\, Gustaf Hällströmin katu 2 B
+UID:3bad2365-f397-423b-9213-968dc7ff38f2
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161006T071500Z
+DTEND:20161006T090000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:b323f62e-542e-4ff2-9c97-979d6f3157f4
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161007T051500Z
+DTEND:20161007T070000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:fec9ac6d-6578-488d-a256-e4995747b4ad
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161007T091500Z
+DTEND:20161007T110000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:bb2fd99f-86f0-46eb-b9ea-857166b3b3b7
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161007T111500Z
+DTEND:20161007T124500Z
+SUMMARY:Johdatus... Ryhmä 6\, Ryhmä 6
+LOCATION:Exactum\, C322\, Gustaf Hällströmin katu 2 B
+UID:1bb003f2-65ec-4a19-b273-d3de6e14b0e5
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161010T091500Z
+DTEND:20161010T110000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:b0a90acd-f0e4-4a16-8fcb-5703afffabdb
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161011T111500Z
+DTEND:20161011T130000Z
+SUMMARY:Tietorak... Ryhmä 1\, Ryhmä 1
+LOCATION:Exactum\, C222\, Gustaf Hällströmin katu 2 B
+UID:4e5df4ff-515e-420c-803f-3ad9db82ef33
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161012T071500Z
+DTEND:20161012T090000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:b7d6fa56-7e62-442a-b60e-2de4d4da34ef
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161012T111500Z
+DTEND:20161012T130000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:0bd0dff2-8bcf-4198-b630-52780be3aa13
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161012T131500Z
+DTEND:20161012T150000Z
+SUMMARY:Tietotekniikka-ala ammattina\, Tietotekniikka-ala ammattina
+LOCATION:Exactum\, CK112\, Gustaf Hällströmin katu 2 B
+UID:38777aad-f0de-4816-bbab-b674d3d6572d
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161013T071500Z
+DTEND:20161013T090000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:23bc57dd-14e5-438d-9ac7-5cef403fd6c8
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161014T091500Z
+DTEND:20161014T110000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:f583c495-d622-4248-ac16-ea73c8b92d9c
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161014T111500Z
+DTEND:20161014T124500Z
+SUMMARY:Johdatus... Ryhmä 6\, Ryhmä 6
+LOCATION:Exactum\, C322\, Gustaf Hällströmin katu 2 B
+UID:c10e879d-d71d-440e-be82-7700c172f4fc
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161017T091500Z
+DTEND:20161017T110000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:cf359c07-327e-4d04-b2a6-b3d1c262be8c
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161018T111500Z
+DTEND:20161018T130000Z
+SUMMARY:Tietorak... Ryhmä 1\, Ryhmä 1
+LOCATION:Exactum\, C222\, Gustaf Hällströmin katu 2 B
+UID:70066a1f-34ea-462c-b68c-5d747cf98995
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161019T071500Z
+DTEND:20161019T090000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:48cda184-485a-4fc0-93f5-cb2a8a4c3b94
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161019T111500Z
+DTEND:20161019T130000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:bce43133-73f4-4bef-b1dc-e2491a22bba8
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161019T131500Z
+DTEND:20161019T150000Z
+SUMMARY:Tietotekniikka-ala ammattina\, Tietotekniikka-ala ammattina
+LOCATION:Exactum\, CK112\, Gustaf Hällströmin katu 2 B
+UID:92e33c23-601f-4772-88d0-82cab3b14837
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161020T071500Z
+DTEND:20161020T090000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:d715bb74-f7bb-48e1-96ed-b9c209f6e283
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161021T091500Z
+DTEND:20161021T110000Z
+SUMMARY:Johdatus logiikkaan I\, Johdatus logiikkaan I
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:0d3fb962-cfd3-483a-8357-e32335892e5d
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161021T111500Z
+DTEND:20161021T124500Z
+SUMMARY:Johdatus... Ryhmä 6\, Ryhmä 6
+LOCATION:Exactum\, C322\, Gustaf Hällströmin katu 2 B
+UID:9aa1e483-23da-4b9b-bd2a-4355be146517
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161031T101500Z
+DTEND:20161031T120000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:38278af4-c584-4041-ba39-5a53f05ac288
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161101T121500Z
+DTEND:20161101T140000Z
+SUMMARY:Tietorak... Ryhmä 1\, Ryhmä 1
+LOCATION:Exactum\, C222\, Gustaf Hällströmin katu 2 B
+UID:2d397230-5904-4390-aad9-3afd8458b6c5
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161102T081500Z
+DTEND:20161102T100000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:3d43b52c-355f-480e-a28f-62c6d066a92c
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161103T081500Z
+DTEND:20161103T100000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, CK112\, Gustaf Hällströmin katu 2 B
+UID:d92ff5d4-0bee-4805-837e-da5bcd6f5d32
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161107T101500Z
+DTEND:20161107T120000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:332641a4-51eb-4f0d-9367-83dc36f62e04
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161108T121500Z
+DTEND:20161108T140000Z
+SUMMARY:Tietorak... Ryhmä 1\, Ryhmä 1
+LOCATION:Exactum\, C222\, Gustaf Hällströmin katu 2 B
+UID:9cd06682-730c-4205-9e0b-d9119cbe938f
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161109T081500Z
+DTEND:20161109T100000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:89d99bdf-41d3-48f0-a4c6-bf914cb109d4
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161110T081500Z
+DTEND:20161110T100000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:9864cdb0-6108-41b8-a211-b87864a499bd
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161114T101500Z
+DTEND:20161114T120000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:5a6e4390-b327-4714-94c2-90c944952aa2
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161115T121500Z
+DTEND:20161115T140000Z
+SUMMARY:Tietorak... Ryhmä 1\, Ryhmä 1
+LOCATION:Exactum\, C222\, Gustaf Hällströmin katu 2 B
+UID:d5ea70cf-62cf-4dff-be8d-e5ddaebeb771
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161116T081500Z
+DTEND:20161116T100000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:ce5050e8-29aa-48a7-b496-33cc26dc5c69
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161117T081500Z
+DTEND:20161117T100000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:00e107b4-512b-45fd-b369-44a6bb0b7c67
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161121T101500Z
+DTEND:20161121T120000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:d65a43f9-dda0-4c4c-bff1-0cd8a0357136
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161122T121500Z
+DTEND:20161122T140000Z
+SUMMARY:Tietorak... Ryhmä 1\, Ryhmä 1
+LOCATION:Exactum\, C222\, Gustaf Hällströmin katu 2 B
+UID:6d713346-9c9e-4b99-aac8-4b79c39ed200
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161123T081500Z
+DTEND:20161123T100000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:12b358d0-f8d4-45a9-9c63-accc854185a8
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161124T081500Z
+DTEND:20161124T100000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:e8d0cea5-1079-47f0-a98a-b80c21077afb
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161128T101500Z
+DTEND:20161128T120000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:b67573cf-9a73-4207-b084-e656dc8d6361
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161129T121500Z
+DTEND:20161129T140000Z
+SUMMARY:Tietorak... Ryhmä 1\, Ryhmä 1
+LOCATION:Exactum\, C222\, Gustaf Hällströmin katu 2 B
+UID:17ecfede-903f-4e0f-b77e-74092c3c482a
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161130T081500Z
+DTEND:20161130T100000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:70a5b56b-675c-445e-9363-33a0c90349cb
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161201T081500Z
+DTEND:20161201T100000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:8d03778b-2fa7-481c-b059-2b421649188e
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161205T101500Z
+DTEND:20161205T120000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:80962901-1868-4e74-83a7-e30f09738f57
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161207T081500Z
+DTEND:20161207T100000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:379efae0-9941-4f0e-9693-10fe1c91d9cd
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161208T081500Z
+DTEND:20161208T100000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, B123\, Gustaf Hällströmin katu 2 B
+UID:5505cafd-320f-47a7-ad7f-4693b2c34de8
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161212T101500Z
+DTEND:20161212T120000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:f3b4ebd1-6189-4bec-be8b-f63556bfeb4c
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161213T121500Z
+DTEND:20161213T140000Z
+SUMMARY:Tietorak... Ryhmä 1\, Ryhmä 1
+LOCATION:Exactum\, C222\, Gustaf Hällströmin katu 2 B
+UID:813ac7f3-022c-4d91-9a6b-78f3e4b30425
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161214T081500Z
+DTEND:20161214T100000Z
+SUMMARY:Johdatus yliopistomatematiikkaan\, Johdatus yliopistomatematiikkaan
+LOCATION:Exactum\, A111\, Gustaf Hällströmin katu 2 B
+UID:f94a62cf-8f64-4a67-bead-b87cb1b7c255
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161215T081500Z
+DTEND:20161215T100000Z
+SUMMARY:Tietorakenteet ja algoritmit\, Tietorakenteet ja algoritmit
+LOCATION:Exactum\, CK112\, Gustaf Hällströmin katu 2 B
+UID:05fb77bb-a5c0-4ce0-94d5-8f9518957f9e
+END:VEVENT
+END:VCALENDAR

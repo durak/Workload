@@ -1,4 +1,4 @@
-package workloadstats.utils;
+package workloadstats.ui.utils;
 
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
