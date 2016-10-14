@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 import net.fortuna.ical4j.model.Date;
-import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.component.VEvent;
 
@@ -16,7 +15,7 @@ import net.fortuna.ical4j.model.component.VEvent;
 public class Course extends Event {
 
     private String courseId;
-    private String name;
+    
 
     private boolean finished;
 
@@ -27,8 +26,7 @@ public class Course extends Event {
     private List<Event> exams;
 
     public Course(VEvent ve) {
-        super(ve);
-        this.name = ve.getSummary().getValue();
+        super(ve);        
         this.lectures = new ArrayList<>();
         this.exercises = new ArrayList<>();
         this.personal = new ArrayList<>();
@@ -38,8 +36,7 @@ public class Course extends Event {
     }
 
     public Course(PropertyList pl) {
-        super(pl);
-        this.name = pl.getProperty(Property.SUMMARY).getValue();
+        super(pl);        
         this.lectures = new ArrayList<>();
         this.exercises = new ArrayList<>();
         this.personal = new ArrayList<>();
@@ -48,9 +45,6 @@ public class Course extends Event {
 
     }
 
-    public String getCourseName() {
-        return this.name;
-    }
 
     /**
      * Return a list of all events in this course

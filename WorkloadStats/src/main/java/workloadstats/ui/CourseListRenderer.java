@@ -20,7 +20,7 @@ public class CourseListRenderer extends JLabel implements ListCellRenderer<Cours
     public Component getListCellRendererComponent(JList<? extends Course> list, Course course, int index,
             boolean isSelected, boolean cellHasFocus) {
 
-        String courseName = course.getCourseName();
+        String courseName = course.getEventName();
         setText(courseName);
         if (isSelected) {
             setBackground(list.getSelectionBackground());

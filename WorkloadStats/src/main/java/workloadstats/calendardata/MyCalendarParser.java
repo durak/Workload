@@ -1,4 +1,4 @@
-package workloadstats.calendardata.mycalendar;
+package workloadstats.calendardata;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
-import net.fortuna.ical4j.model.ParameterList;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Categories;

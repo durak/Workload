@@ -1,4 +1,4 @@
-package workloadstats.calendardata.mycalendar;
+package workloadstats.calendardata;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.fortuna.ical4j.model.Calendar;
-import workloadstats.calendardata.CalendarFileManager;
-import workloadstats.calendardata.hycalendar.CalendarImportManager;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
 import workloadstats.utils.EventUtility;

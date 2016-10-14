@@ -23,9 +23,9 @@ import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Categories;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
-import workloadstats.calendardata.mycalendar.MyCalendarParser;
+import workloadstats.calendardata.MyCalendarParser;
 import workloadstats.calendardata.CalendarFileManager;
-import workloadstats.calendardata.mycalendar.MyCalendarControl;
+import workloadstats.calendardata.MyCalendarControl;
 import workloadstats.ui.Gui;
 import workloadstats.utils.EventUtility;
 

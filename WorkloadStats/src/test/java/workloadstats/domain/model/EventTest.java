@@ -5,15 +5,11 @@
  */
 package workloadstats.domain.model;
 
-import java.io.IOException;
 import java.net.SocketException;
-import java.net.URISyntaxException;
-import java.text.ParseException;
 import java.util.Calendar;
 import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.property.Uid;
 import net.fortuna.ical4j.util.UidGenerator;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -86,15 +82,6 @@ public class EventTest {
 
     }
 
-    @Test
-    public void eventinVoiAsettaaChildiksi() {
-        ev1.childToAnotherEvent(ev2);
-        String ev1RelatedTo = ev1.getProperty(Property.RELATED_TO).getValue();
-
-        String parentUid = ev2.getProperty(Property.UID).getValue();
-
-        assertEquals(parentUid, ev1RelatedTo);
-    }
 
     @Test
     public void eventinStatuksenMuutosConfirmedOnnistuuEkanKerran() {

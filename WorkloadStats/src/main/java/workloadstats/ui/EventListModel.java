@@ -1,8 +1,8 @@
 package workloadstats.ui;
 
-import workloadstats.ui.CourseListModel;
-import edu.emory.mathcs.backport.java.util.Collections;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.JList;

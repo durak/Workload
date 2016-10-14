@@ -1,6 +1,5 @@
 package workloadstats.ui;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -10,8 +9,6 @@ import javax.swing.JRadioButton;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import workloadstats.domain.model.Event;
-import workloadstats.ui.SelectionAttendancePanel;
-import workloadstats.ui.SelectionAttendanceListener;
 import workloadstats.utils.Ac;
 import workloadstats.utils.EventUtility;
 
@@ -135,9 +132,6 @@ public class SelectionInformationPanel extends JPanel implements ListSelectionLi
             Event selection = (Event) eventList.getSelectedValue();
             resetEvent(selection);
         }
-
-//        System.out.println("EventStatsPanel2 " + eventList);
-//        System.out.println("kukkuu" + eventList.getName());
     }
 
 }

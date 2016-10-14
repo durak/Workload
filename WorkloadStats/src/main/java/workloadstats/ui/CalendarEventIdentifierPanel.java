@@ -1,18 +1,13 @@
 package workloadstats.ui;
 
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,8 +16,6 @@ import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import workloadstats.utils.EventType;
@@ -123,17 +116,15 @@ public class CalendarEventIdentifierPanel extends JPanel {
             JSpinner jsMatch = JTextSpinner(matches);
             this.userMatch.put(summary, jsMatch);
             add(jsMatch);
-
-            //
+            
             courseCheckBoxes[j] = jcb;
             matchSpinners[j] = jsMatch;
-//            jcb.addItemListener(new MatchListener(matches[j]));
+            
+            // Disable Matchspinner if event was identified as a course
             jcb.addItemListener(new ItemListener() {
-
                 @Override
                 public void itemStateChanged(ItemEvent ie) {
                     if (ie.getStateChange() == ItemEvent.SELECTED) {
-
                         jsMatch.setEnabled(false);
                     }
                     if (ie.getStateChange() == ItemEvent.DESELECTED) {
@@ -141,16 +132,7 @@ public class CalendarEventIdentifierPanel extends JPanel {
                     }
                 }
             });            
-//            jcb.addActionListener((ActionEvent ae) -> {
-//                jsMatch.setEnabled(false);
-//            });
-//            jcb.addChangeListener(new ChangeListener() {
-//                @Override
-//                public void stateChanged(ChangeEvent ce) {
-//                    jsMatch.setEnabled(false);
-//                }
-//            });
-            //
+
             j++;
         }
         
@@ -236,15 +218,10 @@ public class CalendarEventIdentifierPanel extends JPanel {
         JTextArea title = new JTextArea(3, 30);
         title.setLineWrap(true);
         title.setEditable(false);
-        title.setText("Nimettyäsi ja valittuasi päätapahtumat, pyöritä alitapahtumien kohdalle päätapahtuma");
-//        availableMatches.add(title);
+        title.setText("pyöritä alitapahtumien kohdalle päätapahtuma");
+
         JTextArea[] beginning = new JTextArea[1];
         beginning[0] = title;
-//        JTextArea[] titlesPlusValues = new JTextArea[values.length + 1];
-//        titlesPlusValues[0] = title;
-//        for (int i = 0; i < values.length; i++) {
-//            titlesPlusValues[i + 1] = values[i];
-//        }
 
         JSpinner statusSpinner = new JSpinner();
         statusSpinner.setModel(new SpinnerListModel(beginning) {
@@ -258,7 +235,10 @@ public class CalendarEventIdentifierPanel extends JPanel {
 
         return statusSpinner;
     }
-
+    
+    /**
+     * Update user's input on event names to match spinner values
+     */
     class MyDocumentListener implements DocumentListener {
 
         JTextArea toUpdate;

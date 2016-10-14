@@ -13,7 +13,6 @@ import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.TimeZoneRegistry;
-import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
 import net.fortuna.ical4j.model.ValidationException;
 import net.fortuna.ical4j.model.property.ProdId;
 
@@ -28,9 +27,7 @@ public class CalendarFileManager {
     private final String programIdentifier = "WorkLoadStats";
     private final String calendarconfig = "calendarconfig.ics";
     private CalendarBuilder calendarBuilder;
-    private CalendarOutputter calendarOutputter;
-
-    TimeZoneRegistry tzr = TimeZoneRegistryFactory.getInstance().createRegistry();
+    private CalendarOutputter calendarOutputter; 
 
     public CalendarFileManager() {
         this.calendarBuilder = new CalendarBuilder();
@@ -40,7 +37,7 @@ public class CalendarFileManager {
 
     /**
      * To avoid complicated calendar setup, first we import a pre-generated
-     * empty calendar file.
+     * empty calendar file as a config file.
      */
     private Calendar readConfig() {
         InputStream in = CalendarFileManager.class.getClassLoader().getResourceAsStream(calendarconfig);
@@ -58,7 +55,11 @@ public class CalendarFileManager {
 
         return calendar;
     }
-
+    
+    /**
+     * Returns a new empty calendar file
+     * @return 
+     */
     public Calendar getEmptyCalendar() {
         return readConfig();
     }
@@ -77,24 +78,28 @@ public class CalendarFileManager {
         }
         return false;
     }
-
-//    public Calendar newCalendar() {
-//        Calendar calendar = new Calendar();
-//        calendar.getProperties().add(new ProdId("-//WorkLoadStats//iCal4j 1.0//EN"));
-//        calendar.getProperties().add(Version.VERSION_2_0);
-//        calendar.getProperties().add(CalScale.GREGORIAN);
-//
-//        return calendar;
-//    }
-//    public void addVEvents(List<VEvent> vevents) {
-//        currentCalendar.getComponents().addAll(vevents);
-//    }
+            
+    /**
+     * Loads parameter file and builds a calendar.
+     * @param selectedFile
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParserException 
+     */
     public Calendar loadCalendarFile(File selectedFile) throws FileNotFoundException, IOException, ParserException {
         FileInputStream selection = new FileInputStream(selectedFile);
 
         return calendarBuilder.build(selection);
     }
     
+    /**
+     * Checks if a calendar file was built by this program.
+     * Used to block user from trying to load a generic ics file with load function,
+     * when they should use Import function instead.
+     * @param calendar
+     * @return 
+     */
     public boolean wasCalendarFileBuiltWithThisProgram(Calendar calendar) {
         ProdId id = calendar.getProductId();
         if (id == null) {
@@ -103,8 +108,5 @@ public class CalendarFileManager {
         return (id.getValue().contains(programIdentifier));                
     }
     
-//    public void validateFile(File selectedFile) throws ValidationException, IOException, FileNotFoundException, ParserException {
-//        Calendar test = loadCalendarFile(selectedFile);
-//        test.validate();
-//    }
+
 }

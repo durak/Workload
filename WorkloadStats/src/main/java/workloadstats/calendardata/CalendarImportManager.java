@@ -1,17 +1,15 @@
-package workloadstats.calendardata.hycalendar;
+package workloadstats.calendardata;
+
 
 import workloadstats.utils.EventType;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 import net.fortuna.ical4j.model.Calendar;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
-import workloadstats.utils.EventUtility;
-
 
 
 /**
@@ -20,47 +18,27 @@ import workloadstats.utils.EventUtility;
  * @author Ilkka
  */
 public class CalendarImportManager {
-
-    private Scanner lukija;
+    
     private CalendarImportParser calendarImportParser;
-    private CalendarImportSorter calendarImportSorter;
-    private Map<String, EventType> identifiedSummaries;
-    private List<Course> courses;
+    private CalendarImportBuilder calendarImportBuilder;
+    private Map<String, EventType> identifiedSummaries;   
 
-    public CalendarImportManager(Calendar calendar) throws SocketException {
-        this.lukija = new Scanner(System.in);
+    public CalendarImportManager(Calendar calendar) throws SocketException {        
 
         this.calendarImportParser = new CalendarImportParser(calendar);
-        this.calendarImportSorter = new CalendarImportSorter();
-//        this.identifiedSummaries = identifyUniqueSummaries();
-
-        this.courses = new ArrayList<>();
+        this.calendarImportBuilder = new CalendarImportBuilder();        
     }
-
+    
     /**
-     * Return list of courses identified by the user in Course event-wrappers
-     *
-     * @return List of courses in event-wrappers
+     * Return Unique summaries found in the imported raw calendar events
+     * @return 
      */
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-////////////////////////////////////////////////////////////////////////////////   
-    /**
-     * Identify found unique summaries with input from the user Uses getId() as
-     * a helper
-     *
-     * @return Map with summaries as keys and identification EventTypes as
-     * values
-     */
-
     public Set<String> getSummariesToIdentify() {
         return calendarImportParser.getUniqueSummaries();
     }
 
     /**
-     * Giant method for parsing imported data with userinput. To be refactored in the future.
+     * Giant method for parsing raw imported data with userinput. To be refactored in the future.
      * @param newSummaries
      * @param identifiedTypes
      * @param identifiedCourses
@@ -90,14 +68,14 @@ public class CalendarImportManager {
 
                 //let's make a course
                 Event dummy = calendarImportParser.getEventsOfASummary(oldSummary).get(0);                
-                Course course = calendarImportSorter.getNewCourse(dummy, oldSummary, newSummary);                
+                Course course = calendarImportBuilder.getNewCourse(dummy, oldSummary, newSummary);                
 
                 //let's add events to this course
                 for (String s : oldSummariesThatBelongToThisCourse) {
                     String newChildSummary = newSummaries.get(s);
-                    EventType newChildEt = identifiedTypes.get(s);
+                    EventType newChildEt = identifiedTypes.get(s);                    
                     List<Event> oldUnidentifiedEvents = calendarImportParser.getEventsOfASummary(s);
-                    List<Event> newIdentifiedEvents = calendarImportSorter.getEventsForParent(oldUnidentifiedEvents, eventType, newChildSummary);
+                    List<Event> newIdentifiedEvents = calendarImportBuilder.getEventsForParent(oldUnidentifiedEvents, newChildEt, newChildSummary);
                     course.addEventList(newIdentifiedEvents);
                 }
                 
@@ -109,29 +87,5 @@ public class CalendarImportManager {
         
         return crs;
     }
-
-
-//    /**
-//     * Get type identification from the user
-//     *
-//     * @param summary to be identified
-//     * @return identified EventType
-//     */
-
-////////////////////////////////////////////////////////////////////////////////    
-    /**
-     * Build Course-events from calendar events identified as courses
-     */
-
-//    /**
-//     * Get new names for summaries from the user Helper method for
-//     * buildCoursesFromIdentifiedEvents
-//     *
-//     * @param summary old summary name
-//     * @return new summary from user input
-//     */
-
-////////////////////////////////////////////////////////////////////////////////    
-
 
 }

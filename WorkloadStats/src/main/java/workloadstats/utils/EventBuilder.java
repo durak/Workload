@@ -23,7 +23,7 @@ import workloadstats.domain.model.Personal;
 import workloadstats.domain.model.Teamwork;
 
 /**
- * Builder for event creation and verification
+ * Builder for event creation and verification from user inputted data
  *
  * @author Ilkka
  */

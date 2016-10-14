@@ -2,22 +2,16 @@ package workloadstats.domain.model;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyFactoryImpl;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.property.Categories;
 import net.fortuna.ical4j.model.property.Status;
-import net.fortuna.ical4j.model.property.Summary;
 
 /**
  * Abstract calendar event type
@@ -56,16 +50,6 @@ public abstract class Event extends VEvent {
         }
     }
 
-    /**
-     * Set parent event's UID as this event's RELATED_TO value
-     *
-     * @param parent
-     */
-    public void childToAnotherEvent(Event parent) {
-        if (!parent.equals(this)) {
-            this.addPropertyToVEvent(Property.RELATED_TO, parent.getUid().getValue());
-        }
-    }
 
     public void addPropertyToVEvent(String property, String value) {
         PropertyFactoryImpl pf = PropertyFactoryImpl.getInstance();

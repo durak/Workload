@@ -1,27 +1,18 @@
 package workloadstats.ui;
 
-import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
-import workloadstats.domain.model.Course;
-import workloadstats.domain.model.Event;
-import workloadstats.ui.EventListRenderer;
 
 /**
- *
+ * Panel for showing the event listing
  * @author Ilkka
  */
 public class EventListPanel extends JPanel implements ListDataListener {
-
-    private Course selectedCourse;
-    private Event selectedEvent;
-
-    private List<Event> events;
+      
     private JList eventList;
 
     public EventListPanel(JList eventList) {
@@ -36,8 +27,7 @@ public class EventListPanel extends JPanel implements ListDataListener {
         this.setLayout(layout);
         JScrollPane scrollPane = new JScrollPane(eventList);
         add(scrollPane);
-
-        //eventList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);   
+        
         // Set custom renderer for event list
         eventList.setCellRenderer(new EventListRenderer());
     }
@@ -62,9 +52,6 @@ public class EventListPanel extends JPanel implements ListDataListener {
     @Override
     public void contentsChanged(ListDataEvent lde) {
         eventList.clearSelection();
-
-//        System.out.println("contents changed \n" + lde.toString());
-//        System.out.println("eventListPanel2 " + lde.getSource());
     }
 
 }

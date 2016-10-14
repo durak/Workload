@@ -1,4 +1,4 @@
-package workloadstats.calendardata.hycalendar;
+package workloadstats.calendardata;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,16 +34,8 @@ public class CalendarImportParser {
 
     }
 
-    public List<Event> getAllEvents() {
-        return allEvents;
-    }
-
     public Set<String> getUniqueSummaries() {
         return uniqueEventSummaryStrings;
-    }
-
-    public Map<String, List<Event>> getEventsPerSummaryString() {
-        return eventsPerSummaryString;
     }
 
     public List<Event> getEventsOfASummary(String summary) {

@@ -3,34 +3,24 @@ package workloadstats.ui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import workloadstats.calendardata.hycalendar.CalendarImportManager;
-import workloadstats.calendardata.mycalendar.MyCalendarControl;
-import workloadstats.domain.model.Course;
+import workloadstats.calendardata.MyCalendarControl;
 import workloadstats.utils.Ac;
 
 /**
- *
+ * Main GUI builder
  * @author Ilkka
  */
 public class Gui implements Runnable {
 
-    private CalendarImportManager hyCalendarControl;
     private MyCalendarControl myCalendarControl;
-
     private JFrame frame;
 
     public Gui(MyCalendarControl myCalendarControl) {
-//        this.hyCalendarControl = hyCalendarControl;
         this.myCalendarControl = myCalendarControl;
     }
 
@@ -49,12 +39,8 @@ public class Gui implements Runnable {
 
     private void initComponent(Container container) {
 
-        List<Course> empty = new ArrayList<>();
+        // Initialize Data model       
         CourseListModel courseListModel = new CourseListModel(myCalendarControl.getCourses());
-        
-        
-        // Initialize Data model
-//        CourseListModel clm = new CourseListModel(myCalendarControl.getCourses());        
         EventListModel eventListModel = new EventListModel(courseListModel);
 
         // Initialize Course and Event lists with Data models
@@ -64,56 +50,67 @@ public class Gui implements Runnable {
         courseList.setName("courselist");
         JList eventList = new JList(eventListModel);
         eventList.setName("eventlist");
-        
+
         // Initialize CourseListPanel and EventListPanel
         CourseListPanel courseListPanel = new CourseListPanel(courseList);
         EventListPanel middleEventListPanel = new EventListPanel(eventList);
 
         // Initialize Main menu
         Ac[] menuButtons = {Ac.NEWCALENDAR, Ac.LOADCALENDAR, Ac.IMPORTCALENDAR, Ac.SAVECALENDAR};
-        ButtonsPanel mainMenu = new ButtonsPanel(menuButtons, "Main menu");        
+        ButtonsPanel mainMenu = new ButtonsPanel(menuButtons, "Main menu");
         mainMenu.setMaximumSize(new Dimension(400, 20));
 
         // Initialize Calendar buttons
         Ac[] eventButtons = {Ac.NEWCOURSE, Ac.DELETECOURSE, Ac.NEWEVENT, Ac.DELETE_EVENT};
         ButtonsPanel calendarActionPanel = new ButtonsPanel(eventButtons, "Toiminnot");
         calendarActionPanel.setMaximumSize(new Dimension(400, 20));
-        
+
         // Initialize Selection Statistics & Selection Information panels
         SelectionStatsPanel selectionStatsPanel = new SelectionStatsPanel(eventListModel);
-        SelectionInformationPanel eventInfoPanel = new SelectionInformationPanel();
-        
-        
+        SelectionInformationPanel selectionInfoPanel = new SelectionInformationPanel();
+
+        // Initialize Calendar and Main Menu listeners 
+        CalendarActionListener calActListener = new CalendarActionListener(container, courseList, eventListModel, calendarActionPanel.getButtons());
+        MainMenuActionListener mainMenuLstr = new MainMenuActionListener(container, myCalendarControl, courseListModel, courseList);
+
         /*
-         *  Add listeners:
+         *  Add Listeners:
          *  CalendarActionListener
          *   -> Course list (ListSelectionListener)
          *   -> Event list (ListSelectionListener)
          *   -> Calendar buttons (ActionListener)
+         */
+        courseList.addListSelectionListener(calActListener);
+        eventList.addListSelectionListener(calActListener);
+        calendarActionPanel.addListener(calActListener);
+
+        /*
          *  MainMenuActionListener
-         *   -> mainMenu
+         *   -> mainMenu         
+         */
+        mainMenu.addListener(mainMenuLstr);
+        /*
          *  SelectionStatsPanel
          *   -> EventList (ListSelectionListener)
+         */
+        eventList.addListSelectionListener(selectionStatsPanel);
+        /*
          *  SelectionInformationPanel
          *   -> EventList (ListSelectionListener)
+         */
+        eventList.addListSelectionListener(selectionInfoPanel);
+
+        /*
          *  EventListPanel
          *   -> EventListModel (ListDataListener)
+         */
+        eventListModel.addListDataListener(middleEventListPanel);
+        /*
          *  EventDataModel
          *   -> CourseList (ListSelectionListener)
          */
-        
-        CalendarActionListener calEvButLstr = new CalendarActionListener(container, courseList, eventListModel, calendarActionPanel.getButtons());
-        MainMenuActionListener mainMenuLstr = new MainMenuActionListener(container, myCalendarControl, courseListModel, courseList);
-        
-        courseList.addListSelectionListener(calEvButLstr);
-        eventList.addListSelectionListener(calEvButLstr);
-        calendarActionPanel.addListener(calEvButLstr);       
-        mainMenu.addListener(mainMenuLstr);
-        eventList.addListSelectionListener(selectionStatsPanel);
-        eventList.addListSelectionListener(eventInfoPanel);
-        eventListModel.addListDataListener(middleEventListPanel);
         courseList.addListSelectionListener(eventListModel);
-        
+
         // Construct user interface with initialized parts
         JPanel west = new JPanel();
         west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
@@ -123,7 +120,7 @@ public class Gui implements Runnable {
 
         JPanel east = new JPanel();
         east.setLayout(new BoxLayout(east, BoxLayout.Y_AXIS));
-        east.add(eventInfoPanel);
+        east.add(selectionInfoPanel);
         east.add(selectionStatsPanel);
 
         Dimension eastDimension = new Dimension(400, 800);
@@ -135,15 +132,6 @@ public class Gui implements Runnable {
         container.add(west, BorderLayout.WEST);
         container.add(middleEventListPanel, BorderLayout.CENTER);
         container.add(east, BorderLayout.EAST);
-    }
-
-    public JFrame getFrame() {
-        return frame;
-    }
-
-    //testing
-    public List<Course> testaustaVartenKurssitUlosGuista() {
-        return this.myCalendarControl.getCourses();
     }
 
 }

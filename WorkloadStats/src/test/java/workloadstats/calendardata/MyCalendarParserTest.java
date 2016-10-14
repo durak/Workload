@@ -16,8 +16,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import workloadstats.calendardata.CalendarFileManager;
-import workloadstats.calendardata.mycalendar.MyCalendarControl;
-import workloadstats.calendardata.mycalendar.MyCalendarParser;
 import workloadstats.domain.model.Course;
 
 
