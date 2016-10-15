@@ -22,6 +22,9 @@ Linkin takana havainnoillistus (vielä pelkällä yliopiston kalenteridatalla, e
 ##Hylättyjä ominaisuuksia
  - työajan kellotus itse ohjelmalla hylättiin, koska ohjelman ydinajatukseksi muotoutui kalenterimerkintöjen muokkaus.
  
+##Hienoja uusia ominaisuuksia, joita tuli toteutettua
+ - Tapahtumien importtaus toimii älykkäästi. Jos importtaa uudestaan saman kurssin sisällön, ei uutta kurssia lisätä, vaan tarkistetaan onko uudessa importissa sellaisia tapahtumia mitä aiemmin ei olla tuotu ohjelmaan. Vain nämä tapahtumat lisätään jo olemassa olevaan kurssiin ohjelmassa. Tämän pohjalta pitäisi jatkossakin olla helppoa käyttää ohjelmaa yli periodien, tai toteuttaa tuo Online-luku suoraan yliopiston kalenteritiedostosta.
+ 
 ##Malli ja muutamia selvennyksiä kohdealueen mallintamisesta ohjelmassa
 Ohjelman käyttämä datasäilö on yksinkertainen iCalendar-standardin mukainen kalenteritiedosto. Ohjelma ei siis käytä tietokantatauluja, vaan datan purkaminen ohjelman sovelluslogiikan olioiksi, sekä tallentaminen takaisin tallennuskerrokseen tapahtuu iCal4J-kirjaston toimintoja hyödyntäen. Kirjaston tarjoamat luokat toimivat pohjana ohjelmassa toteutetulle sovelluslogiikalle.
 
