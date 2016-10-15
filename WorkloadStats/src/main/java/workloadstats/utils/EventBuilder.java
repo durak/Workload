@@ -13,13 +13,13 @@ import net.fortuna.ical4j.model.property.DtStamp;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.Summary;
 import net.fortuna.ical4j.util.UidGenerator;
-import workloadstats.domain.model.Course;
-import workloadstats.domain.model.Event;
-import workloadstats.domain.model.Exam;
-import workloadstats.domain.model.Exercise;
-import workloadstats.domain.model.Lecture;
-import workloadstats.domain.model.Personal;
-import workloadstats.domain.model.Teamwork;
+import workloadstats.domain.Course;
+import workloadstats.domain.Event;
+import workloadstats.domain.Exam;
+import workloadstats.domain.Exercise;
+import workloadstats.domain.Lecture;
+import workloadstats.domain.Personal;
+import workloadstats.domain.Teamwork;
 
 /**
  * Builder for event creation and verification from user inputted data

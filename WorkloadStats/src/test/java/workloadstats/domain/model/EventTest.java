@@ -1,12 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workloadstats.domain.model;
 
+import workloadstats.domain.Personal;
+import workloadstats.domain.Exam;
+import workloadstats.domain.Event;
 import java.net.SocketException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.TimeZone;
 import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.component.VEvent;
@@ -46,8 +46,8 @@ public class EventTest {
         Calendar c = Calendar.getInstance();
         Date start = new Date(new Date(c.getTime()));
         Date end = new Date(new Date(c.getTime()));
-        VEvent ve1 = new VEvent(start, "testi1");
-        VEvent ve2 = new VEvent(start, "testi2");
+        VEvent ve1 = new VEvent(start, end, "testi1");
+        VEvent ve2 = new VEvent(start, end, "testi2");
         ve1.getProperties().add(ug.generateUid());
         ve2.getProperties().add(ug.generateUid());
 
@@ -129,6 +129,30 @@ public class EventTest {
         assertEquals("TENTATIVE", ev1.getEventStatus());
         ev1.setStatusConfirmed();
         assertEquals("CONFIRMED", ev1.getEventStatus());        
+    }
+    
+    @Test
+    public void ajanPalautusStringinaToimii() {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
+        dateFormatter.setTimeZone(TimeZone.getTimeZone("Europe/Helsinki"));
+        Calendar c = Calendar.getInstance();
+        c.setTimeZone(TimeZone.getTimeZone("Europe/Helsinki"));
+        c.setTime(ev1.getStartDate().getDate());
+        int h = c.get(Calendar.HOUR_OF_DAY);
+        int m = c.get(Calendar.MINUTE);
+        int y = c.get(Calendar.YEAR);
+        int mo = c.get(Calendar.MONTH) + 1;
+        int d = c.get(Calendar.DAY_OF_MONTH);
+        
+        String hours = String.format("%02d", h);
+        String minute = String.format("%02d", m);
+        String year = String.format("%04d", y);
+        String month = String.format("%02d", mo);
+        String day = String.format("%02d", d);
+        
+        assertEquals(ev1.getStartDateString(), year + "." + month + "." + day);
+        assertEquals(ev1.getEndDateString(),  year + "." + month + "." + day);
+        assertEquals(ev1.getStartTime(), hours + "." + minute);
     }
 
 }

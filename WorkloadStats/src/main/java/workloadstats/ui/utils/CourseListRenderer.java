@@ -4,7 +4,7 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-import workloadstats.domain.model.Course;
+import workloadstats.domain.Course;
 
 /**
  * Custom renderer for JList of courses

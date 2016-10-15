@@ -4,8 +4,8 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import net.fortuna.ical4j.model.PropertyList;
-import workloadstats.domain.model.Course;
-import workloadstats.domain.model.Event;
+import workloadstats.domain.Course;
+import workloadstats.domain.Event;
 
 /**
  * Static helper utility methods

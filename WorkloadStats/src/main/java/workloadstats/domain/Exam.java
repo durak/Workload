@@ -1,6 +1,5 @@
-package workloadstats.domain.model;
+package workloadstats.domain;
 
-import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.component.VEvent;
 
@@ -10,10 +9,6 @@ import net.fortuna.ical4j.model.component.VEvent;
  * @author Ilkka
  */
 public class Exam extends Event {
-
-    public Exam(DateTime start, DateTime end, String summary) {
-        super(start, end, summary);
-    }
 
     public Exam(VEvent ve) {
         super(ve);

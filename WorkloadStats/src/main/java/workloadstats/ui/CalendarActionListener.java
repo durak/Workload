@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import workloadstats.utils.EventBuilder;
-import workloadstats.domain.model.Course;
-import workloadstats.domain.model.Event;
+import workloadstats.domain.Course;
+import workloadstats.domain.Event;
 import workloadstats.utils.Ac;
 import workloadstats.utils.PropId;
 

@@ -5,12 +5,12 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import workloadstats.domain.model.Event;
-import workloadstats.domain.model.Exam;
-import workloadstats.domain.model.Exercise;
-import workloadstats.domain.model.Lecture;
-import workloadstats.domain.model.Personal;
-import workloadstats.domain.model.Teamwork;
+import workloadstats.domain.Event;
+import workloadstats.domain.Exam;
+import workloadstats.domain.Exercise;
+import workloadstats.domain.Lecture;
+import workloadstats.domain.Personal;
+import workloadstats.domain.Teamwork;
 
 /**
  * Analysis class that tells us things about a list of calendar events. Private

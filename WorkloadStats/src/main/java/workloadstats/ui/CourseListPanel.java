@@ -4,7 +4,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import workloadstats.domain.model.Course;
+import workloadstats.domain.Course;
 import workloadstats.ui.utils.CourseListRenderer;
 
 

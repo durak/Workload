@@ -10,8 +10,8 @@ import java.util.Set;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.component.VEvent;
-import workloadstats.domain.model.Event;
-import workloadstats.domain.model.Trash;
+import workloadstats.domain.Event;
+import workloadstats.domain.Trash;
 
 /**
  * Parser functions for imported University calendar data

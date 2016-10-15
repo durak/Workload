@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.fortuna.ical4j.model.Calendar;
-import workloadstats.domain.model.Course;
-import workloadstats.domain.model.Event;
+import workloadstats.domain.Course;
+import workloadstats.domain.Event;
 import workloadstats.utils.EventUtility;
 
 /**

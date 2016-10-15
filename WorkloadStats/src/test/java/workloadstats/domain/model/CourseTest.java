@@ -5,6 +5,12 @@
  */
 package workloadstats.domain.model;
 
+import workloadstats.domain.Teamwork;
+import workloadstats.domain.Personal;
+import workloadstats.domain.Lecture;
+import workloadstats.domain.Exercise;
+import workloadstats.domain.Exam;
+import workloadstats.domain.Event;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,7 +25,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import workloadstats.domain.model.Course;
+import workloadstats.domain.Course;
 
 /**
  *

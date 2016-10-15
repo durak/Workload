@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import workloadstats.domain.model.Event;
+import workloadstats.domain.Event;
 import workloadstats.utils.Ac;
 import workloadstats.utils.EventUtility;
 

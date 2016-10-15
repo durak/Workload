@@ -2,8 +2,8 @@ package workloadstats.ui;
 
 import java.util.List;
 import javax.swing.AbstractListModel;
-import workloadstats.domain.model.Course;
-import workloadstats.domain.model.Event;
+import workloadstats.domain.Course;
+import workloadstats.domain.Event;
 
 /**
  * Data Model for courselist, connects domain objects with the user interface

@@ -1,4 +1,4 @@
-package workloadstats.domain.model;
+package workloadstats.domain;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

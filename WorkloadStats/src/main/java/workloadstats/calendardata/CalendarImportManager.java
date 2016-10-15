@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import net.fortuna.ical4j.model.Calendar;
-import workloadstats.domain.model.Course;
-import workloadstats.domain.model.Event;
+import workloadstats.domain.Course;
+import workloadstats.domain.Event;
 
 
 /**

@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import workloadstats.calendardata.CalendarImportManager;
 import workloadstats.calendardata.MyCalendarControl;
-import workloadstats.domain.model.Course;
+import workloadstats.domain.Course;
 import workloadstats.utils.Ac;
 import workloadstats.utils.EventType;
 

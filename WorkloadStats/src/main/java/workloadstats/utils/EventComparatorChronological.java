@@ -1,7 +1,7 @@
 package workloadstats.utils;
 
 import java.util.Comparator;
-import workloadstats.domain.model.Event;
+import workloadstats.domain.Event;
 
 /**
  *

@@ -12,13 +12,13 @@ import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Categories;
 import workloadstats.utils.EventType;
-import workloadstats.domain.model.Course;
-import workloadstats.domain.model.Event;
-import workloadstats.domain.model.Exercise;
-import workloadstats.domain.model.Lecture;
-import workloadstats.domain.model.Personal;
-import workloadstats.domain.model.Teamwork;
-import workloadstats.domain.model.Trash;
+import workloadstats.domain.Course;
+import workloadstats.domain.Event;
+import workloadstats.domain.Exercise;
+import workloadstats.domain.Lecture;
+import workloadstats.domain.Personal;
+import workloadstats.domain.Teamwork;
+import workloadstats.domain.Trash;
 
 /**
  * Parser for programs own calendar data & domain model object builder
