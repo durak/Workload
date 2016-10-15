@@ -15,8 +15,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import workloadstats.calendardata.CalendarFileManager;
 import workloadstats.domain.model.Course;
+import workloadstats.domain.model.Event;
 
 
 /**
@@ -27,6 +27,7 @@ public class MyCalendarParserTest {
 
     Calendar calendar;
     List<Course> courses;
+    MyCalendarParser myParser;
 
     public MyCalendarParserTest() {
     }
@@ -42,14 +43,11 @@ public class MyCalendarParserTest {
     @Before
     public void setUp() throws FileNotFoundException, IOException, ParserException {
 
-//        EventUtilities eu = new EventUtilities();
         File calendarFile = new File("testCalendar.ics");
-        FileInputStream my = new FileInputStream(calendarFile);
-        MyCalendarControl mcc = new MyCalendarControl();
-        CalendarFileManager builder = new CalendarFileManager();
+        FileInputStream my = new FileInputStream(calendarFile);        
         CalendarBuilder cb = new CalendarBuilder();
         calendar = cb.build(my);
-        MyCalendarParser myParser = new MyCalendarParser(calendar);
+        myParser = new MyCalendarParser(calendar);
         courses = myParser.getCourses();
     }
 
@@ -72,5 +70,12 @@ public class MyCalendarParserTest {
             olioidenMaara += course.getAllEvents().size();  //kaikki kurssin merkinnät            
         }
         assertEquals(iCalJasennetytLuokittelemattomatMerkinnat, olioidenMaara);
+    }
+    
+    @Test
+    public void eventilleLoydetaanParentKurssi() {
+        Course crs = courses.get(0);
+        Event ev = crs.getAllEvents().get(0);
+        assertEquals(myParser.getCourseForEvent(ev), crs);                
     }
 }

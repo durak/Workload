@@ -22,6 +22,11 @@ import workloadstats.utils.EventType;
 import workloadstats.ui.utils.TransferFocus;
 
 /**
+ * User input panel for identifying new imports to calendar Complicated process:
+ * user inputs new name for a "main event" (preferably lectures) of the course,
+ * and this user input needs to be shown in a JSpinner for the user as they
+ * match the other events of this course to this name. Giant size for now, will
+ * be refactored in the future.
  *
  * @author Ilkka
  */
@@ -47,7 +52,7 @@ public class CalendarEventIdentifierPanel extends JPanel {
         this.availableMatches = new ArrayList<>();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(title));
-        setLayout(new GridLayout(summaries.size() + 1, 4));        
+        setLayout(new GridLayout(summaries.size() + 1, 4));
 
         initComponents();
     }
@@ -91,9 +96,9 @@ public class CalendarEventIdentifierPanel extends JPanel {
             i++;
         }
         int j = 0;
-        
+
         JCheckBox[] courseCheckBoxes = new JCheckBox[summaries.size()];
-        JSpinner[] matchSpinners =new JSpinner[summaries.size()];
+        JSpinner[] matchSpinners = new JSpinner[summaries.size()];
         for (String summary : summaries) {
 
             JCheckBox jcb = new JCheckBox();
@@ -109,13 +114,13 @@ public class CalendarEventIdentifierPanel extends JPanel {
             add(userInputs[j]);
             add(js);
             add(jcbWrap);
-            JSpinner jsMatch = JTextSpinner(matches);
+            JSpinner jsMatch = jTextSpinner(matches);
             this.userMatch.put(summary, jsMatch);
             add(jsMatch);
-            
+
             courseCheckBoxes[j] = jcb;
             matchSpinners[j] = jsMatch;
-            
+
             // Disable Matchspinner if event was identified as a course
             jcb.addItemListener(new ItemListener() {
                 @Override
@@ -127,11 +132,11 @@ public class CalendarEventIdentifierPanel extends JPanel {
                         jsMatch.setEnabled(true);
                     }
                 }
-            });            
+            });
 
             j++;
         }
-        
+
         for (int k = 0; k < summaries.size(); k++) {
             courseCheckBoxes[k].addItemListener(new MatchListener(userInputTextAreas[k], matchSpinners));
         }
@@ -210,7 +215,7 @@ public class CalendarEventIdentifierPanel extends JPanel {
      * @param values
      * @return
      */
-    private JSpinner JTextSpinner(JTextArea[] values) {
+    private JSpinner jTextSpinner(JTextArea[] values) {
         JTextArea title = new JTextArea(3, 30);
         title.setLineWrap(true);
         title.setEditable(false);
@@ -231,7 +236,7 @@ public class CalendarEventIdentifierPanel extends JPanel {
 
         return statusSpinner;
     }
-    
+
     /**
      * Update user's input on event names to match spinner values
      */
@@ -298,7 +303,7 @@ public class CalendarEventIdentifierPanel extends JPanel {
                     availableMatches.add(new JTextArea("Valitse ainakin yksi päätapahtuma"));
                 }
             }
-            
+
             for (JSpinner jSpinnerToUpdate : toUpdate) {
                 SpinnerListModel slm = (SpinnerListModel) jSpinnerToUpdate.getModel();
                 slm.setList(availableMatches);

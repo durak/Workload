@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2016</copyright>
     <item>
-      <title>File: 19,
+      <title>File: 43,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.calendardata.mycalendar.MyCalendarControl.java">workloadstats/calendardata/mycalendar/MyCalendarControl.java</a>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.utils.TransferFocus.java">workloadstats/ui/utils/TransferFocus.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.calendardata.mycalendar.MyCalendarParser.java">workloadstats/calendardata/mycalendar/MyCalendarParser.java</a>
+                  <a href="${project.url}/checkstyle.html#workloadstats.utils.Ac.java">workloadstats/utils/Ac.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.calendardata.CalendarBuilderImpl.java">workloadstats/calendardata/CalendarBuilderImpl.java</a>
+                  <a href="${project.url}/checkstyle.html#workloadstats.calendardata.MyCalendarControl.java">workloadstats/calendardata/MyCalendarControl.java</a>
                 </td>
                 <td>
                   0
@@ -88,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.utils.EventUtilities.java">workloadstats/utils/EventUtilities.java</a>
+                  <a href="${project.url}/checkstyle.html#workloadstats.utils.EventBuilder.java">workloadstats/utils/EventBuilder.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.Main.java">workloadstats/Main.java</a>
+                  <a href="${project.url}/checkstyle.html#workloadstats.utils.StatusType.java">workloadstats/utils/StatusType.java</a>
                 </td>
                 <td>
                   0
@@ -116,49 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.utils.Timer.java">workloadstats/utils/Timer.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.calendardata.hycalendar.HyCalendarControl.java">workloadstats/calendardata/hycalendar/HyCalendarControl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.domain.model.Lecture.java">workloadstats/domain/model/Lecture.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.domain.model.EventType.java">workloadstats/domain/model/EventType.java</a>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.CalendarEventIdentifierPanel.java">workloadstats/ui/CalendarEventIdentifierPanel.java</a>
                 </td>
                 <td>
                   0
@@ -186,6 +144,20 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.CalendarActionListener.java">workloadstats/ui/CalendarActionListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#workloadstats.domain.model.Personal.java">workloadstats/domain/model/Personal.java</a>
                 </td>
                 <td>
@@ -200,7 +172,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.calendardata.hycalendar.HyEventSorter.java">workloadstats/calendardata/hycalendar/HyEventSorter.java</a>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.Gui.java">workloadstats/ui/Gui.java</a>
                 </td>
                 <td>
                   0
@@ -214,7 +186,63 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.domain.model.Uncategorized.java">workloadstats/domain/model/Uncategorized.java</a>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.SelectionAttendancePanel.java">workloadstats/ui/SelectionAttendancePanel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.CalendarEventUserInputPanel.java">workloadstats/ui/CalendarEventUserInputPanel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.utils.PropId.java">workloadstats/utils/PropId.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.utils.EventListRenderer.java">workloadstats/ui/utils/EventListRenderer.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.calendardata.CalendarImportManager.java">workloadstats/calendardata/CalendarImportManager.java</a>
                 </td>
                 <td>
                   0
@@ -242,7 +270,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.domain.model.Course.java">workloadstats/domain/model/Course.java</a>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.MainMenuActionListener.java">workloadstats/ui/MainMenuActionListener.java</a>
                 </td>
                 <td>
                   0
@@ -256,7 +284,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.calendardata.hycalendar.HyCalendarParser.java">workloadstats/calendardata/hycalendar/HyCalendarParser.java</a>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.utils.CourseListRenderer.java">workloadstats/ui/utils/CourseListRenderer.java</a>
                 </td>
                 <td>
                   0
@@ -270,7 +298,21 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.domain.model.Exercise.java">workloadstats/domain/model/Exercise.java</a>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.SelectionInformationPanel.java">workloadstats/ui/SelectionInformationPanel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#ical4j.properties">ical4j.properties</a>
                 </td>
                 <td>
                   0
@@ -298,7 +340,301 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#workloadstats.ui.TextUi.java">workloadstats/ui/TextUi.java</a>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.CourseListModel.java">workloadstats/ui/CourseListModel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.utils.EventListAnalysis.java">workloadstats/utils/EventListAnalysis.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.utils.EventType.java">workloadstats/utils/EventType.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.Main.java">workloadstats/Main.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.utils.DateTools.java">workloadstats/utils/DateTools.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.domain.model.Trash.java">workloadstats/domain/model/Trash.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.SelectionStatsPanel.java">workloadstats/ui/SelectionStatsPanel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.domain.model.Lecture.java">workloadstats/domain/model/Lecture.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.CourseListPanel.java">workloadstats/ui/CourseListPanel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#config.properties">config.properties</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.SelectionAttendanceListener.java">workloadstats/ui/SelectionAttendanceListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.EventListPanel.java">workloadstats/ui/EventListPanel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.calendardata.CalendarImportBuilder.java">workloadstats/calendardata/CalendarImportBuilder.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.EventListModel.java">workloadstats/ui/EventListModel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.utils.EventComparatorChronological.java">workloadstats/utils/EventComparatorChronological.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.utils.EventUtility.java">workloadstats/utils/EventUtility.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.calendardata.CalendarImportParser.java">workloadstats/calendardata/CalendarImportParser.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.ui.ButtonsPanel.java">workloadstats/ui/ButtonsPanel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.domain.model.Course.java">workloadstats/domain/model/Course.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.calendardata.CalendarFileManager.java">workloadstats/calendardata/CalendarFileManager.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.domain.model.Exercise.java">workloadstats/domain/model/Exercise.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#workloadstats.calendardata.MyCalendarParser.java">workloadstats/calendardata/MyCalendarParser.java</a>
                 </td>
                 <td>
                   0
