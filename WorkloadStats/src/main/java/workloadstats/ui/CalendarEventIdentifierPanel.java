@@ -35,7 +35,6 @@ public class CalendarEventIdentifierPanel extends JPanel {
     private Map<String, JSpinner> userInputOnEventType;
     private Map<String, JCheckBox> userInputOnCourse;
     private Map<String, JSpinner> userMatch;
-
     private List<JTextArea> availableMatches;
 
     public CalendarEventIdentifierPanel(Set<String> smrs, String title) {
@@ -45,12 +44,10 @@ public class CalendarEventIdentifierPanel extends JPanel {
         this.userInputOnCourse = new HashMap<>();
         this.userMatchesOnSummaries = new HashMap<>();
         this.userMatch = new HashMap<>();
-        //
         this.availableMatches = new ArrayList<>();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(title));
-        setLayout(new GridLayout(summaries.size() + 1, 4));
-        GridLayout g = new GridLayout();
+        setLayout(new GridLayout(summaries.size() + 1, 4));        
 
         initComponents();
     }
@@ -63,7 +60,6 @@ public class CalendarEventIdentifierPanel extends JPanel {
             add(jp);
         }
         JTextArea[] userInputTextAreas = new JTextArea[summaries.size()];
-
         JScrollPane[] userInputs = new JScrollPane[summaries.size()];
         JTextArea[] matches = new JTextArea[summaries.size()];
 
@@ -83,7 +79,7 @@ public class CalendarEventIdentifierPanel extends JPanel {
 
             this.userMatchesOnSummaries.put(summary, match);
 
-            MyDocumentListener userListener = new MyDocumentListener(match, userInput);
+            UserEventNameListener userListener = new UserEventNameListener(match, userInput);
             userInput.getDocument().addDocumentListener(userListener);
 
             //
@@ -239,12 +235,12 @@ public class CalendarEventIdentifierPanel extends JPanel {
     /**
      * Update user's input on event names to match spinner values
      */
-    class MyDocumentListener implements DocumentListener {
+    class UserEventNameListener implements DocumentListener {
 
         JTextArea toUpdate;
         JTextArea toListen;
 
-        public MyDocumentListener(JTextArea tu, JTextArea tl) {
+        public UserEventNameListener(JTextArea tu, JTextArea tl) {
             toUpdate = tu;
             toListen = tl;
         }

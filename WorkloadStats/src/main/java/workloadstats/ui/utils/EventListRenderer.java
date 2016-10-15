@@ -1,4 +1,4 @@
-package workloadstats.ui;
+package workloadstats.ui.utils;
 
 import java.awt.Component;
 import javax.swing.JLabel;

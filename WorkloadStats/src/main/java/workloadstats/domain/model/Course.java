@@ -1,7 +1,6 @@
 package workloadstats.domain.model;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.PropertyList;
@@ -13,12 +12,7 @@ import net.fortuna.ical4j.model.component.VEvent;
  * @author Ilkka
  */
 public class Course extends Event {
-
-    private String courseId;
-    
-
-    private boolean finished;
-
+      
     private List<Event> lectures;
     private List<Event> exercises;
     private List<Event> personal;

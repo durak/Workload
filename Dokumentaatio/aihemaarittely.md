@@ -1,9 +1,9 @@
 #Aihe
 Ohjelman tarkoitus on toimia opiskelijan henkilökohtaisena apuvälineenä opiskelun työtaakan aikaseurannassa. Ensimmäisellä käyttökerralla opiskelija lukee ohjelmalla käynnissä olevat kurssinsa yliopiston kalenteritiedosta, tai täyttää ohjelmaan tiedot itse. Jatkossa opiskelija kirjaa kursseihin tehdyn työn sekä luennoille yms. osallistumisensa ohjelmaan.
 
-Kurssikohtaisesti kerätään tiedot luennoista, laskuharjoituksista sekä muusta kurssin eteen tehdystä työstä (esim. pajatyöskentely tai itsenäinen työskentely). Itsenäistä työtä tehdessään käyttäjä voi kellottaa työskentelynsä ohjelmalla suoraan, tai syöttää aikatiedot erikseen jälkikäteen. Etukäteen aikataulutetun työn (luennot ja laskuharjoitukset) tapauksessa ohjelma voi esimerkiksi kysyä opiskelijalta kävikö tämä luennolla, jolloin vastauksesta riippuen aikaseurantaa päivitetään.
+Kurssikohtaisesti kerätään tiedot luennoista, laskuharjoituksista, omasta työskentelystä, tiimityöskentelystä sekä kokeista.
 
-Varastoiduista seurantatiedoista opiskelija voi verrata kurssiin käyttämäänsä aikaa sen opintopistemäärän laskennolliseen työtaakkaan tai muihin suorittamiinsa kursseihin.
+Varastoiduista seurantatiedoista opiskelija voi verrata kurssiin käyttämäänsä aikaa muihin suorittamiinsa kursseihin.
 
 Kurssien työtaakasta voidaan luoda myös aggregaattimuuttujia ja katsoa opiskelijan kokonaistaakkaa jollain aikavälillä.
 
@@ -17,6 +17,10 @@ Linkin takana havainnoillistus (vielä pelkällä yliopiston kalenteridatalla, e
 ##Mahdollisia laajennuksia:
  - visuaalisia kuvaajia seurantatiedoista
  - ei kalenteritiedostoja, vaan suora lukeminen yliopiston kalenterista ja tallentaminen esim. google calendariin.
+ - opintopisteet mukaan statseihin
+ 
+##Hylättyjä ominaisuuksia
+ - työajan kellotus itse ohjelmalla hylättiin, koska ohjelman ydinajatukseksi muotoutui kalenterimerkintöjen muokkaus.
  
 ##Malli ja muutamia selvennyksiä kohdealueen mallintamisesta ohjelmassa
 Ohjelman käyttämä datasäilö on yksinkertainen iCalendar-standardin mukainen kalenteritiedosto. Ohjelma ei siis käytä tietokantatauluja, vaan datan purkaminen ohjelman sovelluslogiikan olioiksi, sekä tallentaminen takaisin tallennuskerrokseen tapahtuu iCal4J-kirjaston toimintoja hyödyntäen. Kirjaston tarjoamat luokat toimivat pohjana ohjelmassa toteutetulle sovelluslogiikalle.
@@ -37,4 +41,17 @@ Ohjelmalogiikan toiminnan edellyttämät liitokset merkintöjen välillä (luokk
 Seuraavassa tarkempi hahmotelma ohjelman muiden toimintojen suhtautumisesta edellä esitettyyn kohdealueen luokkamalliin. System on tässä yleinen ohjelmalogiikkan edustaja, samoin kuin esimerkiksi ”Analysis functions” kuvaa kokonaisuudessaan ohjelman analyysiluokkia. 
 
 ![Luokkakaavio2](luokkakaavio2.png)
+
+
+## Uusi luokkakaavio, sekvenssikaavioita ja ohjelman lopullisen rakenteen avausta
+![Luokkakaavio3](luokkakaavio3.png)
+
+## Rakennekuvaus
+Ohjelma on lähes valmistunut. Yllä näkyvässä luokkakaaviossa on pääosin kuvattu merkittävät tuntemissuhteet ohjelman sisällä. Kaavioon piirrettyjen luokkien lisäksi graafinen käyttöliittymä rakentuu useista muistakin komponenteista, ja ohjelmassa on lisäksi utils-pakkauksen alla useita apuvälineluokkia ja lueteltuja tyyppejä. 
+
+Ohjelman käynnistyksen yhteydessä luodaan MyCalendarControl, joka toimii ohjelman ytimessä sovelluslogiikan ja käyttöliittymän välissä. Se tarjoilee kunakin ajanhetkenä käytössä olevan kalenterin sisällön käyttöliittymälle CourseListModel-luokan sisältönä (lista kursseja): ensin käynnistyksen yhteydessä GUI:n komponenttien rakentamisen osana, ja myöhemmin käyttäjän tehdessä muutoksia MainMenuActionListenerin toiminnoilla. MyCalendarControl, kuten mikään muukaan sovelluslogiikan luokka ei tunne niiden käyttäjiä GUI:n puolella mitenkään. GUI:n komponentit tuntevat käyttäjän valitsemia kursseja ja tapahtumia (jotka saatu CourseListModelista), jonka lisäksi jotkin osat GUI:ta käyttävät utils-paketin apuvälineitä. 
+
+MyCalendarControl saa kurssit joko avaamalla kalenteritiedoston CalendarFilemanagerin kautta suoraan käyttöön parsimalla sen MyCalendarParserilla, tai käyttäjän valitessa Import-toiminnon, jolloin kalenteritiedoston sisältö parsitaan CalendarImportManager, CalendarImportParser ja CalendarImportBuilder luokkien toimintoina. Ohjelma tallentaa täysin standardinmukaiseen ics-kalenteritiedostoon, jonka voi ladata mihin tahansa kalenteriohjelmaan katseltavaksi. Jotta käyttäjän luoma rakenne säilyisi, hyväksikäytetään tallennuksessa kalenterimerkintöjen kenttiä luovasti. Kalenteritiedoston luku olioiksi ja olioiden tallennus takaisin kokonaiseksi kalenteriksi tapahtuvat ical4j-kirjaston toiminnoilla.
+
+Graafisen käyttöliittymän rakentaminen ja suunnittelu tuntui todella vaikealta, ja aikaa upposi hirmuiset määrät edes nykyisen kaltaisen selvyyden saavuttamiseen rakenteessa. Kunhan pienen tauon jälkeen jaksan palata ohjelman pariin, siitä voisi refaktoroida koko Lecture, Exercise jne. luokkarakenteen pois. Luokista tuli loppujenlopuksi täysin toimettomia, ja ne toimivat vain identifikaattoreilla eri tapahtumatyypeille. Tämä onnistuisi kuitenkin paljon paremmin attribuuttina yhdessä luokassa, jolloin utils-paketin kovassa käytössä oleva Enum EventType tulisi vielä hyödyllisemmäksi. 
 

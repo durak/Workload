@@ -12,7 +12,6 @@ import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStamp;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.Summary;
-import net.fortuna.ical4j.util.HostInfo;
 import net.fortuna.ical4j.util.UidGenerator;
 import workloadstats.domain.model.Course;
 import workloadstats.domain.model.Event;
@@ -110,12 +109,4 @@ public class EventBuilder {
         return userAnswers.get(PropId.COURSENAME).isEmpty();
     }
 
-    private class HostNfo implements HostInfo {
-
-        @Override
-        public String getHostName() {
-            return "mynonrealhost";
-        }
-
-    }
 }

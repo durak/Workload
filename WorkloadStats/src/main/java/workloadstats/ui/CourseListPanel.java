@@ -6,7 +6,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import workloadstats.domain.model.Course;
-import workloadstats.ui.CourseListRenderer;
+import workloadstats.ui.utils.CourseListRenderer;
 
 
 /**

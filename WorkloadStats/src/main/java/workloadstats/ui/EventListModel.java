@@ -21,9 +21,7 @@ import workloadstats.utils.EventComparatorChronological;
 public class EventListModel extends AbstractListModel implements ListSelectionListener {
 
     private CourseListModel clm;
-
-    private List<Event> events;
-    private Course course;
+    private List<Event> events;    
 
     public EventListModel(CourseListModel clm) {
         this.clm = clm;
@@ -40,21 +38,6 @@ public class EventListModel extends AbstractListModel implements ListSelectionLi
         return events.get(i);
     }
 
-    public void addNewEvent(Event ev) {
-        this.course.addEvent(ev);
-        //this, alku, loppu
-        fireContentsChanged(this, 0, getSize());
-    }
-
-    public void removeEvent(Event ev) {
-        System.out.println(ev);
-        this.course.removeEvent(ev);
-        fireContentsChanged(this, 0, getSize());
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
 
     /**
      * A bit complicated process: Listens to ListSelectionEvents from
