@@ -14,4 +14,3 @@ iCalendar-standardin mukaista kalenteridataa hyödyntävä seurantatyökalu opis
 ## Muuta kivaa
 [iCalendar-info](http://icalendar.org/)
 
-[Koodikatselmoijalle - just for fun](Dokumentaatio/fortehfunovits.md)

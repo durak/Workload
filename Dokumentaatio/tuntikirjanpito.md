@@ -7,4 +7,7 @@ Päivä | Tunnit | Kuvaus
 17.09.2016 | 10.0h | iCal4j-kirjastoon tutustumista ja koodausta
 18.09.2016 | 10.0h | Koodausta ja rakenteen uudelleenjärjestelyä, Javadocceja
 18.09.2016 | 4.0h | Dokumentointia ja rakenteen järjestelyä
+06.10.2016 | ---- | -
+ -  | ---- | -
+16.10.2016| | +60.0h | Graafinen käyttöliittymä
 ... | ... | ...

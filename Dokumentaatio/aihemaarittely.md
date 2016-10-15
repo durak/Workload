@@ -55,3 +55,9 @@ MyCalendarControl saa kurssit joko avaamalla kalenteritiedoston CalendarFilemana
 
 Graafisen käyttöliittymän rakentaminen ja suunnittelu tuntui todella vaikealta, ja aikaa upposi hirmuiset määrät edes nykyisen kaltaisen selvyyden saavuttamiseen rakenteessa. Kunhan pienen tauon jälkeen jaksan palata ohjelman pariin, siitä voisi refaktoroida koko Lecture, Exercise jne. luokkarakenteen pois. Luokista tuli loppujenlopuksi täysin toimettomia, ja ne toimivat vain identifikaattoreilla eri tapahtumatyypeille. Tämä onnistuisi kuitenkin paljon paremmin attribuuttina yhdessä luokassa, jolloin utils-paketin kovassa käytössä oleva Enum EventType tulisi vielä hyödyllisemmäksi. 
 
+<sekvenssikaavioita tulossa>
+
+## Käyttöohje
+Tiedostolla readymadecalendar.ics voi testata valmista ohjelman omaa formaattia olevaa kalenteritiedostoa, tai jos haluaa elää villisti voi kokeilla import-toimintoa importcalendar.ics tiedostolla. Importtaaminen toimii 100%, mutta siinä on pieniä myönnytyksiä käyttölogiikan saralla tehty, koska ainoa käyttäjä olen kuitenkin loppupeleissä minä. 
+
+Kun kalenteri on avattu, voi valita yhden tai useampia kursseja kerrallaan hiirellä, ja näistä yhden tai useamman tapahtuman kerrallaan. Käyttöliittymän ominaisuudet jotka ovat tarjolla riippuvat kunkin hetken valinnoista joita graafisessa liittymässä tehdään: jos valitsee useamman kurssin, ei voi lisätä tapahtumia, kun ei tiedetä mihin kurssiin tapahtuma menisi jne. Kun valitsee kaksi tai useamman tapahtuman, näkyy tapahtumien aikavälin statsit oikeassa alareunassa.
