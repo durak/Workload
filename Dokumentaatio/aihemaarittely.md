@@ -58,7 +58,13 @@ MyCalendarControl saa kurssit joko avaamalla kalenteritiedoston CalendarFilemana
 
 Graafisen käyttöliittymän rakentaminen ja suunnittelu tuntui todella vaikealta, ja aikaa upposi hirmuiset määrät edes nykyisen kaltaisen selvyyden saavuttamiseen rakenteessa. Kunhan pienen tauon jälkeen jaksan palata ohjelman pariin, siitä voisi refaktoroida koko Lecture, Exercise jne. luokkarakenteen pois. Luokista tuli loppujenlopuksi täysin toimettomia, ja ne toimivat vain identifikaattoreilla eri tapahtumatyypeille. Tämä onnistuisi kuitenkin paljon paremmin attribuuttina yhdessä luokassa, jolloin utils-paketin kovassa käytössä oleva Enum EventType tulisi vielä hyödyllisemmäksi. 
 
-<sekvenssikaavioita tulossa>
+Sekvenssikaavio ohjelman käynnistyksestä:
+
+![sekvenssi2](sekvenssi2.png)
+
+Sekvenssikaavio uuden tapahtuman lisäämisestä kurssiin:
+
+![sekvenssi3](sekvenssi3.png)
 
 ## Käyttöohje
 Tiedostolla readymadecalendar.ics voi testata valmista ohjelman omaa formaattia olevaa kalenteritiedostoa, tai jos haluaa elää villisti voi kokeilla import-toimintoa importcalendar.ics tiedostolla. Importtaaminen toimii 100%, mutta siinä on pieniä myönnytyksiä käyttölogiikan saralla tehty, koska ainoa käyttäjä olen kuitenkin loppupeleissä minä. 

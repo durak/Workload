@@ -44,8 +44,7 @@ public class CalendarFileManager {
 
         Calendar calendar = null;
         try {
-            calendar = calendarBuilder.build(in);
-            TimeZoneRegistry r = calendarBuilder.getRegistry();
+            calendar = calendarBuilder.build(in);            
 
         } catch (IOException ex) {
             Logger.getLogger(CalendarFileManager.class.getName()).log(Level.SEVERE, null, ex);

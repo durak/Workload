@@ -1,6 +1,5 @@
 package workloadstats.ui;
 
-import workloadstats.ui.CourseListModel;
 import javax.swing.BoxLayout;
 import javax.swing.JList;
 import javax.swing.JPanel;

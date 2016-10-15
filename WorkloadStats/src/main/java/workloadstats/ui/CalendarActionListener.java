@@ -153,7 +153,7 @@ public class CalendarActionListener implements ActionListener, ListSelectionList
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(container, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(CalendarActionListener.class.getName()).log(Level.SEVERE, null, ex);
+//                Logger.getLogger(CalendarActionListener.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -202,7 +202,7 @@ public class CalendarActionListener implements ActionListener, ListSelectionList
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(container, "Virhe syötteessä", "ALARM", JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(CalendarActionListener.class.getName()).log(Level.SEVERE, null, ex);
+//                Logger.getLogger(CalendarActionListener.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }

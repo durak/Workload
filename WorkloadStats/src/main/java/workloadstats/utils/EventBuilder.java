@@ -85,7 +85,7 @@ public class EventBuilder {
         String eTime = userAnswers.get(PropId.ENDTIME);
         String type = userAnswers.get(PropId.EVENTTYPE);
         String status = userAnswers.get(PropId.STATUS);
-        System.out.println(type);
+        
         String startDateTime = sDate + "T" + sTime + "00";
         String endDateTime = sDate + "T" + eTime + "00";
         endDateTime = DateTools.checkAndCorrectMidnight(startDateTime, endDateTime);
