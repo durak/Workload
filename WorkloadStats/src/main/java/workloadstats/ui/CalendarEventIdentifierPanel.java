@@ -32,7 +32,7 @@ import workloadstats.ui.utils.TransferFocus;
  */
 public class CalendarEventIdentifierPanel extends JPanel {
 
-    private final EventType[] availableEventTypes = {EventType.LECTURE, EventType.EXERCISE, EventType.TRASH, EventType.PERSONAL, EventType.TEAMWORK};
+    private final EventType[] availableEventTypes = {EventType.LECTURE, EventType.EXERCISE, EventType.TRASH, EventType.PERSONAL, EventType.TEAMWORK, EventType.EXAM};
 
     private Set<String> summaries;
     private Map<String, JTextArea> userInputOnSummaries;
