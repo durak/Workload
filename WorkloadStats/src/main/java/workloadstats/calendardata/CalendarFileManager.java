@@ -12,7 +12,6 @@ import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
-import net.fortuna.ical4j.model.TimeZoneRegistry;
 import net.fortuna.ical4j.model.ValidationException;
 import net.fortuna.ical4j.model.property.ProdId;
 
@@ -62,13 +61,22 @@ public class CalendarFileManager {
     public Calendar getEmptyCalendar() {
         return readConfig();
     }
-
-    public boolean saveCalendarToFile(Calendar cal) throws FileNotFoundException {
-        FileOutputStream fout = new FileOutputStream("mytestoutput.ics");
+    
+    
+    /**
+     * Save current calendar to user selected file
+     * @param cal
+     * @param saveFile
+     * @return
+     * @throws FileNotFoundException 
+     */
+    public boolean saveCalendarToFile(Calendar cal, File saveFile) throws FileNotFoundException {     
+        FileOutputStream fout = new FileOutputStream(saveFile);
         CalendarOutputter outputter = new CalendarOutputter();
         outputter.setValidating(true);
         try {
             outputter.output(cal, fout);
+            
             return true;
         } catch (IOException ex) {
             Logger.getLogger(CalendarFileManager.class.getName()).log(Level.SEVERE, null, ex);

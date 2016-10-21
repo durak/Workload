@@ -17,6 +17,8 @@ import workloadstats.utils.Ac;
 import workloadstats.utils.EventType;
 
 /**
+ * Main menu user actions User can open a new empty calendar, or
+ * save/load/import calendar data
  *
  * @author Ilkka
  */
@@ -57,7 +59,7 @@ public class MainMenuActionListener implements ActionListener {
                 // Get CalendarImportManager instance from myCalendarControl with user selected file
                 CalendarImportManager calImpMan = myCalendarControl.getCalendarImportManager(selectedFile);
                 if (calImpMan != null) {
-                    // Call import action
+                    // Call import action routine
                     calendarImportAction(calImpMan);
                 } else {
                     JOptionPane.showMessageDialog(container, "Kalenteritiedosto ei kelpaa", "ALARM", JOptionPane.ERROR_MESSAGE);
@@ -66,7 +68,15 @@ public class MainMenuActionListener implements ActionListener {
         }
 
         if (ae.getActionCommand().equals(Ac.SAVECALENDAR.name())) {
-            myCalendarControl.saveCalendar();
+            int returnValue = fileChooser.showSaveDialog(container);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File saveFile = fileChooser.getSelectedFile();
+                if (!myCalendarControl.saveCalendar(saveFile)) {
+                    String error = "Tiedostoon kirjoitus ei onnistunut.";
+                    JOptionPane.showMessageDialog(container, error, "ALARM", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
         }
 
     }
@@ -130,7 +140,7 @@ public class MainMenuActionListener implements ActionListener {
             Map<String, String> eventParents = eip.getEventParents();
             // Get identified imports with user input
             List<Course> newImports = calendImpMan.userIdentifiedEvents(newSummaries, identifiedTypes, identifiedCourses, eventParents);
-            
+
             // Add imports to current calendar
             myCalendarControl.importNewCourses(newImports);
             // Update user view

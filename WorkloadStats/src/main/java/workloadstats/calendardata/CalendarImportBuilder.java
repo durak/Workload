@@ -34,6 +34,13 @@ public class CalendarImportBuilder {
 
     }
 
+    /**
+     * Build a new course with input from user
+     * @param dummy
+     * @param oldSummary
+     * @param newSummary
+     * @return 
+     */
     public Course getNewCourse(Event dummy, String oldSummary, String newSummary) {
         PropertyList props = new PropertyList();
         props.add(new DtStart(dummy.getStartDate().getDate()));

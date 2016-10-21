@@ -67,6 +67,24 @@ Sekvenssikaavio uuden tapahtuman lisäämisestä kurssiin:
 ![sekvenssi3](sekvenssi3.png)
 
 ## Käyttöohje
-Tiedostolla readymadecalendar.ics voi testata valmista ohjelman omaa formaattia olevaa kalenteritiedostoa, tai jos haluaa elää villisti voi kokeilla import-toimintoa importcalendar.ics tiedostolla. Importtaaminen toimii 100%, mutta siinä on pieniä myönnytyksiä käyttölogiikan saralla tehty, koska ainoa käyttäjä olen kuitenkin loppupeleissä minä. 
+Pääasiassa ohjelman käyttö on toivottavasti itsestäänselvää.
 
-Kun kalenteri on avattu, voi valita yhden tai useampia kursseja kerrallaan (normaalit valintatavat hiirellä ja näppäimistöllä, ctrl + tai shift + useamman valitsemiseksi), ja näistä yhden tai useamman tapahtuman kerrallaan. Käyttöliittymän ominaisuudet jotka ovat tarjolla riippuvat kunkin hetken valinnoista joita graafisessa liittymässä tehdään: jos valitsee useamman kurssin, ei voi lisätä tapahtumia, kun ei tiedetä mihin kurssiin tapahtuma menisi jne. Kun valitsee kaksi tai useamman tapahtuman, näkyy tapahtumien aikavälin statsit oikeassa alareunassa.
+Tiedostolla readymadecalendar.ics voi testata valmista ohjelman omaa formaattia olevaa kalenteritiedostoa, tai jos haluaa voi kokeilla import-toimintoa importcalendar.ics tiedostolla. Importtaaminen toimii 100%, mutta siinä on pieniä myönnytyksiä käyttölogiikan saralla tehty, koska ainoa käyttäjä olen kuitenkin loppupeleissä minä. Ruudulla näytetään ennen tuontia ohjeet, joita noudattamalla Import toimii toivotunlaisesti; "käyttäjävirheet" eivät kaada ohjelmaa, mutta eivät johda mielekkäisiin tuloksiin (laskarit väärän kurssin alla jne).
+
+Kun kalenteri on avattu, voi valita yhden tai useampia kursseja kerrallaan (normaalit valintatavat hiirellä ja näppäimistöllä, ctrl + tai shift + useamman valitsemiseksi), ja näistä yhden tai useamman tapahtuman kerrallaan. Käyttöliittymän ominaisuudet jotka ovat tarjolla riippuvat kunkin hetken valinnoista joita graafisessa liittymässä tehdään: jos valitsee useamman kurssin, ei voi lisätä tapahtumia, kun ei tiedetä mihin kurssiin tapahtuma menisi jne. Kun valitsee kaksi tai useamman tapahtuman, näkyy tapahtumien aikavälin statsit oikeassa alareunassa. Toiminnolla voi siis tarkkailla esim. jonkin kurssin työtaakkaa valitsemalla kurssin tapahtumat, tai yleisesti työtaakkaa jollain aikavälillä valitsemalla ensin useamman kurssin ja sen jälkeen tapahtumat haluamaltaan aikaväliltä.
+
+Tapahtumiin osallistumisen statusta muutetaan "Osallituitko tapahtumaan" -paneelin kysymykseen vastaamalla. Osallistumistiedot vaikuttavat statistiikan laskentatuloksiin, ja oletuksena uudella tuodulla tapahtumalla on status "harkitsen", uudella käyttäjän luomalla tapahtumalla taas oletusstatus  on "kyllä". 
+
+Tallennus-toimintoon huomio: muista tallentaa .ics tiedostopäätteellä, tai ladatessa ei tiedostoa näy listauksessa.
+
+
+##Testausdokumentaatiota
+Ohjelman laajuus oli itselle jälkikäteen ajateltuna vähän liian suuri, joka johti ajanpuutteeseen ja ei kovin kattavaan testaukseen. Yksikkötestaus (tai pikemminkin pääosin integraatiotestaus) oli myöskin työlästä, sillä melkein kaikki toiminnot ohjelmassa edellyttävät ensin suuren määrän muuta toiminnallisuutta: kalenteridatan lataaminen / tuominen kalenteriin. Lisäksi käyttäjän valinnat vaikuttavat suuresti ohjelman osien toimintaan. 
+
+Esimerkiksi uuden kalenteritapahtuman tuomisen testaamisessa tarvitsisi korvata käyttäjän syötteet uuden nimen, tyyppivalinnan, "onko päätapahtuma"-valinnan ja alitapahtumaan liitetyn päätapahtuman valinnoista. Lisäksi tulisi olla valmiina jo olemassa olevat kurssit, joissa mahdollisesti samoja tapahtumia kuin näissä tuotavissa. Tällaisen testirykelmän koko olisi kasvanut järjettömän pitkäksi ja työlääksi, vs. se että toiminnallisuus kehitettiin debuggaamalla vaiheita ajon aikana ja varmistamalla toiminta erilaisilla syötteillä / vain sellaisten syötteiden salliminen, joilla rutiini varmasti toimii.
+
+Testaus onkin keskitetty näiden ydintoimintojen toimintaan ja "virheettömän" käyttäjäsyötteen takaamiseen. Ohjelmaa on testattu virheellisillä kalenteritiedostoilla, virheellisillä syötteillä jne. käyttäen hyväksi try-catch rakenteita ja lokeja. Virheellistä kalenteridataa ei saa ladattua ohjelmaan, eikä käyttäjältä hyväksytä puutteellisia syötteitä.
+
+Ennen aiemmin mainittua mahdollista ohjelman mallin refaktorointia testejä olisi hyvä kirjoittaa lisää, ja itse refaktoroinnin voisi tehdä "TDD"-henkisesti: kirjoitetaan testit, muutetaan testit vaatimaan EventTypeä luokan tunnistuksen sijaan tarvittavissa kohdin, ja refaktoroidaan koodi toteuttamaan testit.
+
+

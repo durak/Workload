@@ -30,6 +30,7 @@ public class MyCalendarControl {
         courses = this.myCalendarParser.getCourses();
 
     }
+
     /**
      * Load empty calendar as the current calendar
      */
@@ -38,15 +39,16 @@ public class MyCalendarControl {
         this.myCalendarParser = new MyCalendarParser(currentCalendar);
         courses = this.myCalendarParser.getCourses();
     }
-    
+
     /**
      * Return all courses in the current calendar
-     * @return 
+     *
+     * @return
      */
     public List<Course> getCourses() {
         return courses;
     }
-    
+
     /**
      * Reset current calendar's config file
      */
@@ -58,26 +60,28 @@ public class MyCalendarControl {
         }
         currentCalendar = updated;
     }
-    
-    
+
     /**
      * Save current calendar to file
-     * @return 
+     *
+     * @return
      */
-    public boolean saveCalendar() {
+    public boolean saveCalendar(File saveFile) {
         updateCalendar();
         try {
-            return calendarFileManager.saveCalendarToFile(currentCalendar);
+            return calendarFileManager.saveCalendarToFile(currentCalendar, saveFile);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(MyCalendarControl.class.getName()).log(Level.SEVERE, null, ex);
+            //ui handles message to user
+            //Logger.getLogger(MyCalendarControl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
-    
+
     /**
      * Load selectedFile as the current calendar
+     *
      * @param selectedFile
-     * @return 
+     * @return
      */
     public boolean loadFile(File selectedFile) {
         try {
@@ -91,15 +95,17 @@ public class MyCalendarControl {
             return true;
 
         } catch (Exception ex) {
-            Logger.getLogger(MyCalendarControl.class.getName()).log(Level.SEVERE, null, ex);
+            //ui handles message to user
+            //Logger.getLogger(MyCalendarControl.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
-    
+
     /**
      * Return new CalendarImportManager instance
+     *
      * @param selectedFile
-     * @return 
+     * @return
      */
     public CalendarImportManager getCalendarImportManager(File selectedFile) {
         CalendarImportManager calImpMan = null;
@@ -109,7 +115,8 @@ public class MyCalendarControl {
             calImpMan = new CalendarImportManager(imported);
 
         } catch (Exception ex) {
-            Logger.getLogger(MyCalendarControl.class.getName()).log(Level.SEVERE, null, ex);
+            //ui handles message to user
+            //Logger.getLogger(MyCalendarControl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return calImpMan;
     }

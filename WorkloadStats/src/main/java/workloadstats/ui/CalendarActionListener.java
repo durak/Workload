@@ -166,7 +166,11 @@ public class CalendarActionListener implements ActionListener, ListSelectionList
         // Fetch toBeDeleted courses from data model
         for (int i = 0; i < oldSize; i++) {
             Course del = (Course) clmodel.getElementAt(oldSelection[i]);
-            int choice = JOptionPane.showConfirmDialog(container, "Haluatko varmasti poistaa kurssin?\n" + del.getEventName(),
+            String courseNameLimitViewSize = del.getEventName();
+            if (courseNameLimitViewSize.length() > 50) {
+                courseNameLimitViewSize = courseNameLimitViewSize.substring(0, 47) + "...";
+            }
+            int choice = JOptionPane.showConfirmDialog(container, "Haluatko varmasti poistaa kurssin?\n" + courseNameLimitViewSize,
                     "Huomio!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             if (choice == JOptionPane.OK_OPTION) {
                 toBeDeleted.add(del);
@@ -216,7 +220,12 @@ public class CalendarActionListener implements ActionListener, ListSelectionList
         // Fetch toBeDeleted courses from data model
         for (int i = 0; i < oldSize; i++) {
             Event del = (Event) elmodel.getElementAt(oldSelection[i]);
-            int choice = JOptionPane.showConfirmDialog(container, "Haluatko varmasti poistaa tapahtuman?\n" + del.getStartDateString() + " " + del.getEventName(),
+            String eventNameLimitViewSize = del.getEventName();
+            if (eventNameLimitViewSize.length() > 50) {
+                eventNameLimitViewSize = eventNameLimitViewSize.substring(0, 47) + "...";
+            }
+            
+            int choice = JOptionPane.showConfirmDialog(container, "Haluatko varmasti poistaa tapahtuman?\n" + del.getStartDateString() + " " + eventNameLimitViewSize,
                     "Huomio!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             if (choice == JOptionPane.OK_OPTION) {
                 toBeDeleted.add(del);
