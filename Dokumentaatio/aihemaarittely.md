@@ -50,7 +50,7 @@ Seuraavassa tarkempi hahmotelma ohjelman muiden toimintojen suhtautumisesta edel
 ![Luokkakaavio3](luokkakaavio3.png)
 
 ## Rakennekuvaus
-Ohjelma on lähes valmistunut. Yllä näkyvässä luokkakaaviossa on pääosin kuvattu merkittävät tuntemissuhteet ohjelman sisällä. Kaavioon piirrettyjen luokkien lisäksi graafinen käyttöliittymä rakentuu useista muistakin komponenteista, ja ohjelmassa on lisäksi utils-pakkauksen alla useita apuvälineluokkia ja lueteltuja tyyppejä. 
+Ohjelma on valmistunut. Yllä näkyvässä luokkakaaviossa on pääosin kuvattu merkittävät tuntemissuhteet ohjelman sisällä. Kaavioon piirrettyjen luokkien lisäksi graafinen käyttöliittymä rakentuu useista muistakin komponenteista, ja ohjelmassa on lisäksi utils-pakkauksen alla useita apuvälineluokkia ja lueteltuja tyyppejä. 
 
 Ohjelman käynnistyksen yhteydessä luodaan MyCalendarControl, joka toimii ohjelman ytimessä sovelluslogiikan ja käyttöliittymän välissä. Se tarjoilee kunakin ajanhetkenä käytössä olevan kalenterin sisällön käyttöliittymälle CourseListModel-luokan sisältönä (lista kursseja): ensin käynnistyksen yhteydessä GUI:n komponenttien rakentamisen osana, ja myöhemmin käyttäjän tehdessä muutoksia MainMenuActionListenerin toiminnoilla. MyCalendarControl, kuten mikään muukaan sovelluslogiikan luokka ei tunne niiden käyttäjiä GUI:n puolella mitenkään. GUI:n komponentit tuntevat käyttäjän valitsemia kursseja ja tapahtumia (jotka saatu CourseListModelista), jonka lisäksi jotkin osat GUI:ta käyttävät utils-paketin apuvälineitä. 
 
